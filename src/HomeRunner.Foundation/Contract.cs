@@ -6,7 +6,8 @@ using System.Threading.Tasks;
 
 namespace HomeRunner.Foundation
 {
-    class Contract
+    public class Contract
     {
+		public const string NAMESPACE = "HomeRunner"; 
     }
 }
