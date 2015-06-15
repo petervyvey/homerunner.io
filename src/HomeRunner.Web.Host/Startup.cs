@@ -1,10 +1,10 @@
 ﻿
 using HomeRunner.Web.Host;
-using HomeRunner.Web.Host.App_Start;
 using Microsoft.Owin;
 using Owin;
+using System.Diagnostics;
 
-[assembly: OwinStartup(typeof(Startup))]
+//[assembly: OwinStartup(typeof(Startup))]
 
 namespace HomeRunner.Web.Host
 {
@@ -12,8 +12,8 @@ namespace HomeRunner.Web.Host
     {
         public void Configuration(IAppBuilder app)
         {
-            WebApiConfig.Configuration(app);
-            AuthConfig.Configuration(app);
+            // For more information on how to configure your application, visit http://go.microsoft.com/fwlink/?LinkID=316888
+			Debug.WriteLine(this);
         }
     }
 }
