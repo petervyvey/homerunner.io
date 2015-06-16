@@ -157,6 +157,7 @@ namespace Thinktecture.IdentityServer.Host.Config
                     RequireConsent = false,
                     AccessTokenType = AccessTokenType.Jwt,
                     
+                    
                     RedirectUris = new List<string>
                     {
                         "http://localhost:2360/",

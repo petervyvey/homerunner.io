@@ -69,11 +69,13 @@ namespace Thinktecture.IdentityServer.Host
 
                     CorsPolicy = CorsPolicy.AllowAll,
                     PluginConfiguration = Startup.ConfigurePlugIns,
+                    EnableWelcomePage = false,
+                    
 
                     AuthenticationOptions = new AuthenticationOptions
                     {
                         IdentityProviders = Startup.ConfigureIdentityProviders,
-                        RememberLastUsername = true
+                        RememberLastUsername = false
                     },
 
                     LoggingOptions = new LoggingOptions
