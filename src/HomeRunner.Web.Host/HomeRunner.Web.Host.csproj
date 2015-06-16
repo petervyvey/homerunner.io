@@ -54,7 +54,7 @@
       <HintPath>..\packages\Microsoft.Owin.Security.OAuth.3.0.0\lib\net45\Microsoft.Owin.Security.OAuth.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.Owin.Security.OpenIdConnect">
-      <HintPath>..\IdentityServer3\packages\Microsoft.Owin.Security.OpenIdConnect.3.0.1\lib\net45\Microsoft.Owin.Security.OpenIdConnect.dll</HintPath>
+      <HintPath>..\packages\Microsoft.Owin.Security.OpenIdConnect.3.0.1\lib\net45\Microsoft.Owin.Security.OpenIdConnect.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.Owin.Security.WsFederation">
       <HintPath>..\packages\Microsoft.Owin.Security.WsFederation.3.0.1\lib\net45\Microsoft.Owin.Security.WsFederation.dll</HintPath>
