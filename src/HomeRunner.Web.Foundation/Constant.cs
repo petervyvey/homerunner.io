@@ -10,9 +10,9 @@ namespace HomeRunner.Web.Foundation
 
         public static class Endpoint
         {
-            public const string USER_INFO = Constant.IdentityServer.BASE_ADDRESS + "/connect/userinfo";
+            public const string USER_INFO_ENDPOINT = Constant.IdentityServer.BASE_ADDRESS + "/connect/userinfo";
 
-            public const string TOKEN = Constant.IdentityServer.BASE_ADDRESS + "/connect/token";
+            public const string TOKEN_ENDPOINT = Constant.IdentityServer.BASE_ADDRESS + "/connect/token";
         }
     }
 

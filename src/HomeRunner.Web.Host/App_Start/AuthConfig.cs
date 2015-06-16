@@ -1,17 +1,15 @@
 ﻿
-using System;
-using System.Collections.Generic;
-using System.IdentityModel.Tokens;
-using System.Linq;
-using System.Security.Claims;
 using HomeRunner.Web.Foundation;
 using Microsoft.IdentityModel.Protocols;
 using Microsoft.Owin.Security;
 using Microsoft.Owin.Security.Cookies;
 using Microsoft.Owin.Security.OpenIdConnect;
-using Microsoft.Owin.Security.WsFederation;
 using Owin;
-using System.Threading.Tasks;
+using System;
+using System.Collections.Generic;
+using System.IdentityModel.Tokens;
+using System.Linq;
+using System.Security.Claims;
 using Thinktecture.IdentityModel;
 using Thinktecture.IdentityModel.Client;
 
@@ -19,6 +17,9 @@ namespace HomeRunner.Web.Host.App_Start
 {
     public static class AuthConfig
     {
+        private const string CLIENT_ID = "homerunner";
+        private const string CLIENT_SECRET = "secret";
+
         public static void Configuration(IAppBuilder app)
         {
             JwtSecurityTokenHandler.InboundClaimTypeMap = new Dictionary<string, string>();
@@ -54,7 +55,7 @@ namespace HomeRunner.Web.Host.App_Start
 
             app.UseOpenIdConnectAuthentication(new OpenIdConnectAuthenticationOptions
             {
-                ClientId = "katanaclient",
+                ClientId = AuthConfig.CLIENT_ID,
                 Authority = Constant.IdentityServer.BASE_ADDRESS,
                 RedirectUri = "http://localhost:2360/",
                 PostLogoutRedirectUri = "http://localhost:2360/",
@@ -68,32 +69,26 @@ namespace HomeRunner.Web.Host.App_Start
                     AuthorizationCodeReceived = async n =>
                     {
                         // filter "protocol" claims
-                        var claims = new List<Claim>(from c in n.AuthenticationTicket.Identity.Claims
-                                                     where c.Type != "iss" &&
-                                                           c.Type != "aud" &&
-                                                           c.Type != "nbf" &&
-                                                           c.Type != "exp" &&
-                                                           c.Type != "iat" &&
-                                                           c.Type != "nonce" &&
-                                                           c.Type != "c_hash" &&
-                                                           c.Type != "at_hash"
-                                                     select c);
+                        List<Claim> claims = new List<Claim>(from c in n.AuthenticationTicket.Identity.Claims
+                            where c.Type != "iss" &&
+                                  c.Type != "aud" &&
+                                  c.Type != "nbf" &&
+                                  c.Type != "exp" &&
+                                  c.Type != "iat" &&
+                                  c.Type != "nonce" &&
+                                  c.Type != "c_hash" &&
+                                  c.Type != "at_hash"
+                            select c);
 
                         // get userinfo data
-                        var userInfoClient = new UserInfoClient(
-                            new Uri(Constant.Endpoint.USER_INFO),
-                            n.ProtocolMessage.AccessToken);
+                        UserInfoClient userInfoClient = new UserInfoClient(new Uri(Constant.Endpoint.USER_INFO_ENDPOINT), n.ProtocolMessage.AccessToken);
 
-                        var userInfo = await userInfoClient.GetAsync();
+                        UserInfoResponse userInfo = await userInfoClient.GetAsync();
                         userInfo.Claims.ToList().ForEach(ui => claims.Add(new Claim(ui.Item1, ui.Item2)));
 
                         // get access and refresh token
-                        var tokenClient = new OAuth2Client(
-                            new Uri(Constant.Endpoint.TOKEN),
-                            "katanaclient",
-                            "secret");
-
-                        var response = await tokenClient.RequestAuthorizationCodeAsync(n.Code, n.RedirectUri);
+                        OAuth2Client tokenClient = new OAuth2Client(new Uri(Constant.Endpoint.TOKEN_ENDPOINT), AuthConfig.CLIENT_ID, AuthConfig.CLIENT_SECRET);
+                        TokenResponse response = await tokenClient.RequestAuthorizationCodeAsync(n.Code, n.RedirectUri);
 
                         claims.Add(new Claim("access_token", response.AccessToken));
                         claims.Add(new Claim("expires_at", DateTime.Now.AddSeconds(response.ExpiresIn).ToLocalTime().ToString()));
