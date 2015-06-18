@@ -19,6 +19,9 @@ using System.Security.Cryptography.X509Certificates;
 
 namespace Thinktecture.IdentityServer.Core.Configuration
 {
+
+#if !__MonoCS__
+
     /// <summary>
     /// X.509 certificate based data protector
     /// </summary>
@@ -61,4 +64,7 @@ namespace Thinktecture.IdentityServer.Core.Configuration
             return _encrypt.Decode(validated);
         }
     }
+
+#endif
+
 }

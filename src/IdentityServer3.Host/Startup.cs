@@ -16,6 +16,7 @@
 
 using System.Collections.Generic;
 using Microsoft.Owin;
+using Microsoft.Owin.Security.DataProtection;
 using Microsoft.Owin.Security.Facebook;
 using Microsoft.Owin.Security.Google;
 using Microsoft.Owin.Security.OpenIdConnect;
@@ -28,6 +29,9 @@ using Thinktecture.IdentityServer.Core.Logging;
 using Thinktecture.IdentityServer.Core.Services;
 using Thinktecture.IdentityServer.Host;
 using Thinktecture.IdentityServer.Host.Config;
+#if __MonoCS__
+using Thinktecture.IdentityServer.Mono;
+#endif
 using Thinktecture.IdentityServer.WsFederation.Configuration;
 using Thinktecture.IdentityServer.WsFederation.Models;
 using Thinktecture.IdentityServer.WsFederation.Services;
@@ -49,6 +53,10 @@ namespace Thinktecture.IdentityServer.Host
 
             app.Map("/core", coreApp =>
             {
+#if __MonoCS__
+                coreApp.SetDataProtectionProvider(new MonoDataProtectionProvider(app.Properties["host.AppName"] as string));
+#endif
+
                 var factory = InMemoryFactory.Create(
                     users: Users.Get(),
                     clients: Clients.Get(),

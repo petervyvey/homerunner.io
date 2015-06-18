@@ -153,6 +153,10 @@
       <Project>{fb9e026e-bab3-498a-a954-b93b05c146a5}</Project>
       <Name>IdentityServer3.Core</Name>
     </ProjectReference>
+    <ProjectReference Include="..\IdentityServer3.Mono\IdentityServer3.Mono.csproj">
+      <Project>{89b5e68e-01c7-4303-afde-70257f41c3a0}</Project>
+      <Name>IdentityServer3.Mono</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'AzureWebSites|AnyCPU'">
     <OutputPath>bin\</OutputPath>
