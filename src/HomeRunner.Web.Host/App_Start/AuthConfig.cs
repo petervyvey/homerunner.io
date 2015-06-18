@@ -107,8 +107,12 @@ namespace HomeRunner.Web.Host.App_Start
                         // if signing out, add the id_token_hint
                         if (n.ProtocolMessage.RequestType == OpenIdConnectRequestType.LogoutRequest)
                         {
-                            var idTokenHint = n.OwinContext.Authentication.User.FindFirst("id_token").Value;
-                            n.ProtocolMessage.IdTokenHint = idTokenHint;
+                            try
+                            {
+                                string idTokenHint = n.OwinContext.Authentication.User.FindFirst("id_token").Value;
+                                n.ProtocolMessage.IdTokenHint = idTokenHint;
+                            }
+                            catch { /* IGNORE */ }
                         }
                     },
                 }
