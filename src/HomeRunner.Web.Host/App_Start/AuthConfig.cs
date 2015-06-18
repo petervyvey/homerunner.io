@@ -1,9 +1,11 @@
 ﻿
+using System.Threading.Tasks;
 using HomeRunner.Web.Foundation;
 using Microsoft.IdentityModel.Protocols;
 using Microsoft.Owin.Security;
 using Microsoft.Owin.Security.Cookies;
 using Microsoft.Owin.Security.OpenIdConnect;
+using Microsoft.Owin.Security.WsFederation;
 using Owin;
 using System;
 using System.Collections.Generic;
@@ -30,9 +32,9 @@ namespace HomeRunner.Web.Host.App_Start
             });
 
             //app.UseWsFederationAuthentication(new WsFederationAuthenticationOptions
-            //{                 
+            //{
             //    MetadataAddress = Constant.IdentityServer.BASE_ADDRESS + "/wsfed/metadata",
-            //    Wtrealm = "http://homerunner/",
+            //    Wtrealm = "urn:homerunner",
             //    Wreply = "http://localhost:1000",
 
             //    Notifications = new WsFederationAuthenticationNotifications
@@ -59,8 +61,10 @@ namespace HomeRunner.Web.Host.App_Start
                 Authority = Constant.IdentityServer.BASE_ADDRESS,
                 RedirectUri = "http://localhost:2360/",
                 PostLogoutRedirectUri = "http://localhost:2360/",
-                ResponseType = "code id_token token",
-                Scope = "openid email profile read write offline_access",
+                //ResponseType = "code id_token token",
+                ResponseType = "id_token token",
+                //Scope = "openid email profile read write offline_access",
+                Scope = "email read write",
 
                 SignInAsAuthenticationType = "Cookies",
 
@@ -70,15 +74,15 @@ namespace HomeRunner.Web.Host.App_Start
                     {
                         // filter "protocol" claims
                         List<Claim> claims = new List<Claim>(from c in n.AuthenticationTicket.Identity.Claims
-                            where c.Type != "iss" &&
-                                  c.Type != "aud" &&
-                                  c.Type != "nbf" &&
-                                  c.Type != "exp" &&
-                                  c.Type != "iat" &&
-                                  c.Type != "nonce" &&
-                                  c.Type != "c_hash" &&
-                                  c.Type != "at_hash"
-                            select c);
+                                                             where c.Type != "iss" &&
+                                                                   c.Type != "aud" &&
+                                                                   c.Type != "nbf" &&
+                                                                   c.Type != "exp" &&
+                                                                   c.Type != "iat" &&
+                                                                   c.Type != "nonce" &&
+                                                                   c.Type != "c_hash" &&
+                                                                   c.Type != "at_hash"
+                                                             select c);
 
                         // get userinfo data
                         UserInfoClient userInfoClient = new UserInfoClient(new Uri(Constant.Endpoint.USER_INFO_ENDPOINT), n.ProtocolMessage.AccessToken);

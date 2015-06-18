@@ -28,13 +28,9 @@ using Thinktecture.IdentityServer.Core.Logging;
 using Thinktecture.IdentityServer.Core.Services;
 using Thinktecture.IdentityServer.Host;
 using Thinktecture.IdentityServer.Host.Config;
-
-#if __MonoCS__
-#else
 using Thinktecture.IdentityServer.WsFederation.Configuration;
 using Thinktecture.IdentityServer.WsFederation.Models;
 using Thinktecture.IdentityServer.WsFederation.Services;
-#endif
 
 [assembly: OwinStartup(typeof(Startup))]
 
@@ -104,8 +100,6 @@ namespace Thinktecture.IdentityServer.Host
 
         private static void ConfigurePlugIns(IAppBuilder pluginApp, IdentityServerOptions options)
         {
-			#if __MonoCS__
-			#else
             var factory = new WsFederationServiceFactory(options.Factory);
 
             // data sources for in-memory services
@@ -119,11 +113,8 @@ namespace Thinktecture.IdentityServer.Host
             };
 
             pluginApp.UseWsFederationPlugin(wsFedOptions);
-			#endif
         }
 
-		#if __MonoCS__
-		#else
         private static IEnumerable<RelyingParty> GetRelyingParties()
         {
             return
@@ -133,7 +124,7 @@ namespace Thinktecture.IdentityServer.Host
                     {
                         Name = "HomeRunner",
                         Enabled = true,
-                        Realm = "http://homerunner/",
+                        Realm = "urn:homerunner",
                         ReplyUrl = "http://localhost:2360/",
                         ClaimMappings = new Dictionary<string, string>
                         {
@@ -144,7 +135,6 @@ namespace Thinktecture.IdentityServer.Host
                     }
                 };
         }
-		#endif
 
         public static void ConfigureIdentityProviders(IAppBuilder app, string signInAsType)
         {
