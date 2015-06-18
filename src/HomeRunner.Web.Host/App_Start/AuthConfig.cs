@@ -61,10 +61,10 @@ namespace HomeRunner.Web.Host.App_Start
                 Authority = Constant.IdentityServer.BASE_ADDRESS,
                 RedirectUri = "http://localhost:2360/",
                 PostLogoutRedirectUri = "http://localhost:2360/",
-                //ResponseType = "code id_token token",
-                ResponseType = "id_token token",
-                //Scope = "openid email profile read write offline_access",
-                Scope = "email read write",
+                ResponseType = "code id_token token",
+                //ResponseType = "id_token token",
+                Scope = "openid email profile read write offline_access",
+                //Scope = "email read write",
 
                 SignInAsAuthenticationType = "Cookies",
 
@@ -85,13 +85,13 @@ namespace HomeRunner.Web.Host.App_Start
                                                              select c);
 
                         // get userinfo data
-                        UserInfoClient userInfoClient = new UserInfoClient(new Uri(Constant.Endpoint.USER_INFO_ENDPOINT), n.ProtocolMessage.AccessToken);
+                        UserInfoClient userInfoClient = new UserInfoClient(new Uri(Constant.Endpoint.OPENID_CONNECT_USER_INFO_ENDPOINT), n.ProtocolMessage.AccessToken);
 
                         UserInfoResponse userInfo = await userInfoClient.GetAsync();
                         userInfo.Claims.ToList().ForEach(ui => claims.Add(new Claim(ui.Item1, ui.Item2)));
 
                         // get access and refresh token
-                        OAuth2Client tokenClient = new OAuth2Client(new Uri(Constant.Endpoint.TOKEN_ENDPOINT), AuthConfig.CLIENT_ID, AuthConfig.CLIENT_SECRET);
+                        OAuth2Client tokenClient = new OAuth2Client(new Uri(Constant.Endpoint.OPENID_CONNECT_TOKEN_ENDPOINT), AuthConfig.CLIENT_ID, AuthConfig.CLIENT_SECRET);
                         TokenResponse response = await tokenClient.RequestAuthorizationCodeAsync(n.Code, n.RedirectUri);
 
                         claims.Add(new Claim("access_token", response.AccessToken));
