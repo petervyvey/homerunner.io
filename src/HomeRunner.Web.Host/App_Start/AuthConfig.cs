@@ -35,8 +35,8 @@ namespace HomeRunner.Web.Host.App_Start
             {
                 ClientId = AuthConfig.CLIENT_ID,
                 Authority = Constant.IdentityServer.BASE_ADDRESS,
-                RedirectUri = "http://localhost:2360/",
-                PostLogoutRedirectUri = "http://localhost:2360/",
+                RedirectUri = "http://dev.homerunner.io/",
+                PostLogoutRedirectUri = "http://dev.homerunner.io/",
                 ResponseType = "code id_token token",
                 //ResponseType = "id_token token",
                 Scope = "openid email profile read write offline_access",

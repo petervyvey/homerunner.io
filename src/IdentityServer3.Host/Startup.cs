@@ -74,6 +74,7 @@ namespace Thinktecture.IdentityServer.Host
                     Factory = factory,
                     SigningCertificate = Cert.Load(),
                     SiteName = "Home Runner",
+                    RequireSsl = false,
 
                     CorsPolicy = CorsPolicy.AllowAll,
                     PluginConfiguration = Startup.ConfigurePlugIns,
@@ -139,7 +140,7 @@ namespace Thinktecture.IdentityServer.Host
                         Name = "HomeRunner",
                         Enabled = true,
                         Realm = "urn:homerunner",
-                        ReplyUrl = "http://localhost:2360/",
+                        ReplyUrl = "http://dev.homerunner.io/",
                         ClaimMappings = new Dictionary<string, string>
                         {
                             {"sub", Constants.ClaimTypes.Subject},

@@ -159,12 +159,12 @@ namespace Thinktecture.IdentityServer.Host.Config
                     
                     RedirectUris = new List<string>
                     {
-                        "http://localhost:2360/",
+                        "http://dev.homerunner.io/",
                     },
 
                     PostLogoutRedirectUris = new List<string>
                     {
-                        "http://localhost:2360/"
+                        "http://dev.homerunner.io/"
                     }
                 },
 

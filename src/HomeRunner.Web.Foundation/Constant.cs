@@ -5,8 +5,7 @@ namespace HomeRunner.Web.Foundation
     {
         public static class IdentityServer
         {
-            public const string BASE_ADDRESS = "https://localhost:44333/core";
-            //public const string BASE_ADDRESS = "http://openam.attentia.be:8080/OpenAM";
+            public const string BASE_ADDRESS = "http://dev.homerunner.io/authorization/core";
         }
 
         public static class Endpoint
