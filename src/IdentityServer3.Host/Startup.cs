@@ -78,12 +78,18 @@ namespace Thinktecture.IdentityServer.Host
                     CorsPolicy = CorsPolicy.AllowAll,
                     PluginConfiguration = Startup.ConfigurePlugIns,
                     EnableWelcomePage = false,
-                    
 
                     AuthenticationOptions = new AuthenticationOptions
                     {
                         IdentityProviders = Startup.ConfigureIdentityProviders,
-                        RememberLastUsername = false
+                        RememberLastUsername = false,
+                        EnablePostSignOutAutoRedirect = true,
+                        EnableSignOutPrompt = true,
+                        PostSignOutAutoRedirectDelay = 5,
+                        LoginPageLinks = new List<LoginPageLink>
+                        {
+                            new LoginPageLink {Href = "http://dev.homerunner.io/privacy",Text = "Privacy"}
+                        }
                     },
 
                     LoggingOptions = new LoggingOptions

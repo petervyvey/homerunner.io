@@ -31,30 +31,6 @@ namespace HomeRunner.Web.Host.App_Start
                 AuthenticationType = "Cookies"
             });
 
-            //app.UseWsFederationAuthentication(new WsFederationAuthenticationOptions
-            //{
-            //    MetadataAddress = Constant.IdentityServer.BASE_ADDRESS + "/wsfed/metadata",
-            //    Wtrealm = "urn:homerunner",
-            //    Wreply = "http://localhost:1000",
-
-            //    Notifications = new WsFederationAuthenticationNotifications
-            //    {
-            //        SecurityTokenReceived = notification =>
-            //        {
-            //            var n = notification;
-            //            return Task.FromResult(0);
-            //        },
-
-            //        SecurityTokenValidated = notification =>
-            //        {
-            //            var n = notification;
-            //            return Task.FromResult(0);
-            //        },
-            //    },
-
-            //    SignInAsAuthenticationType = "Cookies"
-            //});
-
             app.UseOpenIdConnectAuthentication(new OpenIdConnectAuthenticationOptions
             {
                 ClientId = AuthConfig.CLIENT_ID,
@@ -67,6 +43,7 @@ namespace HomeRunner.Web.Host.App_Start
                 //Scope = "email read write",
 
                 SignInAsAuthenticationType = "Cookies",
+                
 
                 Notifications = new OpenIdConnectAuthenticationNotifications
                 {
