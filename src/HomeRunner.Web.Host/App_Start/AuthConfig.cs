@@ -1,11 +1,9 @@
 ﻿
-using System.Threading.Tasks;
 using HomeRunner.Web.Foundation;
 using Microsoft.IdentityModel.Protocols;
 using Microsoft.Owin.Security;
 using Microsoft.Owin.Security.Cookies;
 using Microsoft.Owin.Security.OpenIdConnect;
-using Microsoft.Owin.Security.WsFederation;
 using Owin;
 using System;
 using System.Collections.Generic;
@@ -44,7 +42,6 @@ namespace HomeRunner.Web.Host.App_Start
 
                 SignInAsAuthenticationType = "Cookies",
                 
-
                 Notifications = new OpenIdConnectAuthenticationNotifications
                 {
                     AuthorizationCodeReceived = async n =>
@@ -77,6 +74,8 @@ namespace HomeRunner.Web.Host.App_Start
                         claims.Add(new Claim("id_token", n.ProtocolMessage.IdToken));
 
                         n.AuthenticationTicket = new AuthenticationTicket(new ClaimsIdentity(claims.Distinct(new ClaimComparer()), n.AuthenticationTicket.Identity.AuthenticationType), n.AuthenticationTicket.Properties);
+                        n.AuthenticationTicket.Properties.IsPersistent = true;
+                        n.AuthenticationTicket.Properties.ExpiresUtc = DateTime.UtcNow.AddDays(30);
                     },
 
                     RedirectToIdentityProvider = async n =>

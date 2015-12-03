@@ -5,8 +5,6 @@ using Owin;
 using System.Linq;
 using System.Net.Http.Formatting;
 using System.Web.Http;
-using Thinktecture.IdentityServer.AccessTokenValidation;
-
 
 namespace HomeRunner.Web.Host.App_Start
 {
@@ -18,8 +16,6 @@ namespace HomeRunner.Web.Host.App_Start
 
             // Web API attribute routing.
             config.MapHttpAttributeRoutes();
-
-            //config.MessageHandlers.Add(new PlatformApplicationContextHandler());
 
             // Remove all XML formatters.
             config.Formatters.Remove(config.Formatters.XmlFormatter);
@@ -36,14 +32,17 @@ namespace HomeRunner.Web.Host.App_Start
             //config.Formatters.Add(new JsonHalMediaTypeFormatter());
             //config.Formatters.OfType<JsonHalMediaTypeFormatter>().First().SerializerSettings.ContractResolver = new CamelCasePropertyNamesContractResolver();
 
-            app.UseIdentityServerBearerTokenAuthentication(new IdentityServerBearerTokenAuthenticationOptions
-            {
-                Authority = "https://localhost:44333/core",
-                //RequiredScopes = new[] { "write" }
+            //app.UseIdentityServerBearerTokenAuthentication(new IdentityServerBearerTokenAuthenticationOptions
+            //{
+            //    Authority = "http://dev.homerunner.io/authorization/core",
+            //    //Authority = "https://localhost:44333/core",
+            //    //RequiredScopes = new[] { "write" }
                 
-            });
+            //});
 
             app.UseWebApi(config);
+
+            //config.MessageHandlers.Add(new AuthorizatonTokenMessageHandler());
         }
     }
 }

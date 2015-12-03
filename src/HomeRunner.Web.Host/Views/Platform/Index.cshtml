@@ -1,6 +1,19 @@
-﻿
+﻿@using System.Web.UI.WebControls
+
 @{
-    ViewBag.Title = "Home";
+    //ViewBag.Title = "Sliding Tasks | " + ViewBag.ApplicationName.ToUpper();
+    Html.RenderPartial("Navigation", new { groepCode = @ViewBag.GroepCode });
 }
 
-<h2>Index</h2>
+<div>
+    @{
+        try
+        {
+            Html.RenderPartial("App", new { applicationName = ViewBag.ApplicationName });
+        }
+        catch (Exception ex)
+        {
+            Html.RenderAction("AppUnavailable", "Platform", new { groepCode = ViewBag.GroepCode, applicationName = this.ViewBag.ApplicationName });
+        }
+    }
+</div>

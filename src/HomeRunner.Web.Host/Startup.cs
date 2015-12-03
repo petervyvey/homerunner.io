@@ -12,7 +12,7 @@ namespace HomeRunner.Web.Host
     {
         public void Configuration(IAppBuilder app)
         {
-            WebApiConfig.Configuration(app);
+            //WebApiConfig.Configuration(app);
             AuthConfig.Configuration(app);
         }
     }

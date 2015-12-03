@@ -10,11 +10,13 @@ namespace HomeRunner.Web.Host
         {
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
 
-            routes.MapRoute(
-                name: "Default",
-                url: "{controller}/{action}",
-                defaults: new { controller = "Platform", action = "Index" }
-            );
+            //routes.MapRoute(
+            //    name: "Default",
+            //    url: string.Empty,
+            //    defaults: new { controller = "Platform", action = "Index" }
+            //);
+
+            routes.MapMvcAttributeRoutes();
         }
     }
 }
