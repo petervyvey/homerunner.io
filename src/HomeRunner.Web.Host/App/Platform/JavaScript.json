@@ -1,0 +1,61 @@
+﻿{
+    "version": "3.0.1",
+    "bundles": [
+        {
+            "name": "angular",
+            "runTime": {
+                "targets": [ "debug", "release" ]            
+                },
+            "scripts": [
+                { "source": "~/App/Home/app/vendor/angular/lib/angular.js" },
+                { "source": "~/App/Home/app/vendor/angular/lib/angular-route.js" },
+                { "source": "~/App/Home/app/vendor/angular/lib/angular-cookies.js" },
+                { "source": "~/App/Home/app/vendor/angular-ui/lib/angular-ui.js" },
+                { "source": "~/App/Home/app/vendor/angular-ui/lib/angular-ui-router.js" }
+            ]
+        },
+
+        {
+            "name": "d3",
+            "runTime": {
+                "targets": [ "debug", "release" ]            
+                },
+            "scripts": [
+                { "source": "~/App/Home/app/vendor/d3/lib/d3.min.js" },
+                { "source": "~/Vendor/platform/lib/CircularMenu.js" }
+            ]
+        },
+
+        {
+            "name": "SlidingApps.Collaboration.app.home.core",
+            "runTime": {
+                "targets": [ "debug", "release" ]            
+                },
+            "scripts": [
+                { "source": "~/App/Home/app/core/ApplicationCore.js" }
+            ]
+        },
+
+        {
+            "name": "attentia.lib",
+            "runTime": {
+                "targets": [ "debug", "release" ]            
+                },
+            "scripts": [
+                { "source": "~/App/_lib/Attentia/**/*.js" },
+                { "source": "~/Vendor/platform/lib/DropdownOverlay.js" }
+            ]
+        },
+
+        {
+            "name": "SlidingApps.Collaboration.app.home",
+            "runTime": {
+                "targets": [ "debug", "release" ]            
+                },
+            "scripts": [
+                { "source": "~/App/Home/app/service/ApplicationService.js" },
+                { "source": "~/App/Home/app/part/**/*.js" }
+            ]
+        }
+    ]
+}
