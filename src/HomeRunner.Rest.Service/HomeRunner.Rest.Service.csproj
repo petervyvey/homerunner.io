@@ -114,13 +114,13 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\HomeRunner.Domain.Handler\HomeRunner.Domain.Service.csproj">
-      <Project>{59B45137-473C-47BD-AE21-C5833274D62B}</Project>
-      <Name>HomeRunner.Domain.Service</Name>
-    </ProjectReference>
     <ProjectReference Include="..\HomeRunner.Domain.Service.Contract\HomeRunner.Domain.Service.Contract.csproj">
       <Project>{ed587895-9fc8-4bb4-9cc9-c6e5fdd2f22a}</Project>
       <Name>HomeRunner.Domain.Service.Contract</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\HomeRunner.Domain.Service\HomeRunner.Domain.Service.csproj">
+      <Project>{59B45137-473C-47BD-AE21-C5833274D62B}</Project>
+      <Name>HomeRunner.Domain.Service</Name>
     </ProjectReference>
     <ProjectReference Include="..\HomeRunner.Foundation.Contract\HomeRunner.Foundation.Contract.csproj">
       <Project>{0DB614AB-D508-4160-8EF1-4E107808CF42}</Project>

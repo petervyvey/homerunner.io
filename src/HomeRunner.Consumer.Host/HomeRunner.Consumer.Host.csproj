@@ -109,8 +109,8 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\HomeRunner.Domain.Handler\HomeRunner.Domain.Service.csproj">
-      <Project>{59b45137-473c-47bd-ae21-c5833274d62b}</Project>
+    <ProjectReference Include="..\HomeRunner.Domain.Service\HomeRunner.Domain.Service.csproj">
+      <Project>{59B45137-473C-47BD-AE21-C5833274D62B}</Project>
       <Name>HomeRunner.Domain.Service</Name>
     </ProjectReference>
     <ProjectReference Include="..\HomeRunner.Foundation.Contract\HomeRunner.Foundation.Contract.csproj">

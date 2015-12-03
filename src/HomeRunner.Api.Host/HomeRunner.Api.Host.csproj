@@ -179,13 +179,13 @@
     <Compile Include="StartUp.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\HomeRunner.Domain.Handler\HomeRunner.Domain.Service.csproj">
-      <Project>{59b45137-473c-47bd-ae21-c5833274d62b}</Project>
-      <Name>HomeRunner.Domain.Service</Name>
-    </ProjectReference>
     <ProjectReference Include="..\HomeRunner.Domain.Service.Contract\HomeRunner.Domain.Service.Contract.csproj">
       <Project>{ED587895-9FC8-4BB4-9CC9-C6E5FDD2F22A}</Project>
       <Name>HomeRunner.Domain.Service.Contract</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\HomeRunner.Domain.Service\HomeRunner.Domain.Service.csproj">
+      <Project>{59b45137-473c-47bd-ae21-c5833274d62b}</Project>
+      <Name>HomeRunner.Domain.Service</Name>
     </ProjectReference>
     <ProjectReference Include="..\HomeRunner.Foundation.Contract\HomeRunner.Foundation.Contract.csproj">
       <Project>{0DB614AB-D508-4160-8EF1-4E107808CF42}</Project>
