@@ -11,16 +11,16 @@ namespace HomeRunner.Domain.ReadModel.Platform.TaskActivities.Queries
     public class TaskActivityListQuery
         : IQuery<IEnumerable<TaskActivity>>, IWithFilterExpression<TaskActivity>
     {
-        public TaskActivityListQuery(params Guid[] ids)
+        public TaskActivityListQuery(params Guid[] identifiers)
         {
-            this.Ids = ids;
+            this.Identifiers = identifiers;
         }
 
-        public Guid[] Ids { get; set; }
+        public Guid[] Identifiers { get; set; }
 
         public Expression<Func<TaskActivity, bool>> FilterExpression
         {
-            get { return taskactivity => !this.Ids.Any() || this.Ids.Contains(taskactivity.Id); }
+            get { return taskactivity => !this.Identifiers.Any() || this.Identifiers.Contains(taskactivity.Id); }
         }
     }
 }
