@@ -14,12 +14,12 @@ namespace HomeRunner.Foundation.Web
 {
     public static class ApiResponse
     {
-        public static TRepresentation ToRepresentation<TRepresentation>(this object instance)
+        public static TRepresentation ToRepresentation<TEntity, TRepresentation>(this TEntity instance)
             where TRepresentation : class, new()
         {
-            TRepresentation mapping = instance != null
-                ? Mapper.Map(instance, new TRepresentation(), instance.GetType(), typeof(TRepresentation)) as TRepresentation
-                : default(TRepresentation);
+            TRepresentation mapping = Equals(instance, default(TEntity))
+                ? default(TRepresentation)
+                : Mapper.Map(instance, new TRepresentation(), instance.GetType(), typeof(TRepresentation)) as TRepresentation;
 
             return mapping;
         }

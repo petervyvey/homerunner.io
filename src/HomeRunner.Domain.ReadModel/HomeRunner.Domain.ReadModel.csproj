@@ -71,6 +71,7 @@
     <Compile Include="Platform\TaskActivities\Queries\TaskActivityListQuery.cs" />
     <Compile Include="Platform\TaskActivities\Queries\TaskActivityQuery.cs" />
     <Compile Include="Platform\TaskActivities\TaskActivityRepository.cs" />
+    <Compile Include="Platform\TaskActivities\Validations\TaskActivityQueryValidator.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
