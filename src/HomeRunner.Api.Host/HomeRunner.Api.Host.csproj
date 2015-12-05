@@ -179,13 +179,21 @@
     <Compile Include="StartUp.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\HomeRunner.Domain.Service.Contract\HomeRunner.Domain.Service.Contract.csproj">
-      <Project>{ED587895-9FC8-4BB4-9CC9-C6E5FDD2F22A}</Project>
-      <Name>HomeRunner.Domain.Service.Contract</Name>
+    <ProjectReference Include="..\HomeRunner.Api.Service\HomeRunner.Api.Service.csproj">
+      <Project>{ace39372-2eaa-4550-801f-c455aacb2e37}</Project>
+      <Name>HomeRunner.Api.Service</Name>
     </ProjectReference>
-    <ProjectReference Include="..\HomeRunner.Domain.Service\HomeRunner.Domain.Service.csproj">
-      <Project>{59b45137-473c-47bd-ae21-c5833274d62b}</Project>
-      <Name>HomeRunner.Domain.Service</Name>
+    <ProjectReference Include="..\HomeRunner.Api.V1.Contract\HomeRunner.Api.V1.Contract.csproj">
+      <Project>{916ecfca-0241-4060-9e3f-70c0dbe245e2}</Project>
+      <Name>HomeRunner.Api.V1.Contract</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\HomeRunner.Domain.ReadModel\HomeRunner.Domain.ReadModel.csproj">
+      <Project>{99118f97-9d6c-4449-8f96-82471465673b}</Project>
+      <Name>HomeRunner.Domain.ReadModel</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\HomeRunner.Domain.WriteModel\HomeRunner.Domain.WriteModel.csproj">
+      <Project>{27ae38a7-a804-43d2-a546-fcaa8e288bc5}</Project>
+      <Name>HomeRunner.Domain.WriteModel</Name>
     </ProjectReference>
     <ProjectReference Include="..\HomeRunner.Foundation.Contract\HomeRunner.Foundation.Contract.csproj">
       <Project>{0DB614AB-D508-4160-8EF1-4E107808CF42}</Project>
@@ -202,10 +210,6 @@
     <ProjectReference Include="..\HomeRunner.Foundation\HomeRunner.Foundation.csproj">
       <Project>{d7e6a58f-b54d-4339-9ab8-5b9f6f389f9f}</Project>
       <Name>HomeRunner.Foundation</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\HomeRunner.Rest.Service\HomeRunner.Rest.Service.csproj">
-      <Project>{ace39372-2eaa-4550-801f-c455aacb2e37}</Project>
-      <Name>HomeRunner.Rest.Service</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup />

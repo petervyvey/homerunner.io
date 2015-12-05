@@ -4,7 +4,7 @@ using Autofac.Integration.WebApi;
 using HalJsonNet.Serialization;
 using HomeRunner.Api.Host.Handler;
 using HomeRunner.Foundation.Web;
-using HomeRunner.Rest.Service.Platform;
+using HomeRunner.Api.Service.Platform;
 using Newtonsoft.Json;
 using Owin;
 using System.Linq;
@@ -50,9 +50,10 @@ namespace HomeRunner.Api.Host
             builder.RegisterApiControllers(typeof(TaskActivityController).Assembly).PropertiesAutowired();
             builder.Register(c => new ServiceExceptionFilter()).AsWebApiExceptionFilterFor<ApiController>().SingleInstance();
             builder.RegisterWebApiFilterProvider(GlobalConfiguration.Configuration);
-            builder.RegisterAssemblyModules(typeof(Domain.Service.AutofacModule).Assembly);
+            builder.RegisterAssemblyModules(typeof(Domain.ReadModel.AutofacModule).Assembly);
+            builder.RegisterAssemblyModules(typeof(Domain.WriteModel.AutofacModule).Assembly);
             builder.RegisterAssemblyModules(typeof(Foundation.NHibernate.AutofacModule).Assembly);
-            builder.RegisterAssemblyModules(typeof(Rest.Service.AutofacModule).Assembly);
+            builder.RegisterAssemblyModules(typeof(Api.Service.AutofacModule).Assembly);
             IContainer container = builder.Build();
 
             AutofacWebApiDependencyResolver resolver = new AutofacWebApiDependencyResolver(container);

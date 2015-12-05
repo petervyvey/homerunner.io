@@ -9,7 +9,8 @@ namespace HomeRunner.Consumer.Host
             ContainerBuilder builder = new ContainerBuilder();
 
             builder.RegisterModule<AutofacModule>();
-            builder.RegisterAssemblyModules(typeof(Domain.Service.AutofacModule).Assembly);
+            builder.RegisterAssemblyModules(typeof(Domain.ReadModel.AutofacModule).Assembly);
+            builder.RegisterAssemblyModules(typeof(Domain.WriteModel.AutofacModule).Assembly);
             builder.RegisterAssemblyModules(typeof(Foundation.NHibernate.AutofacModule).Assembly);
 
             return builder.Build();

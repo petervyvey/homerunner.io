@@ -9,7 +9,7 @@ namespace HomeRunner.Api.Host
         {
             Mapper.Initialize(config =>
             {
-                config.CreateMap<Domain.Service.Platform.ITaskActivity, Rest.Service.Platform.Representation.TaskActivity>();
+                config.CreateMap<Domain.ReadModel.Platform.TaskActivities.Entities.TaskActivity, V1.Platform.Representations.TaskActivity>();
             });
         }
     }
