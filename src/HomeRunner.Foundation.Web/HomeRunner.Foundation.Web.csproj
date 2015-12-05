@@ -67,6 +67,7 @@
       <HintPath>..\packages\Microsoft.AspNet.WebApi.Client.5.2.3\lib\net45\System.Net.Http.Formatting.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="System.Web" />
     <Reference Include="System.Web.Http, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.AspNet.WebApi.Core.5.2.3\lib\net45\System.Web.Http.dll</HintPath>
       <Private>True</Private>
@@ -82,14 +83,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="CommandExtension.cs" />
+    <Compile Include="ApiExceptionFilterAttribute.cs" />
+    <Compile Include="ApiResponse.cs" />
     <Compile Include="CommandResponse.cs" />
     <Compile Include="Logger.cs" />
-    <Compile Include="MapExtension.cs" />
-    <Compile Include="RestController.cs" />
+    <Compile Include="NotFoundException.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="ServiceController.cs" />
-    <Compile Include="ServiceExceptionFilter.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
@@ -99,10 +98,6 @@
     <ProjectReference Include="..\HomeRunner.Foundation.Contract\HomeRunner.Foundation.Contract.csproj">
       <Project>{0DB614AB-D508-4160-8EF1-4E107808CF42}</Project>
       <Name>HomeRunner.Foundation.Contract</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\HomeRunner.Foundation.Extension\HomeRunner.Foundation.Extension.csproj">
-      <Project>{BC97D3AA-F511-4D4C-ACA1-F009BE85D9CF}</Project>
-      <Name>HomeRunner.Foundation.Extension</Name>
     </ProjectReference>
     <ProjectReference Include="..\HomeRunner.Foundation\HomeRunner.Foundation.csproj">
       <Project>{D7E6A58F-B54D-4339-9AB8-5B9F6F389F9F}</Project>

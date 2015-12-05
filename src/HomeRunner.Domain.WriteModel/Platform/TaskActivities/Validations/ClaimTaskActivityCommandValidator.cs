@@ -10,9 +10,8 @@ namespace HomeRunner.Domain.Platform.Commands
     {
         public ClaimTaskActivityCommandValidator()
         {
-            RuleFor(c => c.Id)
-                .NotEmpty().WithMessage("TASK ID equals Guid.Empty");
-
+            RuleFor(c => c.Id).NotEmpty().WithMessage("COMMAND ID equals Guid.Empty");
+            RuleFor(c => c.TaskId).NotEmpty().WithMessage("TASK ID equals Guid.Empty");
             RuleFor(c => c.TaskId).Must(this.BeAuthorized);
         }
 

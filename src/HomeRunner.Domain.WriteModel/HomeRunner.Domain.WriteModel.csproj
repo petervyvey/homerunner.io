@@ -110,10 +110,6 @@
       <Project>{0DB614AB-D508-4160-8EF1-4E107808CF42}</Project>
       <Name>HomeRunner.Foundation.Contract</Name>
     </ProjectReference>
-    <ProjectReference Include="..\HomeRunner.Foundation.Extension\HomeRunner.Foundation.Extension.csproj">
-      <Project>{BC97D3AA-F511-4D4C-ACA1-F009BE85D9CF}</Project>
-      <Name>HomeRunner.Foundation.Extension</Name>
-    </ProjectReference>
     <ProjectReference Include="..\HomeRunner.Foundation\HomeRunner.Foundation.csproj">
       <Project>{D7E6A58F-B54D-4339-9AB8-5B9F6F389F9F}</Project>
       <Name>HomeRunner.Foundation</Name>

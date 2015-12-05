@@ -4111,9 +4111,9 @@
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\HomeRunner.Foundation.Extension\HomeRunner.Foundation.Extension.csproj">
-      <Project>{BC97D3AA-F511-4D4C-ACA1-F009BE85D9CF}</Project>
-      <Name>HomeRunner.Foundation.Extension</Name>
+    <ProjectReference Include="..\HomeRunner.Foundation\HomeRunner.Foundation.csproj">
+      <Project>{D7E6A58F-B54D-4339-9AB8-5B9F6F389F9F}</Project>
+      <Name>HomeRunner.Foundation</Name>
     </ProjectReference>
     <ProjectReference Include="..\HomeRunner.Web.Foundation\HomeRunner.Web.Foundation.csproj">
       <Project>{8EFE575F-1803-4A6A-8F3B-CE20EDCDB7FE}</Project>

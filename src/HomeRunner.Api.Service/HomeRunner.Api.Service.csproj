@@ -7,8 +7,8 @@
     <ProjectGuid>{ACE39372-2EAA-4550-801F-C455AACB2E37}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>HomeRunner.Rest.Service</RootNamespace>
-    <AssemblyName>HomeRunner.Rest.Service</AssemblyName>
+    <RootNamespace>HomeRunner.Api.Service</RootNamespace>
+    <AssemblyName>HomeRunner.Api.Service</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\</SolutionDir>
@@ -128,10 +128,6 @@
     <ProjectReference Include="..\HomeRunner.Foundation.Contract\HomeRunner.Foundation.Contract.csproj">
       <Project>{0DB614AB-D508-4160-8EF1-4E107808CF42}</Project>
       <Name>HomeRunner.Foundation.Contract</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\HomeRunner.Foundation.Pattern\HomeRunner.Foundation.Pattern.csproj">
-      <Project>{f2af800e-c076-476a-a8b7-c02e4fbebc73}</Project>
-      <Name>HomeRunner.Foundation.Pattern</Name>
     </ProjectReference>
     <ProjectReference Include="..\HomeRunner.Foundation.Web\HomeRunner.Foundation.Web.csproj">
       <Project>{BAC87A48-B162-44DD-836B-DD78543ACD19}</Project>

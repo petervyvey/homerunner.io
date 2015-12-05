@@ -2,39 +2,37 @@
 using Autofac.Integration.WebApi;
 using HomeRunner.Foundation.ExceptionManagement;
 using HomeRunner.Foundation.Logging;
-using System;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http.Filters;
 
 namespace HomeRunner.Foundation.Web
 {
-    public class ServiceExceptionFilter
+    public class ApiExceptionFilterAttribute
         : ExceptionFilterAttribute, IAutofacExceptionFilter
     {
         public override void OnException(HttpActionExecutedContext actionExecutedContext)
         {
-            string message = string.Empty;
+            string message;
             HttpStatusCode statusCode = HttpStatusCode.InternalServerError;
             if (actionExecutedContext.Exception is BusinessException)
             {
-                BusinessException ex = actionExecutedContext.Exception as BusinessException;
-                message = ex.ToString();
-                
+                message = (actionExecutedContext.Exception as BusinessException).ToString();                
             }
             else if (actionExecutedContext.Exception is TechnicalException)
             {
-                TechnicalException ex = actionExecutedContext.Exception as TechnicalException;
-                message = ex.ToString();
-                
+                message = (actionExecutedContext.Exception as TechnicalException).ToString();
+            }
+            else if (actionExecutedContext.Exception is NotFoundException)
+            {
+                message = (actionExecutedContext.Exception as NotFoundException).ToString();
+                statusCode = HttpStatusCode.NotFound;
             }
             else
             {
-                Exception ex = actionExecutedContext.Exception;
-                message = ex.Message;
+                message = actionExecutedContext.Exception.Message;
             }
 
-            
             actionExecutedContext.Response = actionExecutedContext.Request.CreateErrorResponse(statusCode, message);
             Logger.Log.Error(message);
         }

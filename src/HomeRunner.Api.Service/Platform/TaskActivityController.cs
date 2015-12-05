@@ -5,40 +5,45 @@ using HomeRunner.Domain.WriteModel.Commands;
 using HomeRunner.Foundation.Web;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Net.Http;
 using System.Threading.Tasks;
 using System.Web.Http;
+using MassTransit;
+using MediatR;
+using HomeRunner.Foundation.Cqrs;
 
 namespace HomeRunner.Api.Service.Platform
 {
     [RoutePrefix("{tenantId}/taskactivity")]
     public sealed class TaskActivityController
-        : RestController
+        : ApiController
     {
+        private readonly IMediator mediator;
+
+        private readonly IBus bus;
+
+        public TaskActivityController(IMediator mediator, IBus bus) : base()
+        {
+            this.mediator = mediator;
+            this.bus = bus;
+        }
+
         [HttpGet, Route("")]
         public IEnumerable<TaskActivity> GetTaskActivityListQuery(string tenantId)
         {
             TaskActivityListQuery query = new TaskActivityListQuery();
-            var taskActivities =
-                this.ExecuteQuery(query)
-                    .Map<List<TaskActivity>>();
+            List<TaskActivity> representations = this.mediator.Send(query).ToRepresentations<Domain.ReadModel.Platform.TaskActivities.Entities.TaskActivity, TaskActivity>();
 
-            return taskActivities;
+            return ApiResponse.Found(representations);
         }
 
         [HttpGet, Route("{id:guid}")]
         public TaskActivity GetTaskActivityQuery(string tenantId, Guid id)
         {
             TaskActivityListQuery query = new TaskActivityListQuery(id);
-            var taskActivities = this.ExecuteQuery(query);
+            TaskActivity representation = this.mediator.Send(query).ToRepresentation<TaskActivity>();
 
-            var representations =
-                taskActivities
-                    .Map<List<TaskActivity>>()
-                    .Single();
-
-            return representations;
+            return ApiResponse.Found(representation);
         }
 
         [HttpGet, Route("{id:guid}/problem")]
@@ -47,27 +52,31 @@ namespace HomeRunner.Api.Service.Platform
             throw new Exception();
 
             TaskActivityListQuery query = new TaskActivityListQuery(id);
-            TaskActivity taskActivity =
-                this.ExecuteQuery(query)
-                    .Map<List<TaskActivity>>()
-                    .Single();
+            TaskActivity representation = this.mediator.Send(query).ToRepresentation<TaskActivity>();
 
-            return taskActivity;
+            return ApiResponse.Found(representation);
         }
 
         [HttpPut, Route("{id:guid}/claim")]
         public async Task<HttpResponseMessage> PutClaimTaskActivityCommand(string tenantId, Guid id)
         {
-            ClaimTaskActivityCommand claimTaskActivityCommand = new ClaimTaskActivityCommand(id);
+            ClaimTaskActivityCommand command = new ClaimTaskActivityCommand(Guid.Empty);
 
-            return (await this.SubmitCommand(claimTaskActivityCommand)).ToResponse();
+            ISendEndpoint endpoint = await this.bus.GetSendEndpoint(new Uri("rabbitmq://localhost/command/NormalPriority"));
+            await endpoint.Send(new CommandMessage<ClaimTaskActivityCommand>(command));
+
+            return ApiResponse.CommandResponse(command);
         }
 
         [HttpPut, Route("{id:guid}/unclaim")]
         public async Task<HttpResponseMessage> PutUnclaimTaskActivityCommand(string tenantId, Guid id)
         {
-            UnclaimTaskActivityCommand unclaimTaskActivityCommand = new UnclaimTaskActivityCommand(id);
-            return (await this.SubmitCommand(unclaimTaskActivityCommand)).ToResponse();
+            UnclaimTaskActivityCommand command = new UnclaimTaskActivityCommand(id);
+
+            ISendEndpoint endpoint = await this.bus.GetSendEndpoint(new Uri("rabbitmq://localhost/command/NormalPriority"));
+            await endpoint.Send(new CommandMessage<UnclaimTaskActivityCommand>(command));
+
+            return ApiResponse.CommandResponse(command);
         }
     }
 }

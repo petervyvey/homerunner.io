@@ -48,7 +48,7 @@ namespace HomeRunner.Api.Host
 
             ContainerBuilder builder = new ContainerBuilder();
             builder.RegisterApiControllers(typeof(TaskActivityController).Assembly).PropertiesAutowired();
-            builder.Register(c => new ServiceExceptionFilter()).AsWebApiExceptionFilterFor<ApiController>().SingleInstance();
+            builder.Register(c => new ApiExceptionFilterAttribute()).AsWebApiExceptionFilterFor<ApiController>().SingleInstance();
             builder.RegisterWebApiFilterProvider(GlobalConfiguration.Configuration);
             builder.RegisterAssemblyModules(typeof(Domain.ReadModel.AutofacModule).Assembly);
             builder.RegisterAssemblyModules(typeof(Domain.WriteModel.AutofacModule).Assembly);

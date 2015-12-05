@@ -72,6 +72,8 @@
     <Compile Include="ExceptionManagement\ApplicationException.cs" />
     <Compile Include="ExceptionManagement\BusinessException.cs" />
     <Compile Include="ExceptionManagement\TechnicalException.cs" />
+    <Compile Include="Extension\Argument.cs" />
+    <Compile Include="Extension\SerializerExtension.cs" />
     <Compile Include="Infrastructure\QueryProvider.cs" />
     <Compile Include="Infrastructure\UnitOfWork.cs" />
     <Compile Include="Infrastructure\UnitOfWorkDecorator.cs" />
@@ -95,18 +97,11 @@
       <Project>{0DB614AB-D508-4160-8EF1-4E107808CF42}</Project>
       <Name>HomeRunner.Foundation.Contract</Name>
     </ProjectReference>
-    <ProjectReference Include="..\HomeRunner.Foundation.Extension\HomeRunner.Foundation.Extension.csproj">
-      <Project>{BC97D3AA-F511-4D4C-ACA1-F009BE85D9CF}</Project>
-      <Name>HomeRunner.Foundation.Extension</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\HomeRunner.Foundation.Pattern\HomeRunner.Foundation.Pattern.csproj">
-      <Project>{F2AF800E-C076-476A-A8B7-C02E4FBEBC73}</Project>
-      <Name>HomeRunner.Foundation.Pattern</Name>
-    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>
