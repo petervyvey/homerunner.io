@@ -1,6 +1,6 @@
-﻿using System;
-using System.Configuration;
+﻿
 using Microsoft.Owin.Hosting;
+using System.Configuration;
 
 namespace HomeRunner.Api.Host.Console
 {

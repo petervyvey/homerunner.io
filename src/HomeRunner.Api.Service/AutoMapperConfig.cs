@@ -1,7 +1,7 @@
 ﻿
 using AutoMapper;
 
-namespace HomeRunner.Api.Host
+namespace HomeRunner.Api.Service
 {
     public static class AutoMapperConfig
     {

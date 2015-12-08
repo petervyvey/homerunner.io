@@ -1,10 +1,9 @@
 ﻿
 using Autofac;
-using Autofac.Integration.WebApi;
 using Autofac.Features.Variance;
+using Autofac.Integration.WebApi;
 using HomeRunner.Api.Service.Platform;
 using MediatR;
-using System;
 using System.Collections.Generic;
 
 namespace HomeRunner.Api.Host.Console

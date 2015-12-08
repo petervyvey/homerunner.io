@@ -1,14 +1,16 @@
-﻿using System;
-using Owin;
+﻿
+using Autofac;
+using Autofac.Integration.WebApi;
+using HalJsonNet;
+using HalJsonNet.Serialization;
+using HomeRunner.Api.Service;
 using HomeRunner.Api.Service.Platform;
+using Newtonsoft.Json;
+using Owin;
 using System;
 using System.Linq;
 using System.Net.Http.Formatting;
 using System.Web.Http;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Serialization;
-using Autofac;
-using Autofac.Integration.WebApi;
 
 namespace HomeRunner.Api.Host.Console
 {
@@ -18,22 +20,27 @@ namespace HomeRunner.Api.Host.Console
 
 		public void Configuration(IAppBuilder app)
 		{
+            // HTTP config.
 			HttpConfiguration config = new HttpConfiguration();
 			config.MapHttpAttributeRoutes();
 
 			config.Formatters.OfType<JsonMediaTypeFormatter>().First().SerializerSettings = new JsonSerializerSettings
 			{
 				Formatting = Newtonsoft.Json.Formatting.Indented,
-				ContractResolver = new CamelCasePropertyNamesContractResolver(),
+				ContractResolver = new JsonNetHalJsonContactResolver(new HalJsonConfiguration("http://dev.homerunner.io/api")),
 				NullValueHandling = NullValueHandling.Ignore
-					//,TypeNameHandling = TypeNameHandling.Objects
+                //,TypeNameHandling = TypeNameHandling.Objects
 			};
 
+            // Autofac config.
 			IContainer container = AutofacConfig.BuildContainer();
-
 			AutofacWebApiDependencyResolver resolver = new AutofacWebApiDependencyResolver(container);
 			config.DependencyResolver = resolver;
 
+            // AutoMapper config.
+            AutoMapperConfig.Config();
+
+            // OWIN config.
 			app.UseWebApi(config);
 			app.UseAutofacMiddleware(container);
 			//app.UseAutofacWebApi(GlobalConfiguration.Configuration);

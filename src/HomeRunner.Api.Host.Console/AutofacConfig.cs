@@ -1,6 +1,5 @@
 ﻿
 using Autofac;
-using System;
 
 namespace HomeRunner.Api.Host.Console
 {
