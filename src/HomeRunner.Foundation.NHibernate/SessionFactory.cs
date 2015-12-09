@@ -61,6 +61,13 @@ namespace HomeRunner.Foundation.NHibernate
                     persistence = MsSqlConfiguration.MsSql2008.ConnectionString(connectionString);
                 }
                     break;
+
+                case "MySql":
+                    {
+                        string connectionString = ConfigurationManager.AppSettings["nhibernate.connectionstring"];
+                        persistence = MySQLConfiguration.Standard.ConnectionString(connectionString);
+                    }
+                    break;
                  
                 default:
                     throw new NotImplementedException();

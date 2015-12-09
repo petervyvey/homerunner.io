@@ -3,9 +3,9 @@ using Autofac;
 using Autofac.Integration.WebApi;
 using HalJsonNet;
 using HalJsonNet.Serialization;
-using HomeRunner.Foundation.Logging;
 using HomeRunner.Api.Service;
 using HomeRunner.Api.Service.Platform;
+using HomeRunner.Foundation.Logging;
 using Newtonsoft.Json;
 using Owin;
 using System;
@@ -17,7 +17,7 @@ namespace HomeRunner.Api.Host.Console
 {
 	internal sealed class Startup
 	{
-		internal Type service = typeof(TaskActivityController);
+		internal readonly Type SERVICE = typeof(TaskActivityController);
 
 		public void Configuration(IAppBuilder app)
 		{
