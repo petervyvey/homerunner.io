@@ -1,4 +1,6 @@
 ﻿
+using HomeRunner.Foundation.Logging;
+using log4net.Config;
 using Microsoft.Owin.Hosting;
 using System.Configuration;
 
@@ -11,13 +13,18 @@ namespace HomeRunner.Api.Host.Console
 
 		private static void Main(string[] args)
 		{
+			XmlConfigurator.Configure();
+
 			var port = ConfigurationManager.AppSettings.Get(HOST_PORT_CONFIGURATION_KEY);
 			int _port = !string.IsNullOrEmpty(port) ? int.Parse(port) : 8000;
 
-			System.Console.WriteLine("OWIN Web APi self host");
+			Logger.Log.Info (string.Format (typeof(Program).FullName));
+			Logger.Log.Info (string.Format("Listening on URI: {0}", string.Format(Program.BASE_URI_TEMPLATE, _port)));
+
 			using (WebApp.Start<Startup>(new StartOptions(string.Format(Program.BASE_URI_TEMPLATE, _port))))
 			{
-				System.Console.WriteLine("Press any key to quit ...");
+				Logger.Log.Info (string.Empty);
+				Logger.Log.Info ("Press any key to quit ...");
 				System.Console.ReadKey();
 			}
 		}
