@@ -30,9 +30,9 @@ namespace HomeRunner.Domain.ReadModel.Platform.TaskActivities
 
         public IEnumerable<TaskActivity> Handle(TaskActivityListQuery query)
         {
-            var queryable = this.queryProvider.Find<TaskActivityListQuery, TaskActivity>(query);
+			var list = this.queryProvider.Find<TaskActivityListQuery, TaskActivity>(query).ToList();
 
-            return queryable.ToList();
+			return list;
         }
     }
 }

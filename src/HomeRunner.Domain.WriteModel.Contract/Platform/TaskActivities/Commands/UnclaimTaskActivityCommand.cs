@@ -2,12 +2,13 @@
 using HomeRunner.Foundation.Cqrs;
 using System;
 
-namespace HomeRunner.Domain.WriteModel.Commands
+namespace HomeRunner.Domain.WriteModel.Platform.TaskActivities.Commands
 {
     public class UnclaimTaskActivityCommand
         : Command
     {
-        public UnclaimTaskActivityCommand() { }
+        public UnclaimTaskActivityCommand()
+			: base() { }
 
         public UnclaimTaskActivityCommand(Guid taskId)
             : this()

@@ -87,6 +87,7 @@
     <Reference Include="System.Web.Http.WebHost, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35">
       <HintPath>..\packages\Microsoft.AspNet.WebApi.WebHost.5.2.3\lib\net45\System.Web.Http.WebHost.dll</HintPath>
     </Reference>
+    <Reference Include="System.Configuration" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AutofacModule.cs">
@@ -96,6 +97,7 @@
     <Compile Include="Logger.cs" />
     <Compile Include="Platform\TaskActivityController.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Platform\RabbitMQConfiguration.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />

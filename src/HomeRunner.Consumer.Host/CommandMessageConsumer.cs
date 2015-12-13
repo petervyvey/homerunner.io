@@ -10,6 +10,7 @@ using System.Threading.Tasks;
 namespace HomeRunner.Consumer.Host
 {
     public class CommandMessageConsumer :
+		IConsumer<CommandMessage<CreateTaskActivityCommand>>,
         IConsumer<CommandMessage<ClaimTaskActivityCommand>>,
         IConsumer<CommandMessage<UnclaimTaskActivityCommand>>
     {
@@ -22,12 +23,14 @@ namespace HomeRunner.Consumer.Host
         public CommandMessageConsumer(IMediator mediator, IDomainEventMessagePublisher publisher)
             : this()
         {
-            Logger.Log.Info(string.Format("Creating consumer: {0}", this.GetType().AssemblyQualifiedName));
             this.mediator = mediator;
             this.publisher = publisher;
-
-            Logger.Log.Debug(string.Format("Created consumer: {0}", this.GetType().AssemblyQualifiedName));
         }
+
+		public Task Consume(ConsumeContext<CommandMessage<CreateTaskActivityCommand>> context)
+		{
+			return ConsumeCommand(context);
+		}
 
         public Task Consume(ConsumeContext<CommandMessage<ClaimTaskActivityCommand>> context)
         {

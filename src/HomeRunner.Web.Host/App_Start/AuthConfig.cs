@@ -85,8 +85,8 @@ namespace HomeRunner.Web.Host.App_Start
                         {
                             try
                             {
-                                string idTokenHint = n.OwinContext.Authentication.User.FindFirst("id_token").Value;
-                                n.ProtocolMessage.IdTokenHint = idTokenHint;
+									//string idTokenHint = n.OwinContext.Authentication.User.FindFirst("id_token").Value;
+									//n.ProtocolMessage.IdTokenHint = idTokenHint;
                             }
                             catch { /* IGNORE */ }
                         }

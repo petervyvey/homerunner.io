@@ -2,12 +2,13 @@
 using HomeRunner.Foundation.Cqrs;
 using System;
 
-namespace HomeRunner.Domain.WriteModel.Commands
+namespace HomeRunner.Domain.WriteModel.Platform.TaskActivities.Commands
 {
     public class ClaimTaskActivityCommand
         : Command
     {
-        public ClaimTaskActivityCommand() { }
+        public ClaimTaskActivityCommand()
+			: base() { }
 
         public ClaimTaskActivityCommand(Guid taskId)
             : this()

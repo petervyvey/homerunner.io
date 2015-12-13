@@ -12,6 +12,8 @@ using System;
 using System.Linq;
 using System.Net.Http.Formatting;
 using System.Web.Http;
+using AutoMapper;
+using System.Configuration;
 
 namespace HomeRunner.Api.Host.Console
 {
@@ -21,23 +23,33 @@ namespace HomeRunner.Api.Host.Console
 
 		public void Configuration(IAppBuilder app)
 		{
-			Logger.Log.Info ("Start configuration");
+			try
+			{
+				Logger.Log.Info("Start configuration");
 
-			var config = this.ConfigureHttp();
-			var container = this.ConfigureAutofac(config);
-			this.ConfigureAutoMapper();
-			this.ConfigureOwin(app, config, container);
+				var config = this.ConfigureHttp();
+				var container = this.ConfigureAutofac(config);
+				this.ConfigureAutoMapper();
+				this.ConfigureOwin(app, config, container);
+			}
+			catch (Exception ex)
+			{
+				Logger.Log.Error(string.Format("Startup exception: {0}", ex.Message));
+			}
 		}
 
 		private HttpConfiguration ConfigureHttp()
 		{
+			var urlBase = ConfigurationManager.AppSettings["hal.urlBase"];
+			if(string.IsNullOrEmpty(urlBase)) throw new Exception ("HAL JSON URL base not configured");
+
 			HttpConfiguration config = new HttpConfiguration();
 			config.MapHttpAttributeRoutes();
 
 			config.Formatters.OfType<JsonMediaTypeFormatter>().First().SerializerSettings = new JsonSerializerSettings
 			{
 				Formatting = Newtonsoft.Json.Formatting.Indented,
-				ContractResolver = new JsonNetHalJsonContactResolver(new HalJsonConfiguration("http://dev.homerunner.io/api")),
+				ContractResolver = new JsonNetHalJsonContactResolver(new HalJsonConfiguration(urlBase)),
 				NullValueHandling = NullValueHandling.Ignore
 					//,TypeNameHandling = TypeNameHandling.Objects
 			};
@@ -60,6 +72,7 @@ namespace HomeRunner.Api.Host.Console
 
 		private void ConfigureAutoMapper()
 		{
+			Mapper.Initialize (config => { });
 			AutoMapperConfig.Config();
 
 			Logger.Log.Info ("AutoMapper configuration DONE");

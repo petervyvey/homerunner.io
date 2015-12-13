@@ -31,6 +31,21 @@ namespace HomeRunner.Foundation.Entity
 
         public List<IDomainEvent> DomainEvents { get; private set; }
 
+		object IDomainEntity.GetDataEnitity()
+		{
+			return this.entity;
+		}
+
+		public TDataEntity GetDataEnitity()
+		{
+			return this.entity;
+		}
+
+		void IDomainEntity.SetDataEnitity(object dataEntity)
+		{
+			this.entity = (TDataEntity)dataEntity;
+		}
+
         public void SetDataEnitity(TDataEntity dataEntity)
         {
             this.entity = dataEntity;

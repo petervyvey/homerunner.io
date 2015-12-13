@@ -5,34 +5,50 @@ using log4net.Config;
 using MassTransit;
 using System;
 
-
 namespace HomeRunner.Consumer.Host
 {
     class Program
     {
-        private static IContainer container;
-
         static void Main(string[] args)
         {
             XmlConfigurator.Configure();
 
-            Logger.Log.Info("Building AutoFac container");
-            container = AutofacConfig.BuildContainer();
-            Logger.Log.Debug("Build AutoFac container");
+			IContainer container = Program.ConfigureAutofac ();
+			IBusControl bus = Program.ConfigureMassTransit (container);
+			var handle = Program.ConfigureConsumers (bus);
 
-            Logger.Log.Info("Starting MassTransit BusControl");
-            IBusControl control = MassTransitConfig.Configure(container);
-            control.Start();
-            Logger.Log.Info("Started MassTransit BusControl");
-
-            Logger.Log.Info("Instantiating consumers");
-            ConnectHandle handle = control.ConnectConsumer<CommandMessageConsumer>();
-            Logger.Log.Info("Instantiated consumers");
+			Logger.Log.Info (string.Empty);
+			Logger.Log.Info ("Press any key to quit ...");
 
             Console.ReadKey();
 
             handle.Disconnect();
-            control.Stop();
+			bus.Stop();
         }
+
+		private static IContainer ConfigureAutofac()
+		{
+			IContainer container = AutofacConfig.BuildContainer();
+			Logger.Log.Info ("Autofac configuration DONE");
+
+			return container;
+		}
+
+		private static IBusControl ConfigureMassTransit(IContainer container)
+		{
+			IBusControl bus = MassTransitConfig.Configure(container);
+			bus.Start();
+			Logger.Log.Info ("MassTransit configuration DONE");
+
+			return bus;
+		}
+
+		private static ConnectHandle ConfigureConsumers(IBusControl bus )
+		{
+			ConnectHandle handle = bus.ConnectConsumer<CommandMessageConsumer>();
+			Logger.Log.Info ("Consumer configuration DONE");
+
+			return handle;
+		}
     }
 }

@@ -1,6 +1,8 @@
 ﻿
-using HomeRunner.Domain.WriteModel.Commands;
-using HomeRunner.Domain.WriteModel.Events;
+using FluentValidation;
+using FluentValidation.Results;
+using HomeRunner.Domain.WriteModel.Platform.TaskActivities.Commands;
+using HomeRunner.Domain.WriteModel.Platform.TaskActivities.Events;
 using HomeRunner.Foundation.Cqrs;
 using HomeRunner.Foundation.Entity;
 using HomeRunner.Foundation.Extension;
@@ -8,16 +10,24 @@ using System;
 
 namespace HomeRunner.Domain.WriteModel.Platform.TaskActivities
 {
-    public class TaskActivity
-        : DomainEntity<Guid, ReadModel.Platform.TaskActivities.Entities.TaskActivity>
+	public partial class TaskActivity
+		: DomainEntity<Guid, ReadModel.Platform.TaskActivities.Entities.TaskActivity>, IWithValidator<TaskActivity>
     {
-        public TaskActivity()
-            : base() { }
+		private readonly IValidator<TaskActivity> validator;
 
-        public TaskActivity(ReadModel.Platform.TaskActivities.Entities.TaskActivity entity)
-            : this()
+		public TaskActivity(IValidator<TaskActivity> validator)
+            : base() 
+		{
+			Argument.InstanceIsRequired(validator, "validator");
+
+			this.validator = validator;
+		}
+
+		public TaskActivity(ReadModel.Platform.TaskActivities.Entities.TaskActivity entity, IValidator<TaskActivity> validator)
+			: this(validator)
         {
             Argument.InstanceIsRequired(entity, "entity");
+
             this.entity = entity;
         }
 
@@ -51,6 +61,14 @@ namespace HomeRunner.Domain.WriteModel.Platform.TaskActivities
             set { this.entity.UpdateTime = value; }
         }
 
+		public IDomainEvent Apply(CreateTaskActivityCommand command)
+		{
+			TaskActivityCreatedEvent domainEvent = new TaskActivityCreatedEvent(command);
+			this.When(domainEvent);
+
+			return domainEvent;
+		}
+
         public IDomainEvent Apply(ClaimTaskActivityCommand command)
         {
             TaskActivityClaimedEvent domainEvent = new TaskActivityClaimedEvent(command);
@@ -67,6 +85,14 @@ namespace HomeRunner.Domain.WriteModel.Platform.TaskActivities
             return domainEvent;
         }
 
+		public void When(TaskActivityCreatedEvent domainEvent)
+		{
+			this.Id = domainEvent.TaskId;
+			this.Description = domainEvent.Description;
+
+			this.DomainEvents.Add(domainEvent);
+		}
+
         public void When(TaskActivityClaimedEvent domainEvent)
         {
             this.IsClaimed = true;
@@ -80,5 +106,12 @@ namespace HomeRunner.Domain.WriteModel.Platform.TaskActivities
 
             this.DomainEvents.Add(domainEvent);
         }
+
+		public ValidationResult Validate()
+		{
+			ValidationResult result = this.validator.Validate (this);
+
+			return result;
+		}
     }
 }

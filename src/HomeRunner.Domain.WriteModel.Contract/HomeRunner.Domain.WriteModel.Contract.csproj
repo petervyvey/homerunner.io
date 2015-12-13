@@ -49,6 +49,8 @@
     <Compile Include="Platform\TaskActivities\Events\TaskActivityClaimedEvent.cs" />
     <Compile Include="Platform\TaskActivities\Events\TaskActivityUnclaimedEvent.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Platform\TaskActivities\Commands\CreateTaskActivityCommand.cs" />
+    <Compile Include="Platform\TaskActivities\Events\TaskActivityCreatedEvent.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\HomeRunner.Foundation.Contract\HomeRunner.Foundation.Contract.csproj">

@@ -1,8 +1,9 @@
 ﻿
 using HomeRunner.Api.V1.Platform.Representations;
 using HomeRunner.Domain.ReadModel.Platform.TaskActivities.Queries;
-using HomeRunner.Domain.WriteModel.Commands;
+using HomeRunner.Domain.WriteModel.Platform.TaskActivities.Commands;
 using HomeRunner.Foundation.Cqrs;
+using HomeRunner.Foundation.Logging;
 using HomeRunner.Foundation.Web;
 using MassTransit;
 using MediatR;
@@ -29,15 +30,14 @@ namespace HomeRunner.Api.Service.Platform
         }
 
         [HttpGet, Route("")]
-        public IEnumerable<TaskActivity> GetTaskActivityListQuery(string tenantId)
+		public TaskActivityList GetTaskActivityListQuery(string tenantId)
         {
             TaskActivityListQuery query = new TaskActivityListQuery();
-            List<TaskActivity> representations =
-                this.mediator
-                    .Send(query)
-                    .ToRepresentations<Domain.ReadModel.Platform.TaskActivities.Entities.TaskActivity, TaskActivity>();
+			var represenations = 
+				this.mediator.Send (query)
+					.ToRepresentations<Domain.ReadModel.Platform.TaskActivities.Entities.TaskActivity, TaskActivity>();
 
-            return ApiResponse.Found(representations);
+			return new TaskActivityList(represenations);
         }
 
         [HttpGet, Route("{id:guid}")]
@@ -66,12 +66,26 @@ namespace HomeRunner.Api.Service.Platform
             return ApiResponse.Found(representation);
         }
 
+		[HttpPost, Route("")]
+		public async Task<HttpResponseMessage> PostCreateTaskActivityCommand(string tenantId, [FromBody]V1.Intents.CreateTaskActivity intent)
+		{
+			CreateTaskActivityCommand command = new CreateTaskActivityCommand(intent.Description);
+
+			HomeRunner.Api.Service.Logger.Log.Info(string.Format("Submiting command: {0} [{1}] ", command.GetType().FullName, command.Id));
+			ISendEndpoint endpoint = await this.bus.GetSendEndpoint(RabbitMQConfiguration.Exchange);
+			await endpoint.Send(new CommandMessage<CreateTaskActivityCommand>(command));
+
+			HomeRunner.Api.Service.Logger.Log.Info(string.Format("Command submitted: {0} [{1}]", command.GetType().FullName, command.Id));
+
+			return ApiResponse.CommandResponse(command);
+		}
+
         [HttpPut, Route("{id:guid}/claim")]
         public async Task<HttpResponseMessage> PutClaimTaskActivityCommand(string tenantId, Guid id)
         {
             ClaimTaskActivityCommand command = new ClaimTaskActivityCommand(id);
 
-            ISendEndpoint endpoint = await this.bus.GetSendEndpoint(new Uri("rabbitmq://localhost/command/NormalPriority"));
+			ISendEndpoint endpoint = await this.bus.GetSendEndpoint(RabbitMQConfiguration.Exchange);
             await endpoint.Send(new CommandMessage<ClaimTaskActivityCommand>(command));
 
             return ApiResponse.CommandResponse(command);
@@ -82,10 +96,11 @@ namespace HomeRunner.Api.Service.Platform
         {
             UnclaimTaskActivityCommand command = new UnclaimTaskActivityCommand(id);
 
-            ISendEndpoint endpoint = await this.bus.GetSendEndpoint(new Uri("rabbitmq://localhost/command/NormalPriority"));
+			ISendEndpoint endpoint = await this.bus.GetSendEndpoint(RabbitMQConfiguration.Exchange);
             await endpoint.Send(new CommandMessage<UnclaimTaskActivityCommand>(command));
 
             return ApiResponse.CommandResponse(command);
         }
     }
+
 }

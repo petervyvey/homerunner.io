@@ -1,6 +1,6 @@
 ﻿
 using FluentValidation;
-using HomeRunner.Domain.WriteModel.Commands;
+using HomeRunner.Domain.WriteModel.Platform.TaskActivities.Commands;
 using System;
 
 namespace HomeRunner.Domain.Platform.Commands
@@ -10,9 +10,9 @@ namespace HomeRunner.Domain.Platform.Commands
     {
         public ClaimTaskActivityCommandValidator()
         {
-            RuleFor(c => c.Id).NotEmpty().WithMessage("COMMAND ID equals Guid.Empty");
-            RuleFor(c => c.TaskId).NotEmpty().WithMessage("TASK ID equals Guid.Empty");
-            RuleFor(c => c.TaskId).Must(this.BeAuthorized);
+			this.RuleFor(c => c.Id).NotEmpty().WithMessage("COMMAND ID equals Guid.Empty");
+			this.RuleFor(c => c.TaskId).NotEmpty().WithMessage("TASK ID equals Guid.Empty");
+			this.RuleFor(c => c.TaskId).Must(this.BeAuthorized);
         }
 
         private bool BeAuthorized(Guid taskId)

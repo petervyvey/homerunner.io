@@ -3,6 +3,7 @@ using Autofac;
 using Autofac.Core;
 using FluentValidation;
 using HomeRunner.Foundation.Cqrs;
+using HomeRunner.Foundation.Entity;
 using HomeRunner.Foundation.Infrastructure;
 using HomeRunner.Foundation.Logging;
 using MassTransit;
@@ -48,6 +49,11 @@ namespace HomeRunner.Domain.WriteModel
             builder.RegisterAssemblyTypes(typeof(AutofacModule).Assembly)
                 .AsClosedTypesOf(typeof(IValidator<>))
                 .SingleInstance();
+
+			builder.Register<IDomainEntityValidatorFactory>(ctx => {
+				IComponentContext c = ctx.Resolve<IComponentContext>();
+				return new DomainEntityValidatorFactory(c);
+			}).SingleInstance();
 
             //builder.RegisterDecorator<IDomainEventMessagePublisher>(
             //    (c, inner) =>

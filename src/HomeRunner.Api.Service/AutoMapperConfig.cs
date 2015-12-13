@@ -1,5 +1,6 @@
 ﻿
 using AutoMapper;
+using System.Collections.Generic;
 
 namespace HomeRunner.Api.Service
 {
@@ -7,10 +8,7 @@ namespace HomeRunner.Api.Service
     {
         public static void Config()
         {
-            Mapper.Initialize(config =>
-            {
-                config.CreateMap<Domain.ReadModel.Platform.TaskActivities.Entities.TaskActivity, V1.Platform.Representations.TaskActivity>();
-            });
+			Mapper.CreateMap<Domain.ReadModel.Platform.TaskActivities.Entities.TaskActivity, V1.Platform.Representations.TaskActivity>();
         }
     }
 }

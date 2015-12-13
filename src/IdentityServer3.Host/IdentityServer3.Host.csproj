@@ -148,10 +148,6 @@
       <Project>{FB9E026E-BAB3-498A-A954-B93B05C146A5}</Project>
       <Name>IdentityServer3.Core</Name>
     </ProjectReference>
-    <ProjectReference Include="..\IdentityServer3.Mono\IdentityServer3.Mono.csproj">
-      <Project>{89B5E68E-01C7-4303-AFDE-70257F41C3A0}</Project>
-      <Name>IdentityServer3.Mono</Name>
-    </ProjectReference>
   </ItemGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'AzureWebSites|AnyCPU'">
     <OutputPath>bin\</OutputPath>
@@ -192,6 +188,7 @@
   <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />
   <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />
+  <Import Project="$(MSBuildExtensionsPath)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>
       <ErrorText>This project references NuGet package(s) that are missing on this computer. Enable NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
