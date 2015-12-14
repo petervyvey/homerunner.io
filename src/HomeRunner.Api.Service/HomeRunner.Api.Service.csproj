@@ -121,10 +121,6 @@
       <Project>{0DB614AB-D508-4160-8EF1-4E107808CF42}</Project>
       <Name>HomeRunner.Foundation.Contract</Name>
     </ProjectReference>
-    <ProjectReference Include="..\HomeRunner.Foundation.RabbitMQ\HomeRunner.Foundation.RabbitMQ.csproj">
-      <Project>{37643e27-e8cb-4f9e-96b7-3b2bf130c27f}</Project>
-      <Name>HomeRunner.Foundation.RabbitMQ</Name>
-    </ProjectReference>
     <ProjectReference Include="..\HomeRunner.Foundation.Web\HomeRunner.Foundation.Web.csproj">
       <Project>{BAC87A48-B162-44DD-836B-DD78543ACD19}</Project>
       <Name>HomeRunner.Foundation.Web</Name>

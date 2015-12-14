@@ -34,6 +34,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
+    <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.Transactions" />
     <Reference Include="System.Xml.Linq" />
@@ -81,6 +82,7 @@
     <Compile Include="Extension\ObjectExtension.cs" />
     <Compile Include="ExceptionManagement\DataEntityNotFoundException.cs" />
     <Compile Include="Extension\DomainEntityExtension.cs" />
+    <Compile Include="RabbitMQ\Configuration.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
