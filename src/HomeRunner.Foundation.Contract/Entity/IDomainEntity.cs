@@ -10,7 +10,7 @@ namespace HomeRunner.Foundation.Entity
     public interface IDomainEntity<TDataEntity>
 		: IDomainEntity
     {
-		TDataEntity GetDataEnitity();
+		new TDataEntity GetDataEnitity();
         void SetDataEnitity(TDataEntity dataEntity);
     }
 }
