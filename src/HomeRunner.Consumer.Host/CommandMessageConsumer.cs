@@ -1,5 +1,5 @@
 ﻿
-using HomeRunner.Domain.WriteModel.Commands;
+using HomeRunner.Domain.WriteModel.Platform.TaskActivities.Commands;
 using HomeRunner.Foundation.Cqrs;
 using HomeRunner.Foundation.Extension;
 using HomeRunner.Foundation.Logging;

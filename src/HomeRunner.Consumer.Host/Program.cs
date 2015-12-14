@@ -4,6 +4,7 @@ using HomeRunner.Foundation.Logging;
 using log4net.Config;
 using MassTransit;
 using System;
+using System.Linq;
 
 namespace HomeRunner.Consumer.Host
 {
@@ -11,6 +12,27 @@ namespace HomeRunner.Consumer.Host
     {
         static void Main(string[] args)
         {
+			System.Console.Clear();
+
+			var header = new[]
+			{
+				@"-----------------------------------------------------------------------",
+				@"      _   _                      ____                               ",
+				@"     | | | | ___  _ __ ___   ___|  _ \ _   _ _ __  _ __   ___ _ __  ",
+				@"     | |_| |/ _ \| '_ ` _ \ / _ \ |_) | | | | '_ \| '_ \ / _ \ '__| ",
+				@"     |  _  | (_) | | | | | |  __/  _ <| |_| | | | | | | |  __/ |    ",
+				@"     |_| |_|\___/|_| |_| |_|\___|_| \_\\__,_|_| |_|_| |_|\___|_|    ",
+				@"     ___ ___  _ __ ___  _ __ ___   __ _ _ __   __| |  _____   _____ ",
+				@"    / __/ _ \| '_ ` _ \| '_ ` _ \ / _` | '_ \ / _` | / __\ \ / / __|",
+				@"   | (_| (_) | | | | | | | | | | | (_| | | | | (_| | \__ \\ V / (__ ",
+				@"    \___\___/|_| |_| |_|_| |_| |_|\__,_|_| |_|\__,_| |___/ \_/ \___|",
+				@"                                                                    ",
+				@"-----------------------------------------------------------------------",
+				@"                                                                                     "
+			};
+
+			header.ToList().ForEach(x => System.Console.WriteLine(x));
+
             XmlConfigurator.Configure();
 
 			IContainer container = Program.ConfigureAutofac ();
