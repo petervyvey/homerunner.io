@@ -10,8 +10,8 @@ using System;
 
 namespace HomeRunner.Domain.WriteModel.Platform.TaskActivities
 {
-	public partial class TaskActivity
-		: DomainEntity<Guid, ReadModel.Platform.TaskActivities.Entities.TaskActivity>, IWithValidator<TaskActivity>
+	public sealed partial class TaskActivity
+		: DomainEntity<Guid, Entities.TaskActivity>, IWithValidator<TaskActivity>
     {
 		private readonly IValidator<TaskActivity> validator;
 
@@ -23,7 +23,7 @@ namespace HomeRunner.Domain.WriteModel.Platform.TaskActivities
 			this.validator = validator;
 		}
 
-		public TaskActivity(ReadModel.Platform.TaskActivities.Entities.TaskActivity entity, IValidator<TaskActivity> validator)
+		public TaskActivity(Entities.TaskActivity entity, IValidator<TaskActivity> validator)
 			: this(validator)
         {
             Argument.InstanceIsRequired(entity, "entity");
@@ -34,31 +34,31 @@ namespace HomeRunner.Domain.WriteModel.Platform.TaskActivities
         public string Description
         {
             get { return this.entity.Description; }
-            set { this.entity.Description = value; }
+            private set { this.entity.Description = value; }
         }
 
         public string AssignedTo
         {
             get { return this.entity.AssignedTo; }
-            set { this.entity.AssignedTo = value; }
+            private set { this.entity.AssignedTo = value; }
         }
 
         public bool IsClaimed
         {
             get { return this.entity.IsClaimed; }
-            set { this.entity.IsClaimed = value; }
+            private set { this.entity.IsClaimed = value; }
         }
 
         public bool IsCompleted
         {
             get { return this.entity.IsCompleted; }
-            set { this.entity.IsCompleted = value; }
+            private set { this.entity.IsCompleted = value; }
         }
 
         public DateTime UpdateTime
         {
             get { return this.entity.UpdateTime; }
-            set { this.entity.UpdateTime = value; }
+            private set { this.entity.UpdateTime = value; }
         }
 
 		public IDomainEvent Apply(CreateTaskActivityCommand command)

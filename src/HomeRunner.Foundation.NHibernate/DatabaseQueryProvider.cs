@@ -1,5 +1,5 @@
 ﻿
-using HomeRunner.Foundation.Infrastructure;
+using HomeRunner.Foundation.NHibernate.Contract;
 using NHibernate;
 
 namespace HomeRunner.Foundation.NHibernate

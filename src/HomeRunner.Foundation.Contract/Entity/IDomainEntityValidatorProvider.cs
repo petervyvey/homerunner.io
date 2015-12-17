@@ -3,7 +3,7 @@ using FluentValidation;
 
 namespace HomeRunner.Foundation.Entity
 {
-	public interface IDomainEntityValidatorFactory
+	public interface IDomainEntityValidatorProvider
 	{
 		IValidator<TDomainEntity> Create<TDomainEntity> () where TDomainEntity: IDomainEntity;
 	}

@@ -50,9 +50,9 @@ namespace HomeRunner.Domain.WriteModel
                 .AsClosedTypesOf(typeof(IValidator<>))
                 .SingleInstance();
 
-			builder.Register<IDomainEntityValidatorFactory>(ctx => {
+			builder.Register<IDomainEntityValidatorProvider>(ctx => {
 				IComponentContext c = ctx.Resolve<IComponentContext>();
-				return new DomainEntityValidatorFactory(c);
+				return new DomainEntityValidatorProvider(c);
 			}).SingleInstance();
 
             //builder.RegisterDecorator<IDomainEventMessagePublisher>(

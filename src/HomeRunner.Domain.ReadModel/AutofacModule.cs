@@ -1,6 +1,9 @@
 ﻿using Autofac;
 using Autofac.Core;
 using FluentValidation;
+using HomeRunner.Domain.ReadModel.Platform;
+using HomeRunner.Foundation.Dapper;
+using HomeRunner.Foundation.Dapper.Filter;
 using HomeRunner.Foundation.Infrastructure;
 using HomeRunner.Foundation.Logging;
 using MediatR;
@@ -34,6 +37,18 @@ namespace HomeRunner.Domain.ReadModel
             builder.RegisterAssemblyTypes(typeof(AutofacModule).Assembly)
                 .AsClosedTypesOf(typeof(IValidator<>))
                 .SingleInstance();
+
+            builder.RegisterType<Criteria>().As<ICriteria>().InstancePerDependency();
+            builder.RegisterType<Criterion>().As<ICriterion>().InstancePerDependency();
+
+            builder.Register<ICriteriaProvider>(ctx =>
+            {
+                IComponentContext c = ctx.Resolve<IComponentContext>();
+                return new CriteriaProvider(c);
+            }).SingleInstance();
+
+            builder.RegisterType<MappingProvider>().As<IMappingProvider>().SingleInstance();
+            builder.RegisterType<DapperEntityContext>().As<IEntityContext>().InstancePerDependency();
         }
     }
 }

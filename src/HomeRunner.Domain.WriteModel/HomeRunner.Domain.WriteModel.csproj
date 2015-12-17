@@ -32,6 +32,10 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="FluentNHibernate, Version=2.0.3.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\FluentNHibernate.2.0.3.0\lib\net40\FluentNHibernate.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="log4net">
       <HintPath>..\packages\log4net.2.0.4\lib\net45-full\log4net.dll</HintPath>
     </Reference>
@@ -49,6 +53,11 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Net.Http.Formatting, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Client.5.2.3\lib\net45\System.Net.Http.Formatting.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -83,6 +92,8 @@
     <Compile Include="AutofacModule.cs" />
     <Compile Include="LocalDomainEventPublisher.cs" />
     <Compile Include="Logger.cs" />
+    <Compile Include="Platform\TaskActivities\Entities\TaskActivity.cs" />
+    <Compile Include="Platform\TaskActivities\Maps\TaskActivityMap.cs" />
     <Compile Include="Platform\TaskActivities\TaskActivity.cs" />
     <Compile Include="Platform\TaskActivities\TaskActivityService.cs" />
     <Compile Include="Platform\TaskActivities\Validations\ClaimTaskActivityCommandValidator.cs" />
@@ -94,10 +105,6 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\HomeRunner.Domain.ReadModel\HomeRunner.Domain.ReadModel.csproj">
-      <Project>{99118F97-9D6C-4449-8F96-82471465673B}</Project>
-      <Name>HomeRunner.Domain.ReadModel</Name>
-    </ProjectReference>
     <ProjectReference Include="..\HomeRunner.Domain.WriteModel.Contract\HomeRunner.Domain.WriteModel.Contract.csproj">
       <Project>{B0FA7AD3-2A9F-4C1D-997D-833EFE84D674}</Project>
       <Name>HomeRunner.Domain.WriteModel.Contract</Name>
@@ -105,6 +112,10 @@
     <ProjectReference Include="..\HomeRunner.Foundation.Contract\HomeRunner.Foundation.Contract.csproj">
       <Project>{0DB614AB-D508-4160-8EF1-4E107808CF42}</Project>
       <Name>HomeRunner.Foundation.Contract</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\HomeRunner.Foundation.NHibernate.Contract\HomeRunner.Foundation.NHibernate.Contract.csproj">
+      <Project>{443660a1-60cf-45bb-bad8-0105933d869d}</Project>
+      <Name>HomeRunner.Foundation.NHibernate.Contract</Name>
     </ProjectReference>
     <ProjectReference Include="..\HomeRunner.Foundation\HomeRunner.Foundation.csproj">
       <Project>{D7E6A58F-B54D-4339-9AB8-5B9F6F389F9F}</Project>

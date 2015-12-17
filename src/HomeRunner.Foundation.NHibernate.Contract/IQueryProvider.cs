@@ -4,11 +4,10 @@ using HomeRunner.Foundation.Entity;
 using NHibernate;
 using System.Linq;
 
-namespace HomeRunner.Foundation.Infrastructure
+namespace HomeRunner.Foundation.NHibernate
 {
-    public interface IQueryProvider<TSession> 
-        where TSession: ISession
-        //where TResult : class
+    public interface IQueryProvider<TSession>
+        where TSession : ISession
     {
         TSession Session { get; }
 

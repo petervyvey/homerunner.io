@@ -8,7 +8,6 @@ using HomeRunner.Foundation.Web;
 using MassTransit;
 using MediatR;
 using System;
-using System.Collections.Generic;
 using System.Net.Http;
 using System.Threading.Tasks;
 using System.Web.Http;
@@ -16,28 +15,29 @@ using System.Web.Http;
 namespace HomeRunner.Api.Service.Platform
 {
     [RoutePrefix("{tenantId}/taskactivity")]
-    public sealed class TaskActivityController
+    public class TaskActivityController
         : ApiController
     {
         private readonly IMediator mediator;
 
         private readonly IBus bus;
 
-        public TaskActivityController(IMediator mediator, IBus bus) : base()
+        public TaskActivityController(IMediator mediator, IBus bus)
+            : base()
         {
             this.mediator = mediator;
             this.bus = bus;
         }
 
         [HttpGet, Route("")]
-		public TaskActivityList GetTaskActivityListQuery(string tenantId)
+        public TaskActivityList GetTaskActivityListQuery(string tenantId)
         {
             TaskActivityListQuery query = new TaskActivityListQuery();
-			var represenations = 
-				this.mediator.Send (query)
-					.ToRepresentations<Domain.ReadModel.Platform.TaskActivities.Entities.TaskActivity, TaskActivity>();
+            var represenations =
+                this.mediator.Send(query)
+                    .ToRepresentations<Domain.ReadModel.Platform.TaskActivities.Entities.TaskActivity, TaskActivity>();
 
-			return new TaskActivityList(represenations);
+            return new TaskActivityList(represenations);
         }
 
         [HttpGet, Route("{id:guid}")]
@@ -66,26 +66,26 @@ namespace HomeRunner.Api.Service.Platform
             return ApiResponse.Found(representation);
         }
 
-		[HttpPost, Route("")]
-		public async Task<HttpResponseMessage> PostCreateTaskActivityCommand(string tenantId, [FromBody]V1.Intents.CreateTaskActivity intent)
-		{
-			CreateTaskActivityCommand command = new CreateTaskActivityCommand(intent.Description);
+        [HttpPost, Route("")]
+        public async Task<HttpResponseMessage> PostCreateTaskActivityCommand(string tenantId, [FromBody] V1.Intents.CreateTaskActivity intent)
+        {
+            CreateTaskActivityCommand command = new CreateTaskActivityCommand(intent.Description);
 
-			HomeRunner.Api.Service.Logger.Log.Info(string.Format("Submiting command: {0} [{1}] ", command.GetType().FullName, command.Id));
-			ISendEndpoint endpoint = await this.bus.GetSendEndpoint(Foundation.RabbitMQ.Configuration.Exchange);
-			await endpoint.Send(new CommandMessage<CreateTaskActivityCommand>(command));
+            HomeRunner.Api.Service.Logger.Log.Info(string.Format("Submiting command: {0} [{1}] ", command.GetType().FullName, command.Id));
+            ISendEndpoint endpoint = await this.bus.GetSendEndpoint(Foundation.RabbitMQ.Configuration.Exchange);
+            await endpoint.Send(new CommandMessage<CreateTaskActivityCommand>(command));
 
-			HomeRunner.Api.Service.Logger.Log.Info(string.Format("Command submitted: {0} [{1}]", command.GetType().FullName, command.Id));
+            HomeRunner.Api.Service.Logger.Log.Info(string.Format("Command submitted: {0} [{1}]", command.GetType().FullName, command.Id));
 
-			return ApiResponse.CommandResponse(command);
-		}
+            return ApiResponse.CommandResponse(command);
+        }
 
         [HttpPut, Route("{id:guid}/claim")]
         public async Task<HttpResponseMessage> PutClaimTaskActivityCommand(string tenantId, Guid id)
         {
             ClaimTaskActivityCommand command = new ClaimTaskActivityCommand(id);
 
-			ISendEndpoint endpoint = await this.bus.GetSendEndpoint(Foundation.RabbitMQ.Configuration.Exchange);
+            ISendEndpoint endpoint = await this.bus.GetSendEndpoint(Foundation.RabbitMQ.Configuration.Exchange);
             await endpoint.Send(new CommandMessage<ClaimTaskActivityCommand>(command));
 
             return ApiResponse.CommandResponse(command);
@@ -96,11 +96,10 @@ namespace HomeRunner.Api.Service.Platform
         {
             UnclaimTaskActivityCommand command = new UnclaimTaskActivityCommand(id);
 
-			ISendEndpoint endpoint = await this.bus.GetSendEndpoint(Foundation.RabbitMQ.Configuration.Exchange);
+            ISendEndpoint endpoint = await this.bus.GetSendEndpoint(Foundation.RabbitMQ.Configuration.Exchange);
             await endpoint.Send(new CommandMessage<UnclaimTaskActivityCommand>(command));
 
             return ApiResponse.CommandResponse(command);
         }
     }
-
 }

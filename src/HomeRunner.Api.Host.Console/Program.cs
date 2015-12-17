@@ -38,7 +38,7 @@ namespace HomeRunner.Api.Host.Console
 
 			Program.HEADER.ToList().ForEach(x => System.Console.WriteLine(x));
 			System.Console.WriteLine(string.Format (typeof(Program).FullName));
-			System.Console.WriteLine("Press Q to quit ...");
+			System.Console.WriteLine("Press q to quit ...");
 			System.Console.WriteLine("-----------------------------------------------------------------");
 
 

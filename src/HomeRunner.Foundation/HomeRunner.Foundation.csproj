@@ -54,9 +54,6 @@
     <Reference Include="Newtonsoft.Json, Version=7.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed">
       <HintPath>..\packages\Newtonsoft.Json.7.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
-    <Reference Include="NHibernate, Version=4.0.0.4000, Culture=neutral, PublicKeyToken=aa95f207798dfdb4">
-      <HintPath>..\packages\NHibernate.4.0.4.4000\lib\net40\NHibernate.dll</HintPath>
-    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Cqrs\Command.cs" />
@@ -70,7 +67,6 @@
     <Compile Include="ExceptionManagement\TechnicalException.cs" />
     <Compile Include="Extension\Argument.cs" />
     <Compile Include="Extension\SerializerExtension.cs" />
-    <Compile Include="Infrastructure\QueryProvider.cs" />
     <Compile Include="Infrastructure\UnitOfWork.cs" />
     <Compile Include="Infrastructure\UnitOfWorkDecorator.cs" />
     <Compile Include="Infrastructure\ValidationDecorator.cs" />

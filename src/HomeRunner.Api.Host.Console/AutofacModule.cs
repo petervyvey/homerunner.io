@@ -13,7 +13,7 @@ namespace HomeRunner.Api.Host.Console
 		protected override void Load(ContainerBuilder builder)
 		{
 			builder.RegisterSource(new ContravariantRegistrationSource());
-			builder.RegisterApiControllers(typeof(TaskActivityController).Assembly);
+            builder.RegisterApiControllers(typeof(Service.AutofacModule).Assembly);
 			builder.RegisterAssemblyTypes(typeof (IMediator).Assembly).AsImplementedInterfaces();
 
 			builder.Register<SingleInstanceFactory>(ctx =>

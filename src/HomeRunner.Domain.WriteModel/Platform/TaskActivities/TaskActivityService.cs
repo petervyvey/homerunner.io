@@ -1,14 +1,13 @@
 ﻿
-using HomeRunner.Domain.ReadModel.Platform.TaskActivities.Queries;
 using HomeRunner.Domain.WriteModel.Platform.TaskActivities.Commands;
 using HomeRunner.Foundation.Cqrs;
 using HomeRunner.Foundation.Entity;
 using HomeRunner.Foundation.ExceptionManagement;
 using HomeRunner.Foundation.Extension;
-using HomeRunner.Foundation.Infrastructure;
+using HomeRunner.Foundation.NHibernate;
 using MediatR;
+using System.Linq;
 using NHibernate;
-using System;
 
 namespace HomeRunner.Domain.WriteModel.Platform.TaskActivities
 {
@@ -22,9 +21,9 @@ namespace HomeRunner.Domain.WriteModel.Platform.TaskActivities
 
 		private readonly IQueryProvider<ISession> queryProvider;
 
-		private readonly IDomainEntityValidatorFactory validator;
+		private readonly IDomainEntityValidatorProvider validator;
 
-		public TaskActivityService(IMediator mediator, IQueryProvider<ISession> queryProvider, IDomainEntityValidatorFactory validator)
+		public TaskActivityService(IMediator mediator, IQueryProvider<ISession> queryProvider, IDomainEntityValidatorProvider validator)
         {
             this.mediator = mediator;
 			this.queryProvider = queryProvider;
@@ -33,7 +32,7 @@ namespace HomeRunner.Domain.WriteModel.Platform.TaskActivities
 
 		public ICommandResult Handle(CreateTaskActivityCommand command)
 			{
-				TaskActivity entity = new TaskActivity (new ReadModel.Platform.TaskActivities.Entities.TaskActivity (), validator.Create<TaskActivity>());
+				TaskActivity entity = new TaskActivity (new Entities.TaskActivity(), validator.Create<TaskActivity>());
 				IDomainEvent domainEvent = entity.Apply(command);
 
 				entity
@@ -45,7 +44,7 @@ namespace HomeRunner.Domain.WriteModel.Platform.TaskActivities
 
         public ICommandResult Handle(ClaimTaskActivityCommand command)
         {
-            var existing = this.mediator.Send(new TaskActivityQuery(command.TaskId));
+            var existing = this.queryProvider.CreateQuery<Entities.TaskActivity>().SingleOrDefault(x => x.Id == command.TaskId);
 			if (existing.IsDefault()) throw new DataEntityNotFoundException ("");
 
 			TaskActivity entity = new TaskActivity(existing, validator.Create<TaskActivity>());
@@ -58,7 +57,7 @@ namespace HomeRunner.Domain.WriteModel.Platform.TaskActivities
 
         public ICommandResult Handle(UnclaimTaskActivityCommand command)
 		{
-			var existing = this.mediator.Send (new TaskActivityQuery (command.TaskId));
+            var existing = this.queryProvider.CreateQuery<Entities.TaskActivity>().SingleOrDefault(x => x.Id == command.TaskId);
 			if (existing.IsDefault ())
 				throw new DataEntityNotFoundException ("");
 

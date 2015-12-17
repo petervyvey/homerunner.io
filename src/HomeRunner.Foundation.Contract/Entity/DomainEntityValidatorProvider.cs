@@ -4,12 +4,12 @@ using FluentValidation;
 
 namespace HomeRunner.Foundation.Entity
 {
-	public class DomainEntityValidatorFactory 
-		: IDomainEntityValidatorFactory  
+	public class DomainEntityValidatorProvider
+        : IDomainEntityValidatorProvider 
 	{
 		private readonly IComponentContext context;
 
-		public DomainEntityValidatorFactory(IComponentContext context)
+		public DomainEntityValidatorProvider(IComponentContext context)
 		{
 			this.context = context;
 		}

@@ -1,10 +1,11 @@
 ﻿
 using HomeRunner.Foundation.Cqrs;
+using HomeRunner.Foundation.Infrastructure;
 using NHibernate;
 using NHibernate.Linq;
 using System.Linq;
 
-namespace HomeRunner.Foundation.Infrastructure
+namespace HomeRunner.Foundation.NHibernate.Contract
 {
     public abstract class QueryProvider<TSession>
         : IQueryProvider<TSession>
