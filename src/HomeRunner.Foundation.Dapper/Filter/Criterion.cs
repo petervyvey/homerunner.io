@@ -5,6 +5,61 @@ using System.Linq;
 
 namespace HomeRunner.Foundation.Dapper.Filter
 {
+    public class Criterion<TEntity> 
+        : Criterion, ICriterion<TEntity>
+        where TEntity : class
+    {
+        public ICriteria<TEntity> Criteria { get; set; }
+
+        public ICriteria<TEntity> EqualTo(object value)
+        {
+            this.Operator = Operator.Equals;
+            this.Value = value;
+
+            return this.Criteria;
+        }
+
+        public ICriteria<TEntity> LessThan(object value)
+        {
+            this.Operator = Operator.LessThan;
+            this.Value = value;
+
+            return this.Criteria;
+        }
+
+        public ICriteria<TEntity> LessThanOrEqual(object value)
+        {
+            this.Operator = Operator.LessThanOrEqual;
+            this.Value = value;
+
+            return this.Criteria;
+        }
+
+        public ICriteria<TEntity> GreaterThan(object value)
+        {
+            this.Operator = Operator.GreaterThan;
+            this.Value = value;
+
+            return this.Criteria;
+        }
+
+        public ICriteria<TEntity> GreaterThanOrEqual(object value)
+        {
+            this.Operator = Operator.GreaterThanOrEqual;
+            this.Value = value;
+
+            return this.Criteria;
+        }
+
+        public ICriteria<TEntity> In(IEnumerable<object> value)
+        {
+            this.Operator = Operator.In;
+            this.Value = value;
+
+            return this.Criteria;
+        }
+    }
+
     public class Criterion : ICriterion
     {
         /// <summary>
@@ -13,8 +68,6 @@ namespace HomeRunner.Foundation.Dapper.Filter
         public Criterion()
             : base() { }
 
-        public ICriteria Criteria { get; set; }
-
         public string Field { get; set; }
 
         public Type FieldType { get; set; }
@@ -22,54 +75,6 @@ namespace HomeRunner.Foundation.Dapper.Filter
         public Operator Operator { get; set; }
 
         public object Value { get; set; }
-
-        public ICriteria Equal(object value)
-        {
-            this.Operator = Operator.Equals;
-            this.Value = value;
-
-            return this.Criteria;
-        }
-
-        public ICriteria LessThan(object value)
-        {
-            this.Operator = Operator.LessThan;
-            this.Value = value;
-
-            return this.Criteria;
-        }
-
-        public ICriteria LessThanOrEqual(object value)
-        {
-            this.Operator = Operator.LessThanOrEqual;
-            this.Value = value;
-
-            return this.Criteria;
-        }
-
-        public ICriteria GreaterThan(object value)
-        {
-            this.Operator = Operator.GreaterThan;
-            this.Value = value;
-
-            return this.Criteria;
-        }
-
-        public ICriteria GreaterThanOrEqual(object value)
-        {
-            this.Operator = Operator.GreaterThanOrEqual;
-            this.Value = value;
-
-            return this.Criteria;
-        }
-
-        public ICriteria In(IEnumerable<object> value)
-        {
-            this.Operator = Operator.In;
-            this.Value = value;
-
-            return this.Criteria;
-        }
 
         public override string ToString()
         {

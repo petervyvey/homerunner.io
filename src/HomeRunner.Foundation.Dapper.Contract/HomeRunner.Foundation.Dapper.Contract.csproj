@@ -39,12 +39,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="EntityContext.cs" />
+    <Compile Include="DatabaseContext.cs" />
     <Compile Include="Filter\ICriteria.cs" />
     <Compile Include="Filter\ICriterion.cs" />
-    <Compile Include="Filter\ICriteriaProvider.cs" />
     <Compile Include="Filter\Operator.cs" />
-    <Compile Include="IEntityContext.cs" />
+    <Compile Include="IQueryProvider.cs" />
+    <Compile Include="IDatabaseContext.cs" />
     <Compile Include="IMappingProvider.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

@@ -8,8 +8,8 @@ namespace HomeRunner.Foundation.Dapper
     /// <summary>
     /// The base class of persistence context implementations.
     /// </summary>
-    public abstract class EntityContext
-        : IEntityContext
+    public abstract class DatabaseContext
+        : IDatabaseContext
     {
         /// <summary>
         /// TRUE if the object is disposed, FALSE otherwise.
@@ -19,13 +19,13 @@ namespace HomeRunner.Foundation.Dapper
         /// <summary>
         /// Default constructor.
         /// </summary>
-        protected EntityContext()
+        protected DatabaseContext()
             : base() { }
 
         /// <summary>
         /// Destructor.
         /// </summary>
-        ~EntityContext()
+        ~DatabaseContext()
         {
             this.Dispose(false);
         }
@@ -37,7 +37,7 @@ namespace HomeRunner.Foundation.Dapper
         /// <typeparam name="TIdentifier">The entity identifier type.</typeparam>
         /// <param name="identifier">The entity identifier.</param>
         /// <returns>The entity matching the given identifier.</returns>
-        public abstract TEntity Get<TEntity, TIdentifier>(TIdentifier identifier);
+        public abstract TEntity Get<TEntity, TIdentifier>(TIdentifier identifier) where TEntity : class;
 
         /// <summary>
         /// Gets the entity filtered by the given <see cref="ICriteria"/>.
@@ -45,7 +45,7 @@ namespace HomeRunner.Foundation.Dapper
         /// <typeparam name="TEntity">The entity type.</typeparam>
         /// <param name="criteria">>The criteria for entity selection.</param>
         /// <returns>The entity matching the given criteria.</returns>
-        public abstract TEntity Get<TEntity>(ICriteria criteria);
+        public abstract TEntity Get<TEntity>(ICriteria criteria) where TEntity : class;
 
         /// <summary>
         /// Gets the entity set.

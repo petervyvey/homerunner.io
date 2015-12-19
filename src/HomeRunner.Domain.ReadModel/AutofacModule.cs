@@ -19,19 +19,19 @@ namespace HomeRunner.Domain.ReadModel
                 .As(t => t.GetInterfaces()
                     .Where(i => i.IsClosedTypeOf(typeof(IRequestHandler<,>)))
                     .Select(i =>
-                        new KeyedService("request-handler", i)))
+                        new KeyedService("request-handler-read", i)))
                 .InstancePerDependency();
 
-            builder.RegisterGenericDecorator(typeof(UnitOfWorkDecorator<,>), typeof(IRequestHandler<,>), "request-handler")
-                .Keyed("request-with-unit-of-work", typeof(IRequestHandler<,>))
+            //builder.RegisterGenericDecorator(typeof(UnitOfWorkDecorator<,>), typeof(IRequestHandler<,>), "request-handler")
+            //    .Keyed("request-with-unit-of-work", typeof(IRequestHandler<,>))
+            //    .InstancePerDependency();
+
+            builder.RegisterGenericDecorator(typeof(ValidationDecorator<,>), typeof(IRequestHandler<,>), "request-handler-read")
+                .Keyed("request-with-validation-read", typeof(IRequestHandler<,>))
                 .InstancePerDependency();
 
-            builder.RegisterGenericDecorator(typeof(ValidationDecorator<,>), typeof(IRequestHandler<,>), "request-with-unit-of-work")
-                .Keyed("request-with-validation", typeof(IRequestHandler<,>))
-                .InstancePerDependency();
-
-            builder.RegisterGenericDecorator(typeof(LoggingDecorator<,>), typeof(IRequestHandler<,>), "request-with-validation")
-                .Keyed("request-with-logging", typeof(IRequestHandler<,>))
+            builder.RegisterGenericDecorator(typeof(LoggingDecorator<,>), typeof(IRequestHandler<,>), "request-with-validation-read")
+                .Keyed("request-with-logging-read", typeof(IRequestHandler<,>))
                 .InstancePerDependency();
 
             builder.RegisterAssemblyTypes(typeof(AutofacModule).Assembly)
@@ -41,14 +41,28 @@ namespace HomeRunner.Domain.ReadModel
             builder.RegisterType<Criteria>().As<ICriteria>().InstancePerDependency();
             builder.RegisterType<Criterion>().As<ICriterion>().InstancePerDependency();
 
-            builder.Register<ICriteriaProvider>(ctx =>
+            builder.Register<Foundation.Dapper.IQueryProvider>(ctx =>
             {
                 IComponentContext c = ctx.Resolve<IComponentContext>();
-                return new CriteriaProvider(c);
-            }).SingleInstance();
+                return new QueryProvider(c);
+            }).InstancePerLifetimeScope();
 
             builder.RegisterType<MappingProvider>().As<IMappingProvider>().SingleInstance();
-            builder.RegisterType<DapperEntityContext>().As<IEntityContext>().InstancePerDependency();
+            builder.RegisterType<DapperDatabaseContext>().As<IDatabaseContext>().InstancePerDependency();
+
+            builder.RegisterGeneric(typeof(Criteria<>)).As(typeof(ICriteria<>)).InstancePerDependency();
+            builder.Register<CriteriaFactory>(ctx =>
+            {
+                var c = ctx.Resolve<IComponentContext>();
+                return t => (ICriteria)c.Resolve(typeof(ICriteria<>).MakeGenericType(t));
+            }).InstancePerLifetimeScope();
+
+            builder.RegisterGeneric(typeof(Criterion<>)).As(typeof(ICriterion<>)).InstancePerDependency();
+            builder.Register<CriterionFactory>(ctx =>
+            {
+                var c = ctx.Resolve<IComponentContext>();
+                return t => (ICriterion)c.Resolve(typeof(ICriterion<>).MakeGenericType(t));
+            }).InstancePerLifetimeScope();
         }
     }
 }

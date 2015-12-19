@@ -50,17 +50,26 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="DapperEntityContext.cs" />
+    <Compile Include="QueryProvider.cs" />
+    <Compile Include="DapperDatabaseContext.cs" />
     <Compile Include="DatabaseHelper.cs" />
     <Compile Include="Filter\Criteria.cs" />
     <Compile Include="Filter\Criterion.cs" />
-    <Compile Include="Filter\CriteriaProvider.cs" />
+    <Compile Include="Logger.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\HomeRunner.Foundation.Contract\HomeRunner.Foundation.Contract.csproj">
+      <Project>{0db614ab-d508-4160-8ef1-4e107808cf42}</Project>
+      <Name>HomeRunner.Foundation.Contract</Name>
+    </ProjectReference>
     <ProjectReference Include="..\HomeRunner.Foundation.Dapper.Contract\HomeRunner.Foundation.Dapper.Contract.csproj">
       <Project>{d669b2a8-d7b2-48df-8a9c-adc09a704b32}</Project>
       <Name>HomeRunner.Foundation.Dapper.Contract</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\HomeRunner.Foundation\HomeRunner.Foundation.csproj">
+      <Project>{d7e6a58f-b54d-4339-9ab8-5b9f6f389f9f}</Project>
+      <Name>HomeRunner.Foundation</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

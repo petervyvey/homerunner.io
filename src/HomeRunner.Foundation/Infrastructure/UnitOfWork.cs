@@ -26,7 +26,7 @@ namespace HomeRunner.Foundation.Infrastructure
         {
             Argument.InstanceIsRequired(action, "action");
 
-            correlationId = string.IsNullOrEmpty(correlationId) ? "UNKNOWN CORRELATION IDENTIFIER" : correlationId;
+            correlationId = string.IsNullOrEmpty(correlationId) ? "[UNSPECIFIED]" : correlationId;
 
             LogInstance.Log.Info(string.Format("Starting TransactionScope for: {0}", correlationId));
             TransactionOptions options = new TransactionOptions {IsolationLevel = isolationLevel};

@@ -21,9 +21,21 @@ namespace HomeRunner.Api.Host.Console
 					var c = ctx.Resolve<IComponentContext>();
 					return t =>
 					{
-						object instance = c.IsRegisteredWithKey("request-with-logging", t) ? c.ResolveKeyed("request-with-logging", t) : c.Resolve(t);
+						object instance;
+					    if (c.IsRegisteredWithKey("request-with-logging-read", t))
+					    {
+					        instance = c.ResolveKeyed("request-with-logging-read", t);
+					    }
+                        else if (c.IsRegisteredWithKey("request-with-logging-write", t))
+                        {
+                            instance = c.ResolveKeyed("request-with-logging-write", t);
+                        }
+					    else
+					    {
+					        instance = c.Resolve(t);
+					    }
 
-						return instance;
+					    return instance;
 					};
 				});
 

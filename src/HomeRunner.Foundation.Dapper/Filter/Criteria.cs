@@ -7,14 +7,72 @@ using System.Reflection;
 
 namespace HomeRunner.Foundation.Dapper.Filter
 {
-    public partial class Criteria : ICriteria
+    public partial class Criteria<TEntity> 
+        : Criteria, ICriteria<TEntity>
+        where TEntity: class
     {
-        private readonly ICriteriaProvider provider;
+        private readonly IDatabaseContext context;
+
+        public Criteria(IQueryProvider provider, IDatabaseContext context)
+            : base(provider)
+        {
+            this.context = context;
+        }
+
+        /// <summary>
+        /// Add a <see cref="Criterion"/> as a restriction.
+        /// </summary>
+        /// <typeparam name="TEntity">The entity type of the <see cref="Criterion"/></typeparam>
+        /// <param name="property">The entity property expression.</param>
+        /// <returns>The <see cref="Criteria"/> the <see cref="Criterion"/> was added to.</returns>
+        public ICriterion<TEntity> By(Expression<Func<TEntity, object>> property)
+        {
+            ICriterion<TEntity> criterion = null;
+
+            PropertyInfo propertyInfo = null;
+            if (property.Body is MemberExpression)
+            {
+                propertyInfo = (property.Body as MemberExpression).Member as PropertyInfo;
+            }
+            else
+            {
+                MemberExpression memberExpression = ((UnaryExpression)property.Body).Operand as MemberExpression;
+                if (memberExpression != null) propertyInfo = memberExpression.Member as PropertyInfo;
+            }
+
+            if (propertyInfo != null)
+            {
+                criterion = provider.CreateCriterion<TEntity>();
+                criterion.Criteria = this;
+                criterion.Field = propertyInfo.Name;
+
+                this.Restrictions.Add(criterion);
+            }
+
+            return criterion;
+        }
+
+
+        public TEntity SingleOrDefault()
+        {
+            return this.context.Get<TEntity>(this);
+        }
+
+        public IList<TEntity> ToList()
+        {
+            return this.context.GetList<TEntity>(this);
+        }
+    }
+
+    public partial class Criteria 
+        : ICriteria
+    {
+        protected readonly IQueryProvider provider;
 
         /// <summary>
         /// Default constructor.
         /// </summary>
-        public Criteria(ICriteriaProvider provider)
+        public Criteria(IQueryProvider provider)
         {
             this.provider = provider;
 
@@ -49,51 +107,6 @@ namespace HomeRunner.Foundation.Dapper.Filter
             this.OrCriteria.Clear();
 
             return this;
-        }
-
-        /// <summary>
-        /// Add a <see cref="Criterion"/> as a restriction.
-        /// </summary>
-        /// <typeparam name="TEntity">The entity type of the <see cref="Criterion"/></typeparam>
-        /// <param name="property">The entity property expression.</param>
-        /// <returns>The <see cref="Criteria"/> the <see cref="Criterion"/> was added to.</returns>
-        public ICriterion Add<TEntity>(Expression<Func<TEntity, object>> property)
-        {
-            return this.Add(property, null);
-        }
-
-        /// <summary>
-        /// Add a <see cref="Criterion"/> as a restriction.
-        /// </summary>
-        /// <typeparam name="TEntity">The entity type of the <see cref="Criterion"/></typeparam>
-        /// <param name="property">The entity property expression.</param>
-        /// <param name="converter"></param>
-        /// <returns>The <see cref="Criteria"/> the <see cref="Criterion"/> was added to.</returns>
-        public ICriterion Add<TEntity>(Expression<Func<TEntity, object>> property, Func<object> converter)
-        {
-            ICriterion criterion = null;
-
-            PropertyInfo propertyInfo = null;
-            if (property.Body is MemberExpression)
-            {
-                propertyInfo = (property.Body as MemberExpression).Member as PropertyInfo;
-            }
-            else
-            {
-                MemberExpression memberExpression = ((UnaryExpression)property.Body).Operand as MemberExpression;
-                if (memberExpression != null) propertyInfo = memberExpression.Member as PropertyInfo;
-            }
-
-            if (propertyInfo != null)
-            {
-                criterion = provider.CreateCriterion();
-                criterion.Criteria = this;
-                criterion.Field = propertyInfo.Name;
-
-                this.Restrictions.Add(criterion);
-            }
-
-            return criterion;
         }
 
         /// <summary>

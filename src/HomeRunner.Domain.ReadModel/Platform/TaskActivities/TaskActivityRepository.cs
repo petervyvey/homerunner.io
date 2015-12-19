@@ -3,7 +3,6 @@ using HomeRunner.Domain.ReadModel.Platform.TaskActivities.Entities;
 using HomeRunner.Domain.ReadModel.Platform.TaskActivities.Queries;
 using HomeRunner.Foundation.Cqrs;
 using HomeRunner.Foundation.Dapper;
-using HomeRunner.Foundation.Dapper.Filter;
 using System.Collections.Generic;
 
 namespace HomeRunner.Domain.ReadModel.Platform.TaskActivities
@@ -12,31 +11,26 @@ namespace HomeRunner.Domain.ReadModel.Platform.TaskActivities
         IQueryHandler<TaskActivityQuery, TaskActivity>,
         IQueryHandler<TaskActivityListQuery, IEnumerable<TaskActivity>>
     {
-        private readonly IEntityContext queryProvider;
+        private readonly IQueryProvider queryProvider;
 
-        private readonly ICriteriaProvider criteria;
-
-        public TaskActivityRepository(IEntityContext queryProvider, ICriteriaProvider criteria)
+        public TaskActivityRepository(IQueryProvider queryProvider)
         {
             this.queryProvider = queryProvider;
-            this.criteria = criteria;
         }
 
         public TaskActivity Handle(TaskActivityQuery query)
         {
             TaskActivity instance =
-                this.queryProvider
-                    .Get<TaskActivity>(criteria.CreateCriteria()
-                        .Add<TaskActivity>(x => x.Id).Equal(query.TaskActivityId));
+                queryProvider.From<TaskActivity>()
+                    .By(x => x.Id).EqualTo(query.TaskActivityId)
+                    .SingleOrDefault();
 
             return instance;
         }
 
         public IEnumerable<TaskActivity> Handle(TaskActivityListQuery query)
         {
-            IList<TaskActivity> list =
-                this.queryProvider
-                    .GetList<TaskActivity>();
+            IList<TaskActivity> list = this.queryProvider.From<TaskActivity>().ToList();
 
 			return list;
         }

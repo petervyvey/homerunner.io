@@ -6,8 +6,6 @@ namespace HomeRunner.Foundation.Dapper.Filter
 {
     public interface ICriterion
     {
-        ICriteria Criteria { get; set; }
-
         string Field { get; set; }
 
         Type FieldType { get; set; }
@@ -15,18 +13,25 @@ namespace HomeRunner.Foundation.Dapper.Filter
         Operator Operator { get; set; }
 
         object Value { get; set; }
+    }
 
-        ICriteria Equal(object value);
+    public interface ICriterion<TEntity>
+        : ICriterion
+        where TEntity : class
+    {
+        ICriteria<TEntity> Criteria { get; set; }
 
-        ICriteria LessThan(object value);
+        ICriteria<TEntity> EqualTo(object value);
 
-        ICriteria LessThanOrEqual(object value);
+        ICriteria<TEntity> LessThan(object value);
 
-        ICriteria GreaterThan(object value);
+        ICriteria<TEntity> LessThanOrEqual(object value);
 
-        ICriteria GreaterThanOrEqual(object value);
+        ICriteria<TEntity> GreaterThan(object value);
 
-        ICriteria In(IEnumerable<object> value);
+        ICriteria<TEntity> GreaterThanOrEqual(object value);
+
+        ICriteria<TEntity> In(IEnumerable<object> value);
 
         string ToString();
     }

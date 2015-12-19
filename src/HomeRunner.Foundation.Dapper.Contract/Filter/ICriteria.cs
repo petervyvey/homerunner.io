@@ -15,12 +15,19 @@ namespace HomeRunner.Foundation.Dapper.Filter
 
         ICriteria Clear();
 
-        ICriterion Add<TEntity>(Expression<Func<TEntity, object>> property);
-
-        ICriterion Add<TEntity>(Expression<Func<TEntity, object>> property, Func<object> converter);
-
         ICriteria And(params ICriteria[] andCriteria);
 
         ICriteria Or(params ICriteria[] orCriteria);
+    }
+
+    public interface ICriteria<TEntity>
+        : ICriteria
+        where TEntity : class
+    {
+        ICriterion<TEntity> By(Expression<Func<TEntity, object>> property);
+
+        TEntity SingleOrDefault();
+
+        IList<TEntity> ToList();
     }
 }

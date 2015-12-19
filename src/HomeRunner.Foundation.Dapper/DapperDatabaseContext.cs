@@ -4,14 +4,16 @@ using HomeRunner.Foundation.Dapper.Filter;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
+using HomeRunner.Foundation.Extension;
+using HomeRunner.Foundation.Logging;
 
 namespace HomeRunner.Foundation.Dapper
 {
     /// <summary>
     /// The base class for NHibernate entity context implementations.
     /// </summary>
-    public sealed class DapperEntityContext
-        : EntityContext
+    public sealed class DapperDatabaseContext
+        : DatabaseContext
     {
         private readonly IMappingProvider mappingProvider;
 
@@ -25,7 +27,7 @@ namespace HomeRunner.Foundation.Dapper
         /// <summary>
         /// Default constructor.
         /// </summary>
-        public DapperEntityContext(IMappingProvider mappingProvider) :
+        public DapperDatabaseContext(IMappingProvider mappingProvider) :
             base()
         {
             this.mappingProvider = mappingProvider;
@@ -35,7 +37,7 @@ namespace HomeRunner.Foundation.Dapper
         /// <summary>
         /// Destructor.
         /// </summary>
-        ~DapperEntityContext()
+        ~DapperDatabaseContext()
         {
             this.Dispose(false);
         }
@@ -49,8 +51,14 @@ namespace HomeRunner.Foundation.Dapper
         /// <returns>The entity matching the given identifier.</returns>
         public override TEntity Get<TEntity, TIdentifier>(TIdentifier identifier)
         {
+            Argument.InstanceIsRequired(identifier, "identifier");
+
             string query = string.Format("SELECT * FROM {0} WHERE ID = '{1}'", this.mappingProvider.Mappings[typeof(TEntity)], identifier);
+
+            Logger.Log.Info(string.Format("Executing query: {0}", query));
             IEnumerable<TEntity> list = this.connection.Query<TEntity>(query);
+
+            Logger.Log.Debug(string.Format("Executed query: {0}", query));
 
             return list.SingleOrDefault();
         }
@@ -63,10 +71,7 @@ namespace HomeRunner.Foundation.Dapper
         /// <returns>The entity matching the given criteria.</returns>
         public override TEntity Get<TEntity>(ICriteria criteria)
         {
-            string query = string.Format("SELECT * FROM {0} WHERE {1}", this.mappingProvider.Mappings[typeof(TEntity)], criteria);
-            IEnumerable<TEntity> list = this.connection.Query<TEntity>(query);
-
-            return list.SingleOrDefault();
+            return this.GetList<TEntity>(criteria).SingleOrDefault();
         }
 
         /// <summary>
@@ -77,7 +82,11 @@ namespace HomeRunner.Foundation.Dapper
         public override IList<TEntity> GetList<TEntity>()
         {
             string query = string.Format("SELECT * FROM {0} ", this.mappingProvider.Mappings[typeof(TEntity)]);
+
+            Logger.Log.Info(string.Format("Executing query: {0}", query));
             IEnumerable<TEntity> entities = this.connection.Query<TEntity>(query);
+
+            Logger.Log.Debug(string.Format("Executed query: {0}", query));
 
             return entities.ToList();
         }
@@ -89,8 +98,15 @@ namespace HomeRunner.Foundation.Dapper
         /// <returns>The entity set of the given entity type.</returns>
         public override IList<TEntity> GetList<TEntity>(ICriteria criteria)
         {
-            string query = string.Format("SELECT * FROM {0} WHERE {1}", this.mappingProvider.Mappings[typeof(TEntity)], criteria);
+            Argument.InstanceIsRequired(criteria,"criteria");
+
+            var _criteria = criteria.ToString();
+            string query = string.Format("SELECT * FROM {0} {1} {2}", this.mappingProvider.Mappings[typeof (TEntity)], string.IsNullOrEmpty(_criteria) ? "" : "WHERE", _criteria);
+
+            Logger.Log.Info(string.Format("Executing query: {0}", query));
             IEnumerable<TEntity> entities = this.connection.Query<TEntity>(query);
+
+            Logger.Log.Debug(string.Format("Executed query: {0}", query));
 
             return entities.ToList();
         }

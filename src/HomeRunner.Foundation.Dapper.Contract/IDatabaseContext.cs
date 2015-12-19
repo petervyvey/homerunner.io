@@ -8,7 +8,7 @@ namespace HomeRunner.Foundation.Dapper
     /// <summary>
     /// Interface defining the API for the entity context.
     /// </summary>
-    public interface IEntityContext
+    public interface IDatabaseContext
         : IDisposable 
     {
         /// <summary>
@@ -18,7 +18,7 @@ namespace HomeRunner.Foundation.Dapper
         /// <typeparam name="TIdentifier">The entity identifier type.</typeparam>
         /// <param name="identifier">The entity identifier.</param>
         /// <returns>The entity matching the given identifier.</returns>
-        TEntity Get<TEntity, TIdentifier>(TIdentifier identifier);
+        TEntity Get<TEntity, TIdentifier>(TIdentifier identifier) where TEntity : class;
 
         /// <summary>
         /// Gets the entity filtered by the given <see cref="ICriteria"/>.
@@ -26,7 +26,7 @@ namespace HomeRunner.Foundation.Dapper
         /// <typeparam name="TEntity">The entity type.</typeparam>
         /// <param name="criteria">>The criteria for entity selection.</param>
         /// <returns>The entity matching the given criteria.</returns>
-        TEntity Get<TEntity>(ICriteria criteria);
+        TEntity Get<TEntity>(ICriteria criteria) where TEntity : class;
 
         /// <summary>
         /// Gets the entity set.

@@ -22,19 +22,19 @@ namespace HomeRunner.Domain.WriteModel
                 .As(t => t.GetInterfaces()
                     .Where(i => i.IsClosedTypeOf(typeof(IRequestHandler<,>)))
                     .Select(i =>
-                        new KeyedService("request-handler", i)))
+                        new KeyedService("request-handler-write", i)))
                 .InstancePerDependency();
 
-            builder.RegisterGenericDecorator(typeof(UnitOfWorkDecorator<,>), typeof(IRequestHandler<,>), "request-handler")
-                .Keyed("request-with-unit-of-work", typeof(IRequestHandler<,>))
+            builder.RegisterGenericDecorator(typeof(UnitOfWorkDecorator<,>), typeof(IRequestHandler<,>), "request-handler-write")
+                .Keyed("request-with-unit-of-work-write", typeof(IRequestHandler<,>))
                 .InstancePerDependency();
 
-            builder.RegisterGenericDecorator(typeof(ValidationDecorator<,>), typeof(IRequestHandler<,>), "request-with-unit-of-work")
-                .Keyed("request-with-validation", typeof(IRequestHandler<,>))
+            builder.RegisterGenericDecorator(typeof(ValidationDecorator<,>), typeof(IRequestHandler<,>), "request-with-unit-of-work-write")
+                .Keyed("request-with-validation-write", typeof(IRequestHandler<,>))
                 .InstancePerDependency();
 
-            builder.RegisterGenericDecorator(typeof(LoggingDecorator<,>), typeof(IRequestHandler<,>), "request-with-validation")
-                .Keyed("request-with-logging", typeof(IRequestHandler<,>))
+            builder.RegisterGenericDecorator(typeof(LoggingDecorator<,>), typeof(IRequestHandler<,>), "request-with-validation-write")
+                .Keyed("request-with-logging-write", typeof(IRequestHandler<,>))
                 .InstancePerDependency();
 
             builder.RegisterType<LocalDomainEventPublisher>()
