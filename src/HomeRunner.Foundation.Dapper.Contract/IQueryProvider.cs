@@ -7,6 +7,6 @@ namespace HomeRunner.Foundation.Dapper
     {
         ICriteria<TEntity> From<TEntity>() where TEntity : class;
 
-        ICriterion<TEntity> CreateCriterion<TEntity>() where TEntity : class;
+		ICriterion<TEntity> CreateCriterion<TEntity>(string prefix) where TEntity : class;
     }
 }

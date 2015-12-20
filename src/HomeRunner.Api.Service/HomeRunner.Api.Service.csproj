@@ -95,8 +95,9 @@
     </Compile>
     <Compile Include="AutoMapperConfig.cs" />
     <Compile Include="Logger.cs" />
-    <Compile Include="Platform\TaskActivityController.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Platform\TaskActivityQueryController.cs" />
+    <Compile Include="Platform\TaskActivityCommandController.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />

@@ -11,6 +11,12 @@ namespace HomeRunner.Foundation.Dapper
     public interface IDatabaseContext
         : IDisposable 
     {
+		/// <summary>
+		/// Gets the mappings.
+		/// </summary>
+		/// <value>The mappings.</value>
+		Dictionary<Type, string> Mappings { get; }
+
         /// <summary>
         /// Gets the entity identified by the identifier.
         /// </summary>

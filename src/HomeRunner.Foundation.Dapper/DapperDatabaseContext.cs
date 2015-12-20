@@ -6,6 +6,7 @@ using System.Data;
 using System.Linq;
 using HomeRunner.Foundation.Extension;
 using HomeRunner.Foundation.Logging;
+using System;
 
 namespace HomeRunner.Foundation.Dapper
 {
@@ -41,6 +42,12 @@ namespace HomeRunner.Foundation.Dapper
         {
             this.Dispose(false);
         }
+
+		/// <summary>
+		/// Gets the mappings.
+		/// </summary>
+		/// <value>The type to table mappings.</value>
+		public override Dictionary<Type, string> Mappings { get { return this.mappingProvider.Mappings; } }
 
         /// <summary>
         /// Gets the entity identified by the identifier.

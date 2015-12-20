@@ -58,6 +58,14 @@ namespace HomeRunner.Foundation.Dapper.Filter
 
             return this.Criteria;
         }
+
+		public ICriteria<TEntity> Like(string value)
+		{
+			this.Operator = Operator.Like;
+			this.Value = value;
+
+			return this.Criteria;
+		}
     }
 
     public class Criterion : ICriterion
@@ -67,6 +75,8 @@ namespace HomeRunner.Foundation.Dapper.Filter
         /// </summary>
         public Criterion()
             : base() { }
+
+		public string Prefix { get; set; }
 
         public string Field { get; set; }
 
@@ -83,12 +93,16 @@ namespace HomeRunner.Foundation.Dapper.Filter
             {
                 value = "(" + string.Join(", ", ((IEnumerable<object>)this.Value).Select(x => "'" + x.ToString() + "'")) + ")";
             }
+			else if (this.Operator == Operator.Like)
+			{
+				value = "'%" + this.Value.ToString() + "%'";
+			}
             else
             {
                 value = "'" + this.Value.ToString() + "'";
             }
 
-            string criterion = this.Field + this.ConvertOperator() + value;
+			string criterion = string.Format("{0}.{1}{2}{3}", this.Prefix, this.Field, this.ConvertOperator(), value);
 
             return criterion;
         }
@@ -103,32 +117,36 @@ namespace HomeRunner.Foundation.Dapper.Filter
         {
             string @operator = string.Empty;
 
-            switch (this.Operator)
-            {
-                case Operator.Equals:
-                    @operator = " = ";
-                    break;
+			switch(this.Operator)
+			{
+				case Operator.Equals:
+					@operator = " = ";
+					break;
 
-                case Operator.LessThan:
-                    @operator = " < ";
-                    break;
+				case Operator.LessThan:
+					@operator = " < ";
+					break;
 
-                case Operator.LessThanOrEqual:
-                    @operator = " <= ";
-                    break;
+				case Operator.LessThanOrEqual:
+					@operator = " <= ";
+					break;
 
-                case Operator.GreaterThan:
-                    @operator = " > ";
-                    break;
+				case Operator.GreaterThan:
+					@operator = " > ";
+					break;
 
-                case Operator.GreaterThanOrEqual:
-                    @operator = " >= ";
-                    break;
+				case Operator.GreaterThanOrEqual:
+					@operator = " >= ";
+					break;
 
-                case Operator.In:
-                    @operator = " IN ";
-                    break;
-            }
+				case Operator.In:
+					@operator = " IN ";
+					break;
+
+				case Operator.Like:
+					@operator = " LIKE ";
+					break;
+			}
 
             return @operator;
         }

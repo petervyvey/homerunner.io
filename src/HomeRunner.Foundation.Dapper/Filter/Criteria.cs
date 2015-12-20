@@ -11,12 +11,12 @@ namespace HomeRunner.Foundation.Dapper.Filter
         : Criteria, ICriteria<TEntity>
         where TEntity: class
     {
-        private readonly IDatabaseContext context;
+		private readonly IDatabaseContext database;
 
-        public Criteria(IQueryProvider provider, IDatabaseContext context)
+		public Criteria(IQueryProvider provider, IDatabaseContext database)
             : base(provider)
         {
-            this.context = context;
+			this.database = database;
         }
 
         /// <summary>
@@ -42,7 +42,8 @@ namespace HomeRunner.Foundation.Dapper.Filter
 
             if (propertyInfo != null)
             {
-                criterion = provider.CreateCriterion<TEntity>();
+				string prefix = this.database.Mappings[typeof(TEntity)];
+				criterion = provider.CreateCriterion<TEntity>(prefix);
                 criterion.Criteria = this;
                 criterion.Field = propertyInfo.Name;
 
@@ -55,12 +56,12 @@ namespace HomeRunner.Foundation.Dapper.Filter
 
         public TEntity SingleOrDefault()
         {
-            return this.context.Get<TEntity>(this);
+			return this.database.Get<TEntity>(this);
         }
 
         public IList<TEntity> ToList()
         {
-            return this.context.GetList<TEntity>(this);
+			return this.database.GetList<TEntity>(this);
         }
     }
 

@@ -20,17 +20,19 @@ namespace HomeRunner.Domain.ReadModel.Platform.TaskActivities
 
         public TaskActivity Handle(TaskActivityQuery query)
         {
-            TaskActivity instance =
-                queryProvider.From<TaskActivity>()
-                    .By(x => x.Id).EqualTo(query.TaskActivityId)
-                    .SingleOrDefault();
+			TaskActivity instance =
+				this.queryProvider.From<TaskActivity>()
+					.By(x => x.Id).EqualTo(query.TaskActivityId)
+					.SingleOrDefault();
 
             return instance;
         }
 
         public IEnumerable<TaskActivity> Handle(TaskActivityListQuery query)
         {
-            IList<TaskActivity> list = this.queryProvider.From<TaskActivity>().ToList();
+            IList<TaskActivity> list = 
+				this.queryProvider.From<TaskActivity>()
+					.ToList();
 
 			return list;
         }

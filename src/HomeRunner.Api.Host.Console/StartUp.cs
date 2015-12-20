@@ -19,10 +19,10 @@ namespace HomeRunner.Api.Host.Console
 {
 	internal sealed class Startup
 	{
-	    internal readonly Type[] SERVICES =
-	    {
-	        typeof (TaskActivityController),
-	    };
+	    internal readonly Type[] SERVICES = {
+			typeof(TaskActivityQueryController),
+			typeof (TaskActivityCommandController),
+		};
 
 		public void Configuration(IAppBuilder app)
 		{

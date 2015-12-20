@@ -10,7 +10,7 @@ namespace HomeRunner.Foundation.Dapper
     public delegate ICriterion CriterionFactory(Type serviceType);
 
     public class QueryProvider
-        : IQueryProvider
+		: IQueryProvider
     {
         private readonly IComponentContext context;
 
@@ -24,10 +24,12 @@ namespace HomeRunner.Foundation.Dapper
             return this.context.Resolve<CriteriaFactory>().Invoke(typeof(TEntity)) as ICriteria<TEntity>;
         }
 
-        public ICriterion<TEntity> CreateCriterion<TEntity>() where TEntity : class
+		public ICriterion<TEntity> CreateCriterion<TEntity>(string prefix) where TEntity : class
         {
-            return this.context.Resolve<ICriterion<TEntity>>();
-        }
+			var criterion = this.context.Resolve<ICriterion<TEntity>>();
+			criterion.Prefix = prefix;
 
+			return criterion;
+        }
     }
 }

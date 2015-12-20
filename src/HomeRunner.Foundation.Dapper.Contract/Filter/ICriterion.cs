@@ -19,6 +19,8 @@ namespace HomeRunner.Foundation.Dapper.Filter
         : ICriterion
         where TEntity : class
     {
+		string Prefix { get; set; }
+
         ICriteria<TEntity> Criteria { get; set; }
 
         ICriteria<TEntity> EqualTo(object value);
@@ -32,6 +34,8 @@ namespace HomeRunner.Foundation.Dapper.Filter
         ICriteria<TEntity> GreaterThanOrEqual(object value);
 
         ICriteria<TEntity> In(IEnumerable<object> value);
+
+		ICriteria<TEntity> Like(string value);
 
         string ToString();
     }

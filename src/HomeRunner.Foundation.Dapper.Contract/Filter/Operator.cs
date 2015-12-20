@@ -8,6 +8,7 @@ namespace HomeRunner.Foundation.Dapper.Filter
         LessThanOrEqual,
         GreaterThan,
         GreaterThanOrEqual,
-        In
+		In,
+		Like
     }
 }

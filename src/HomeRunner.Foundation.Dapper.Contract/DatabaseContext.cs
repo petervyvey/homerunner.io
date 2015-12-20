@@ -30,6 +30,12 @@ namespace HomeRunner.Foundation.Dapper
             this.Dispose(false);
         }
 
+		/// <summary>
+		/// Gets the mappings.
+		/// </summary>
+		/// <value>The mappings.</value>
+		public abstract Dictionary<Type, string> Mappings { get; }
+
         /// <summary>
         /// Gets the entity identified by the identifier.
         /// </summary>
