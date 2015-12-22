@@ -1,5 +1,5 @@
 ﻿
-using HomeRunner.Api.Service;
+using HomeRunner.Api.ReadModel;
 using Microsoft.Owin;
 using Owin;
 

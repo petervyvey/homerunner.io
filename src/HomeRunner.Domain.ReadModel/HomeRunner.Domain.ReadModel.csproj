@@ -65,7 +65,7 @@
     <Compile Include="Platform\TaskActivities\Maps\TaskActivityMap.cs" />
     <Compile Include="Platform\TaskActivities\Queries\TaskActivityListQuery.cs" />
     <Compile Include="Platform\TaskActivities\Queries\TaskActivityQuery.cs" />
-    <Compile Include="Platform\TaskActivities\TaskActivityRepository.cs" />
+    <Compile Include="Platform\TaskActivities\TaskActivityService.cs" />
     <Compile Include="Platform\TaskActivities\Validations\TaskActivityListQueryValidator.cs" />
     <Compile Include="Platform\TaskActivities\Validations\TaskActivityQueryValidator.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

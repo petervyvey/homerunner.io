@@ -164,13 +164,13 @@
     <Compile Include="StartUp.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\HomeRunner.Api.Service\HomeRunner.Api.Service.csproj">
-      <Project>{ACE39372-2EAA-4550-801F-C455AACB2E37}</Project>
-      <Name>HomeRunner.Api.Service</Name>
+    <ProjectReference Include="..\HomeRunner.Api.ReadModel\HomeRunner.Api.ReadModel.csproj">
+      <Project>{79359f8f-5501-4da5-8367-f34573144bd3}</Project>
+      <Name>HomeRunner.Api.ReadModel</Name>
     </ProjectReference>
-    <ProjectReference Include="..\HomeRunner.Api.V1.Contract\HomeRunner.Api.V1.Contract.csproj">
-      <Project>{916ECFCA-0241-4060-9E3F-70C0DBE245E2}</Project>
-      <Name>HomeRunner.Api.V1.Contract</Name>
+    <ProjectReference Include="..\HomeRunner.Api.WriteModel\HomeRunner.Api.WriteModel.csproj">
+      <Project>{0adbf1e6-d18c-4493-9ee0-2fe73ed4b848}</Project>
+      <Name>HomeRunner.Api.WriteModel</Name>
     </ProjectReference>
     <ProjectReference Include="..\HomeRunner.Domain.ReadModel\HomeRunner.Domain.ReadModel.csproj">
       <Project>{99118F97-9D6C-4449-8F96-82471465673B}</Project>
