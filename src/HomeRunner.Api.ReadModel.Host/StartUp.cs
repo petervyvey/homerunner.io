@@ -46,13 +46,13 @@ namespace HomeRunner.Api.ReadModel.Host
 			HttpConfiguration config = new HttpConfiguration();
 			config.MapHttpAttributeRoutes();
 
-			config.Formatters.OfType<JsonMediaTypeFormatter>().First().SerializerSettings = new JsonSerializerSettings
-			{
-				Formatting = Newtonsoft.Json.Formatting.Indented,
-				ContractResolver = new JsonNetHalJsonContactResolver(new HalJsonConfiguration(urlBase)),
-				NullValueHandling = NullValueHandling.Ignore
-					//,TypeNameHandling = TypeNameHandling.Objects
-			};
+		    config.Formatters.OfType<JsonMediaTypeFormatter>().First().SerializerSettings = new JsonSerializerSettings
+		    {
+		        Formatting = Newtonsoft.Json.Formatting.Indented,
+		        ContractResolver = new JsonNetHalJsonContactResolver(new HalJsonConfiguration(urlBase)),
+		        NullValueHandling = NullValueHandling.Ignore
+		        //,TypeNameHandling = TypeNameHandling.Objects
+		    };
 
 			Logger.Log.Info ("HTTP configuration DONE");
 

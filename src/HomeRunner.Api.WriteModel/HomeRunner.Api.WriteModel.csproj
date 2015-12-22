@@ -101,6 +101,7 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Logger.cs" />
+    <Compile Include="Platform\MassTransitConnector.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Platform\TaskActivityCommandController.cs" />
   </ItemGroup>

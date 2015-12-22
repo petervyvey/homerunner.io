@@ -4,17 +4,17 @@ using System;
 
 namespace HomeRunner.Domain.ReadModel.Platform.TaskActivities.Entities
 {
-    public class TaskActivity
+    public sealed class TaskActivity
         : DataEntity<Guid>
     {
-        public virtual string Description { get; set; }
+        public string Description { get; set; }
 
-        public virtual string AssignedTo { get; set; }
+        public string AssignedTo { get; set; }
 
-        public virtual bool IsClaimed { get; set; }
+        public bool IsClaimed { get; set; }
 
-        public virtual bool IsCompleted { get; set; }
+        public bool IsCompleted { get; set; }
 
-        public virtual DateTime UpdateTime { get; set; }
+        public DateTime UpdateTime { get; set; }
     }
 }
