@@ -21,24 +21,28 @@ namespace HomeRunner.Api.WriteModel.Host
 			typeof (Platform.TaskActivityCommandController),
 		};
 
-		public void Configuration(IAppBuilder app)
-		{
-			try
-			{
-				Logger.Log.Info("Start configuration");
+	    public void Configuration(IAppBuilder app)
+	    {
+	        try
+	        {
+                Program.WriteMessage("Start configuration");
 
-				var config = this.ConfigureHttp();
-				var container = this.ConfigureAutofac(config);
-				this.ConfigureAutoMapper();
-				this.ConfigureOwin(app, config, container);
-			}
-			catch (Exception ex)
-			{
-				Logger.Log.Error(string.Format("Startup exception: {0}", ex.Message));
-			}
-		}
+	            var config = this.ConfigureHttp();
+	            var container = this.ConfigureAutofac(config);
+	            this.ConfigureAutoMapper();
+	            this.ConfigureOwin(app, config, container);
+	        }
+	        catch (Exception ex)
+	        {
+	            Logger.Log.Error(string.Format("Startup exception: {0}", ex.Message));
+	        }
+	        finally
+	        {
+                Console.WriteLine("-----------------------------------------------------------------");
+	        }
+	    }
 
-		private HttpConfiguration ConfigureHttp()
+	    private HttpConfiguration ConfigureHttp()
 		{
 			var urlBase = ConfigurationManager.AppSettings["hal.urlBase"];
 			if(string.IsNullOrEmpty(urlBase)) throw new Exception ("HAL JSON URL base not configured");
@@ -54,7 +58,7 @@ namespace HomeRunner.Api.WriteModel.Host
 					//,TypeNameHandling = TypeNameHandling.Objects
 			};
 
-			Logger.Log.Info ("HTTP configuration DONE");
+            Program.WriteMessage("HTTP configuration DONE");
 
 			return config;
 		}
@@ -65,7 +69,7 @@ namespace HomeRunner.Api.WriteModel.Host
 			AutofacWebApiDependencyResolver resolver = new AutofacWebApiDependencyResolver(container);
 			config.DependencyResolver = resolver;
 
-			Logger.Log.Info ("Autofac configuration DONE");
+            Program.WriteMessage("Autofac configuration DONE");
 
 			return container;
 		}
@@ -75,7 +79,7 @@ namespace HomeRunner.Api.WriteModel.Host
 			Mapper.Initialize (config => { });
 			ReadModel.AutoMapperConfig.Config();
 
-			Logger.Log.Info ("AutoMapper configuration DONE");
+            Program.WriteMessage("AutoMapper configuration DONE");
 		}
 
 		private void ConfigureOwin(IAppBuilder app, HttpConfiguration config, IContainer container)
@@ -84,7 +88,7 @@ namespace HomeRunner.Api.WriteModel.Host
 			app.UseAutofacMiddleware(container);
 			//app.UseAutofacWebApi(GlobalConfiguration.Configuration);
 
-			Logger.Log.Info ("OWIN configuration DONE");
+            Program.WriteMessage("OWIN configuration DONE");
 		}
 	}
 }

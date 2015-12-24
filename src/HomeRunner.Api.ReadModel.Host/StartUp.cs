@@ -5,6 +5,7 @@ using AutoMapper;
 using HalJsonNet;
 using HalJsonNet.Serialization;
 using HomeRunner.Foundation.Logging;
+using HomeRunner.Foundation.Web;
 using Newtonsoft.Json;
 using Owin;
 using System;
@@ -25,7 +26,7 @@ namespace HomeRunner.Api.ReadModel.Host
 		{
 			try
 			{
-				Logger.Log.Info("Start configuration");
+                Program.WriteMessage("Start configuration");
 
 				var config = this.ConfigureHttp();
 				var container = this.ConfigureAutofac(config);
@@ -36,6 +37,10 @@ namespace HomeRunner.Api.ReadModel.Host
 			{
 				Logger.Log.Error(string.Format("Startup exception: {0}", ex.Message));
 			}
+            finally
+            {
+                Console.WriteLine("-----------------------------------------------------------------");
+            }
 		}
 
 		private HttpConfiguration ConfigureHttp()
@@ -54,7 +59,9 @@ namespace HomeRunner.Api.ReadModel.Host
 		        //,TypeNameHandling = TypeNameHandling.Objects
 		    };
 
-			Logger.Log.Info ("HTTP configuration DONE");
+            config.MessageHandlers.Add(new LoggingMessageHandler());
+
+            Program.WriteMessage("HTTP configuration DONE");
 
 			return config;
 		}
@@ -65,7 +72,7 @@ namespace HomeRunner.Api.ReadModel.Host
 			AutofacWebApiDependencyResolver resolver = new AutofacWebApiDependencyResolver(container);
 			config.DependencyResolver = resolver;
 
-			Logger.Log.Info ("Autofac configuration DONE");
+            Program.WriteMessage("Autofac configuration DONE");
 
 			return container;
 		}
@@ -75,7 +82,7 @@ namespace HomeRunner.Api.ReadModel.Host
 			Mapper.Initialize (config => { });
 			ReadModel.AutoMapperConfig.Config();
 
-			Logger.Log.Info ("AutoMapper configuration DONE");
+            Program.WriteMessage("AutoMapper configuration DONE");
 		}
 
 		private void ConfigureOwin(IAppBuilder app, HttpConfiguration config, IContainer container)
@@ -84,7 +91,7 @@ namespace HomeRunner.Api.ReadModel.Host
 			app.UseAutofacMiddleware(container);
 			//app.UseAutofacWebApi(GlobalConfiguration.Configuration);
 
-			Logger.Log.Info ("OWIN configuration DONE");
+            Program.WriteMessage("OWIN configuration DONE");
 		}
 	}
 }

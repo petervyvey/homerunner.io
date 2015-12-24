@@ -62,10 +62,10 @@ namespace HomeRunner.Foundation.Dapper
 
             string query = string.Format("SELECT * FROM {0} WHERE ID = '{1}'", this.mappingProvider.Mappings[typeof(TEntity)], identifier);
 
-            Logger.Log.Info(string.Format("Executing query: {0}", query));
+            Logger.Log.Info(string.Format("Executing query:\r\n{0}", query));
             IEnumerable<TEntity> list = this.connection.Query<TEntity>(query);
 
-            Logger.Log.Debug(string.Format("Executed query: {0}", query));
+            Logger.Log.Debug(string.Format("Executed query:\r\n{0}", query));
 
             return list.SingleOrDefault();
         }
@@ -90,10 +90,10 @@ namespace HomeRunner.Foundation.Dapper
         {
             string query = string.Format("SELECT * FROM {0} ", this.mappingProvider.Mappings[typeof(TEntity)]);
 
-            Logger.Log.Info(string.Format("Executing query: {0}", query));
+            Logger.Log.Info(string.Format("Executing query:\r\n{0}", query));
             IEnumerable<TEntity> entities = this.connection.Query<TEntity>(query);
 
-            Logger.Log.Debug(string.Format("Executed query: {0}", query));
+            Logger.Log.Debug(string.Format("Executed query:\r\n{0}", query));
 
             return entities.ToList();
         }
@@ -110,10 +110,10 @@ namespace HomeRunner.Foundation.Dapper
             var _criteria = criteria.ToString();
             string query = string.Format("SELECT * FROM {0} {1} {2}", this.mappingProvider.Mappings[typeof (TEntity)], string.IsNullOrEmpty(_criteria) ? "" : "WHERE", _criteria);
 
-            Logger.Log.Info(string.Format("Executing query: {0}", query));
+            Logger.Log.Info(string.Format("Executing query:\r\n{0}", query));
             IEnumerable<TEntity> entities = this.connection.Query<TEntity>(query);
 
-            Logger.Log.Debug(string.Format("Executed query: {0}", query));
+            Logger.Log.Debug(string.Format("Executed query:\r\n{0}", query));
 
             return entities.ToList();
         }

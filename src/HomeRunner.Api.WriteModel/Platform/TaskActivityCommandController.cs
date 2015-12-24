@@ -1,7 +1,5 @@
 ﻿
 using HomeRunner.Domain.WriteModel.Platform.TaskActivities.Commands;
-using HomeRunner.Foundation.Cqrs;
-using HomeRunner.Foundation.Logging;
 using HomeRunner.Foundation.Web;
 using MassTransit;
 using System;
@@ -11,7 +9,7 @@ using System.Web.Http;
 
 namespace HomeRunner.Api.WriteModel.Platform
 {
-	[RoutePrefix("command/{tenantId}/taskactivity")]
+    [RoutePrefix("command/{tenantId}/taskactivity"), ApiExceptionFilter]
 	public class TaskActivityCommandController
 		: ApiController
 	{

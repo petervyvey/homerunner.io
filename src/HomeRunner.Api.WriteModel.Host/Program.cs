@@ -1,4 +1,5 @@
 ﻿
+using HomeRunner.Foundation.Extension;
 using HomeRunner.Foundation.Logging;
 using log4net.Config;
 using Microsoft.Owin.Hosting;
@@ -14,7 +15,6 @@ namespace HomeRunner.Api.WriteModel.Host
 	{
 		private static readonly string[] HEADER = new[]
 		{
-			@"-----------------------------------------------------------------",
 			@"  _   _                      ____                                ",
 			@" | | | | ___  _ __ ___   ___|  _ \ _   _ _ __  _ __   ___ _ __   ",
 			@" | |_| |/ _ \| '_ ` _ \ / _ \ |_) | | | | '_ \| '_ \ / _ \ '__|  ",
@@ -25,8 +25,7 @@ namespace HomeRunner.Api.WriteModel.Host
 			@"        \ V  V /| |  | | ||  __/ |  | | (_) | (_| |  __/ |       ",
 			@"         \_/\_/ |_|  |_|\__\___|_|  |_|\___/ \__,_|\___|_|       ",
 			@"                                                                 ",
-			@"                                                                 ",
-			@"-----------------------------------------------------------------"
+			@"                                                                 "
 			};
 
 		private const string BASE_URI_TEMPLATE = "http://{0}:{1}";
@@ -35,15 +34,19 @@ namespace HomeRunner.Api.WriteModel.Host
 
 		private static void Main(string[] args)
 		{
-			System.Console.Clear();
+            Console.Clear();
+            Console.WriteLine("-----------------------------------------------------------------");
 
-			Program.HEADER.ToList().ForEach(x => System.Console.WriteLine(x));
-			System.Console.WriteLine(string.Format (typeof(Program).FullName));
-			System.Console.WriteLine("Press q to quit ...");
-			System.Console.WriteLine("-----------------------------------------------------------------");
+            Console.ForegroundColor = ConsoleColor.Cyan;
+            HEADER.ToList().ForEach(Console.WriteLine);
+            Console.ResetColor();
 
+            Console.WriteLine("-----------------------------------------------------------------");
+            Console.WriteLine(string.Format(typeof(Program).FullName));
+            Console.WriteLine("Press q to quit ...");
+            Console.WriteLine("-----------------------------------------------------------------");
 
-			XmlConfigurator.Configure();
+            XmlConfigurator.Configure();
 
 			try
 			{
@@ -51,19 +54,20 @@ namespace HomeRunner.Api.WriteModel.Host
 				var port = ConfigurationManager.AppSettings[HOST_PORT_CONFIGURATION_KEY];
 				int _port = !string.IsNullOrEmpty(port) ? int.Parse(port) : 8000;
 
-				Logger.Log.Info(string.Format("Network binding: {0}", string.Format(Program.BASE_URI_TEMPLATE, address, _port)));
+				Program.WriteMessage(string.Format("Network binding: {0}", string.Format(Program.BASE_URI_TEMPLATE, address, _port)));
 				using (WebApp.Start<Startup>(new StartOptions(string.Format(Program.BASE_URI_TEMPLATE, address, _port))))
 				{
 					while (true)
 					{
-						while (!System.Console.KeyAvailable)
+                        Program.WriteMessage("Listening ...");
+						while (!Console.KeyAvailable)
 						{
 							Thread.Sleep(250);
 						}
 
-						if (System.Console.ReadKey().Key == ConsoleKey.Q) 
+						if (Console.ReadKey().Key == ConsoleKey.Q) 
 						{
-							System.Console.WriteLine();
+                            Program.WriteMessage("Received 'q' to quit");
 							break;
 						}
 					}
@@ -71,9 +75,20 @@ namespace HomeRunner.Api.WriteModel.Host
 			}
 			catch (Exception ex)
 			{
-				Logger.Log.Error(ex.Message);
+                Logger.Log.Error(ex.ToJson());
+                Logger.Log.Error(ex.InnerException != null ? ex.InnerException.Message : string.Empty);
+                Console.ReadKey();
 			}
 
 		}
+
+	    internal static void WriteMessage(string message)
+	    {
+	        if (Console.CursorLeft > 0) Console.Write("\r\n");
+
+	        Console.ForegroundColor = ConsoleColor.Cyan;
+	        Console.WriteLine("{0} - {1}", DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss,fff"), message);
+	        Console.ResetColor();
+	    }
 	}
 }

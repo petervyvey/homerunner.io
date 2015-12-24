@@ -1,5 +1,4 @@
 ﻿
-using Autofac.Integration.WebApi;
 using HomeRunner.Foundation.ExceptionManagement;
 using HomeRunner.Foundation.Logging;
 using System.Net;
@@ -9,7 +8,7 @@ using System.Web.Http.Filters;
 namespace HomeRunner.Foundation.Web
 {
     public class ApiExceptionFilterAttribute
-        : ExceptionFilterAttribute, IAutofacExceptionFilter
+        : ExceptionFilterAttribute
     {
         public override void OnException(HttpActionExecutedContext actionExecutedContext)
         {

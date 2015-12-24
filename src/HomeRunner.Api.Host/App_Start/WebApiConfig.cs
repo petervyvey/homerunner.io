@@ -64,7 +64,7 @@ namespace HomeRunner.Api.Host
             app.UseAutofacMiddleware(container);
             app.UseAutofacWebApi(GlobalConfiguration.Configuration);
 
-            config.MessageHandlers.Add(new LoggingMessageHandler());
+            config.MessageHandlers.Add(new HomeRunner.Api.Host.Handler.LoggingMessageHandler());
         }
     }
 }

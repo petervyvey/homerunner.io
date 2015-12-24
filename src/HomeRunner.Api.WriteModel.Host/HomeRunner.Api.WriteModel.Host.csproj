@@ -120,9 +120,17 @@
       <Project>{27AE38A7-A804-43D2-A546-FCAA8E288BC5}</Project>
       <Name>HomeRunner.Domain.WriteModel</Name>
     </ProjectReference>
+    <ProjectReference Include="..\HomeRunner.Foundation.Contract\HomeRunner.Foundation.Contract.csproj">
+      <Project>{0db614ab-d508-4160-8ef1-4e107808cf42}</Project>
+      <Name>HomeRunner.Foundation.Contract</Name>
+    </ProjectReference>
     <ProjectReference Include="..\HomeRunner.Foundation.NHibernate\HomeRunner.Foundation.NHibernate.csproj">
       <Project>{B1027144-83B6-4B72-809E-56D792FB7AC3}</Project>
       <Name>HomeRunner.Foundation.NHibernate</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\HomeRunner.Foundation.Web\HomeRunner.Foundation.Web.csproj">
+      <Project>{BAC87A48-B162-44DD-836B-DD78543ACD19}</Project>
+      <Name>HomeRunner.Foundation.Web</Name>
     </ProjectReference>
     <ProjectReference Include="..\HomeRunner.Foundation\HomeRunner.Foundation.csproj">
       <Project>{D7E6A58F-B54D-4339-9AB8-5B9F6F389F9F}</Project>

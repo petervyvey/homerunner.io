@@ -8,7 +8,7 @@ using System.Web.Http;
 
 namespace HomeRunner.Api.ReadModel.Platform
 {
-	[RoutePrefix("query/{tenantId}/taskactivity")]
+	[RoutePrefix("query/{tenantId}/taskactivity"), ApiExceptionFilter]
 	public class TaskActivityQueryController
 		: ApiController
 	{
