@@ -16,7 +16,7 @@ namespace HomeRunner.Api.WriteModel.Host
 	internal sealed class Startup
 	{
 	    internal readonly Type[] SERVICES = {
-			typeof (Platform.TaskActivityCommandController),
+			typeof (Platform.TaskActivityController),
 		};
 
 	    public void Configuration(IAppBuilder app)

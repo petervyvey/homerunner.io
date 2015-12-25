@@ -10,12 +10,12 @@ using System.Web.Http;
 namespace HomeRunner.Api.WriteModel.Platform
 {
     [RoutePrefix("command/{tenantId}/taskactivity"), ApiExceptionFilter]
-	public class TaskActivityCommandController
+	public class TaskActivityController
 		: ApiController
 	{
         private readonly IBusConnector connector;
 
-	    public TaskActivityCommandController(IBusConnector connector)
+	    public TaskActivityController(IBusConnector connector)
 			: base()
 	    {
             this.connector = connector;

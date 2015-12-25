@@ -8,12 +8,12 @@ using System.Web.Http;
 namespace HomeRunner.Api.ReadModel.Platform
 {
 	[RoutePrefix("query/{tenantId}/taskactivity"), ApiExceptionFilter]
-	public class TaskActivityQueryController
+	public class TaskActivityController
 		: ApiController
 	{
 		private readonly IMediator mediator;
 
-		public TaskActivityQueryController(IMediator mediator)
+		public TaskActivityController(IMediator mediator)
 			: base()
 		{
 			this.mediator = mediator;
