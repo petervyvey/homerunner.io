@@ -24,7 +24,7 @@ namespace HomeRunner.Domain.ReadModel.Platform.TaskActivities.Representations
         {
             //var tenant = ((ClaimsPrincipal) Thread.CurrentPrincipal).Claims.Single(x => x.Type.Equals(CustomClaimTypes.TenantId, StringComparison.InvariantCultureIgnoreCase)).Value;
             var tenant = "tenant";
-            return new Dictionary<string, Link> { { "self", string.Format("/v1/{0}/taskactivity/{1}", tenant, this.Id) } };
+            return new Dictionary<string, Link> { { "self", string.Format("{0}/taskactivity/{1}", tenant, this.Id) } };
         }
     }
 }
