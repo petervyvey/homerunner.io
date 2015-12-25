@@ -20,15 +20,7 @@ namespace HomeRunner.Api.ReadModel.Host
 					var c = ctx.Resolve<IComponentContext>();
 					return t =>
 					{
-						object instance;
-					    if (c.IsRegisteredWithKey("request-with-logging-read", t))
-					    {
-					        instance = c.ResolveKeyed("request-with-logging-read", t);
-					    }
-					    else
-					    {
-					        instance = c.Resolve(t);
-					    }
+					    object instance = c.IsRegisteredWithKey("request-with-logging-read", t) ? c.ResolveKeyed("request-with-logging-read", t) : c.Resolve(t);
 
 					    return instance;
 					};

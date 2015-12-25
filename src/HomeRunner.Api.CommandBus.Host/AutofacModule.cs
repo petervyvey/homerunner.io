@@ -37,19 +37,7 @@ namespace HomeRunner.Api.CommandBus.Host
                 var c = ctx.Resolve<IComponentContext>();
                 return t =>
                 {
-                    object instance;
-                    if (c.IsRegisteredWithKey("request-with-logging-read", t))
-                    {
-                        instance = c.ResolveKeyed("request-with-logging-read", t);
-                    }
-                    else if (c.IsRegisteredWithKey("request-with-logging-write", t))
-                    {
-                        instance = c.ResolveKeyed("request-with-logging-write", t);
-                    }
-                    else
-                    {
-                        instance = c.Resolve(t);
-                    }
+                    object instance = c.IsRegisteredWithKey("request-with-logging-write", t) ? c.ResolveKeyed("request-with-logging-write", t) : c.Resolve(t);
 
                     return instance;
                 };
@@ -60,25 +48,6 @@ namespace HomeRunner.Api.CommandBus.Host
                 var c = context.Resolve<IComponentContext>();
                 return t => (IEnumerable<object>)c.Resolve(typeof(IEnumerable<>).MakeGenericType(t));
             });
-
-            //builder.Register<SingleInstanceFactory>(ctx =>
-            //{
-            //    var c = ctx.Resolve<IComponentContext>();
-            //    return t =>
-            //    {
-            //        var instance = c.IsRegisteredWithKey("request-with-logging", t) ? c.ResolveKeyed("request-with-logging", t) : c.Resolve(t);
-            //        return instance;
-            //    };
-            //});
-
-            //builder.Register<MultiInstanceFactory>(ctx =>
-            //{
-            //    var c = ctx.Resolve<IComponentContext>();
-            //    return t =>
-            //    {
-            //        return (IEnumerable<object>) c.Resolve(typeof (IEnumerable<>).MakeGenericType(t));
-            //    };
-            //});
         }
     }
 }

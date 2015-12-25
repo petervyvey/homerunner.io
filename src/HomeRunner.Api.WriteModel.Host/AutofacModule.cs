@@ -20,15 +20,7 @@ namespace HomeRunner.Api.WriteModel.Host
 					var c = ctx.Resolve<IComponentContext>();
 					return t =>
 					{
-						object instance;
-                        if (c.IsRegisteredWithKey("request-with-logging-write", t))
-                        {
-                            instance = c.ResolveKeyed("request-with-logging-write", t);
-                        }
-					    else
-					    {
-					        instance = c.Resolve(t);
-					    }
+					    object instance = c.IsRegisteredWithKey("request-with-logging-write", t) ? c.ResolveKeyed("request-with-logging-write", t) : c.Resolve(t);
 
 					    return instance;
 					};
