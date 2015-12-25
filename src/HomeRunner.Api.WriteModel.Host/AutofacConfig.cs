@@ -10,6 +10,7 @@ namespace HomeRunner.Api.WriteModel.Host
 			ContainerBuilder builder = new ContainerBuilder();
 
 			builder.RegisterModule<AutofacModule>();
+            builder.RegisterAssemblyModules(typeof(Api.WriteModel.AutofacModule).Assembly);
 			builder.RegisterAssemblyModules(typeof(Domain.WriteModel.AutofacModule).Assembly);
 			builder.RegisterAssemblyModules(typeof(Foundation.NHibernate.AutofacModule).Assembly);
 

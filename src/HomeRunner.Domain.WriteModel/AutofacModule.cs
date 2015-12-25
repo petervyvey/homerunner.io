@@ -62,19 +62,6 @@ namespace HomeRunner.Domain.WriteModel
             //    },
             //    "local-domain-event-publisher", "bus-domain-event-publisher")
             //    .InstancePerDependency();
-
-            builder.Register<IBus>(context => Bus.Factory.CreateUsingRabbitMq(config =>
-            {
-                config.UseLog4Net();
-                config.UseJsonSerializer();
-                config.Durable = true;
-
-                var host = config.Host(new Uri("rabbitmq://localhost/command/"), h =>
-                {
-                    h.Username("slidingapps");
-                    h.Password("slidingapps");
-                });
-            })).As<IBus>().SingleInstance();
         }
     }
 }

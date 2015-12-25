@@ -101,7 +101,6 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Logger.cs" />
-    <Compile Include="Platform\MassTransitConnector.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Platform\TaskActivityCommandController.cs" />
   </ItemGroup>
@@ -123,6 +122,10 @@
     <ProjectReference Include="..\HomeRunner.Foundation.Contract\HomeRunner.Foundation.Contract.csproj">
       <Project>{0DB614AB-D508-4160-8EF1-4E107808CF42}</Project>
       <Name>HomeRunner.Foundation.Contract</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\HomeRunner.Foundation.MassTransit\HomeRunner.Foundation.MassTransit.csproj">
+      <Project>{01E245D6-B21B-49A7-A967-3349E44B00DC}</Project>
+      <Name>HomeRunner.Foundation.MassTransit</Name>
     </ProjectReference>
     <ProjectReference Include="..\HomeRunner.Foundation.Web\HomeRunner.Foundation.Web.csproj">
       <Project>{BAC87A48-B162-44DD-836B-DD78543ACD19}</Project>

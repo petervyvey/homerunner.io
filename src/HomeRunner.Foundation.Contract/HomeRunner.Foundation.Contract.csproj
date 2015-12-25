@@ -71,6 +71,7 @@
     <Compile Include="Entity\IIdentifiable.cs" />
     <Compile Include="Entity\IWithDomainEvents.cs" />
     <Compile Include="Infrastructure\IUnitOfWork.cs" />
+    <Compile Include="MessageBus\IBusConnector.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Entity\IDomainEntityValidatorProvider.cs" />
     <Compile Include="Entity\DomainEntityValidatorProvider.cs" />

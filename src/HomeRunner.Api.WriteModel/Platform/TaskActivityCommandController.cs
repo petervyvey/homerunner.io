@@ -1,7 +1,7 @@
 ﻿
 using HomeRunner.Domain.WriteModel.Platform.TaskActivities.Commands;
+using HomeRunner.Foundation.MessageBus;
 using HomeRunner.Foundation.Web;
-using MassTransit;
 using System;
 using System.Net.Http;
 using System.Threading.Tasks;
@@ -13,20 +13,19 @@ namespace HomeRunner.Api.WriteModel.Platform
 	public class TaskActivityCommandController
 		: ApiController
 	{
-		private readonly IBus bus;
-	    private readonly MassTransitConnector massTransitConnector;
+        private readonly IBusConnector connector;
 
-	    public TaskActivityCommandController(IBus bus)
+	    public TaskActivityCommandController(IBusConnector connector)
 			: base()
 	    {
-	        this.bus = bus;
+            this.connector = connector;
 	    }
 
 	    [HttpPost, Route("")]
 		public async Task<HttpResponseMessage> PostCreateTaskActivityCommand(string tenantId, [FromBody] V1.Platform.Intents.CreateTaskActivity intent)
 		{
 			CreateTaskActivityCommand command = new CreateTaskActivityCommand(intent.Description);
-            await MassTransitConnector.SendCommand(command, this.bus);
+            await this.connector.SendCommand(command);
 
 		    return ApiResponse.CommandResponse(command);
 		}
@@ -35,7 +34,7 @@ namespace HomeRunner.Api.WriteModel.Platform
 		public async Task<HttpResponseMessage> PutClaimTaskActivityCommand(string tenantId, Guid id)
 		{
 			ClaimTaskActivityCommand command = new ClaimTaskActivityCommand(id);
-            await MassTransitConnector.SendCommand(command, this.bus);
+            await this.connector.SendCommand(command);
 
 			return ApiResponse.CommandResponse(command);
 		}
@@ -44,7 +43,7 @@ namespace HomeRunner.Api.WriteModel.Platform
 		public async Task<HttpResponseMessage> PutUnclaimTaskActivityCommand(string tenantId, Guid id)
 		{
 			UnclaimTaskActivityCommand command = new UnclaimTaskActivityCommand(id);
-            await MassTransitConnector.SendCommand(command, this.bus);
+            await this.connector.SendCommand(command);
 
 			return ApiResponse.CommandResponse(command);
 		}

@@ -66,6 +66,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HomeRunner.Api.WriteModel.H
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HomeRunner.Api.CommandBus.Host", "HomeRunner.Api.CommandBus.Host\HomeRunner.Api.CommandBus.Host.csproj", "{F627FF60-71F9-448F-9F71-174C36AC5D06}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HomeRunner.Foundation.MassTransit", "HomeRunner.Foundation.MassTransit\HomeRunner.Foundation.MassTransit.csproj", "{01E245D6-B21B-49A7-A967-3349E44B00DC}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		AzureWebSites|Any CPU = AzureWebSites|Any CPU
@@ -205,6 +207,12 @@ Global
 		{F627FF60-71F9-448F-9F71-174C36AC5D06}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F627FF60-71F9-448F-9F71-174C36AC5D06}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F627FF60-71F9-448F-9F71-174C36AC5D06}.Release|Any CPU.Build.0 = Release|Any CPU
+		{01E245D6-B21B-49A7-A967-3349E44B00DC}.AzureWebSites|Any CPU.ActiveCfg = Release|Any CPU
+		{01E245D6-B21B-49A7-A967-3349E44B00DC}.AzureWebSites|Any CPU.Build.0 = Release|Any CPU
+		{01E245D6-B21B-49A7-A967-3349E44B00DC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{01E245D6-B21B-49A7-A967-3349E44B00DC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{01E245D6-B21B-49A7-A967-3349E44B00DC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{01E245D6-B21B-49A7-A967-3349E44B00DC}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -232,6 +240,7 @@ Global
 		{1D1157A7-2A01-40D6-9AB5-387E1059928C} = {E0354E9C-7E76-4B05-8AA4-92C62CDD6707}
 		{3E8EFD3E-3A5D-4708-9806-F99414937008} = {E0354E9C-7E76-4B05-8AA4-92C62CDD6707}
 		{F627FF60-71F9-448F-9F71-174C36AC5D06} = {E0354E9C-7E76-4B05-8AA4-92C62CDD6707}
+		{01E245D6-B21B-49A7-A967-3349E44B00DC} = {A84D4E8A-419B-4B07-B734-47A053521688}
 	EndGlobalSection
 	GlobalSection(MonoDevelopProperties) = preSolution
 		StartupItem = HomeRunner.Api.Host.Console\HomeRunner.Api.Host.Console.csproj

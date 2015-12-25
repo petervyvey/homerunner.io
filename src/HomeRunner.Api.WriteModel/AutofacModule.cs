@@ -1,5 +1,7 @@
 ﻿
 using Autofac;
+using HomeRunner.Foundation.MassTransit;
+using HomeRunner.Foundation.MessageBus;
 using MassTransit;
 using MassTransit.Log4NetIntegration;
 using System;
@@ -10,6 +12,8 @@ namespace HomeRunner.Api.WriteModel
     {
         protected override void Load(ContainerBuilder builder)
         {
+            builder.RegisterType<MassTransitConnector>().As<IBusConnector>();
+
             builder.Register(context => Bus.Factory.CreateUsingRabbitMq(config =>
             {
                 config.UseLog4Net();
