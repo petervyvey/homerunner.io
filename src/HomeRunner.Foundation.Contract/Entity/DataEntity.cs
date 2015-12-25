@@ -6,7 +6,7 @@ namespace HomeRunner.Foundation.Entity
     /// </summary>
     /// <typeparam name="TIdentifier">The type of the identifier.</typeparam>
     public abstract class DataEntity<TIdentifier>
-        : IDataEntity<TIdentifier>, IIdentifiable<TIdentifier>
+        : IDataEntity<TIdentifier>
     {
         /// <summary>
         /// The entity identifier.

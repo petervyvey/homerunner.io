@@ -1,8 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-
-using HomeRunner.Domain.ReadModel.Platform.TaskActivities.Entities;
+﻿
+using HomeRunner.Domain.ReadModel.Platform.TaskActivities.Representations;
 using HomeRunner.Foundation.Dapper;
+using System;
+using System.Collections.Generic;
 
 namespace HomeRunner.Domain.ReadModel.Platform
 {

@@ -1,5 +1,5 @@
 ﻿
-using HomeRunner.Domain.ReadModel.Platform.TaskActivities.Entities;
+using HomeRunner.Domain.ReadModel.Platform.TaskActivities.Representations;
 using HomeRunner.Foundation.Cqrs;
 using System;
 using System.Collections.Generic;
@@ -9,7 +9,7 @@ using System.Linq.Expressions;
 namespace HomeRunner.Domain.ReadModel.Platform.TaskActivities.Queries
 {
     public class TaskActivityListQuery
-        : IQuery<IEnumerable<TaskActivity>>, IWithFilterExpression<TaskActivity>
+        : IQuery<TaskActivityList>, IWithFilterExpression<TaskActivity>
     {
         public TaskActivityListQuery(params Guid[] identifiers)
         {

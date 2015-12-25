@@ -1,11 +1,9 @@
 ﻿
 using Autofac;
 using Autofac.Integration.WebApi;
-using AutoMapper;
-using HalJsonNet;
-using HalJsonNet.Serialization;
 using HomeRunner.Foundation.Logging;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Serialization;
 using Owin;
 using System;
 using System.Configuration;
@@ -29,7 +27,6 @@ namespace HomeRunner.Api.WriteModel.Host
 
 	            var config = this.ConfigureHttp();
 	            var container = this.ConfigureAutofac(config);
-	            this.ConfigureAutoMapper();
 	            this.ConfigureOwin(app, config, container);
 	        }
 	        catch (Exception ex)
@@ -53,7 +50,7 @@ namespace HomeRunner.Api.WriteModel.Host
 			config.Formatters.OfType<JsonMediaTypeFormatter>().First().SerializerSettings = new JsonSerializerSettings
 			{
 				Formatting = Newtonsoft.Json.Formatting.Indented,
-				ContractResolver = new JsonNetHalJsonContactResolver(new HalJsonConfiguration(urlBase)),
+				ContractResolver = new CamelCasePropertyNamesContractResolver(), //new JsonNetHalJsonContactResolver(new HalJsonConfiguration(urlBase)),
 				NullValueHandling = NullValueHandling.Ignore
 					//,TypeNameHandling = TypeNameHandling.Objects
 			};
@@ -72,14 +69,6 @@ namespace HomeRunner.Api.WriteModel.Host
             Program.WriteMessage("Autofac configuration DONE");
 
 			return container;
-		}
-
-		private void ConfigureAutoMapper()
-		{
-			Mapper.Initialize (config => { });
-			ReadModel.AutoMapperConfig.Config();
-
-            Program.WriteMessage("AutoMapper configuration DONE");
 		}
 
 		private void ConfigureOwin(IAppBuilder app, HttpConfiguration config, IContainer container)

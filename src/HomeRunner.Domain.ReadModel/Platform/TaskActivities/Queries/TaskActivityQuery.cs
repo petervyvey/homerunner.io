@@ -1,5 +1,5 @@
 ﻿
-using HomeRunner.Domain.ReadModel.Platform.TaskActivities.Entities;
+using HomeRunner.Domain.ReadModel.Platform.TaskActivities.Representations;
 using HomeRunner.Foundation.Cqrs;
 using System;
 using System.Linq.Expressions;

@@ -64,6 +64,8 @@ namespace HomeRunner.Domain.WriteModel.Platform.TaskActivities
 			TaskActivity entity = new TaskActivity (existing, validator.Create<TaskActivity> ());
 			IDomainEvent domainEvent = entity.Apply (command);
 
+            entity.MustBeValid();
+
 			return new CommandResult (command.Id, domainEvent);
 		}
 	}

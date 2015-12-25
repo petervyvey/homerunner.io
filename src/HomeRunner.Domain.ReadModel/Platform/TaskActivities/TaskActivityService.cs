@@ -1,6 +1,6 @@
 ﻿
-using HomeRunner.Domain.ReadModel.Platform.TaskActivities.Entities;
 using HomeRunner.Domain.ReadModel.Platform.TaskActivities.Queries;
+using HomeRunner.Domain.ReadModel.Platform.TaskActivities.Representations;
 using HomeRunner.Foundation.Cqrs;
 using HomeRunner.Foundation.Dapper;
 using System.Collections.Generic;
@@ -9,7 +9,7 @@ namespace HomeRunner.Domain.ReadModel.Platform.TaskActivities
 {
     public class TaskActivityService :
         IQueryHandler<TaskActivityQuery, TaskActivity>,
-        IQueryHandler<TaskActivityListQuery, IEnumerable<TaskActivity>>
+        IQueryHandler<TaskActivityListQuery, TaskActivityList>
     {
         private readonly IQueryProvider queryProvider;
 
@@ -28,13 +28,13 @@ namespace HomeRunner.Domain.ReadModel.Platform.TaskActivities
             return instance;
         }
 
-        public IEnumerable<TaskActivity> Handle(TaskActivityListQuery query)
+        public TaskActivityList Handle(TaskActivityListQuery query)
         {
             IList<TaskActivity> list = 
 				this.queryProvider.From<TaskActivity>()
 					.ToList();
 
-			return list;
+			return new TaskActivityList(list);
         }
     }
 }

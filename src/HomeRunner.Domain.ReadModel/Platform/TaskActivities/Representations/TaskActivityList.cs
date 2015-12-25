@@ -4,10 +4,10 @@ using HalJsonNet.Configuration.Attributes;
 using HalJsonNet.Configuration.Interfaces;
 using System.Collections.Generic;
 
-namespace HomeRunner.Api.ReadModel.V1.Platform.Representations
+namespace HomeRunner.Domain.ReadModel.Platform.TaskActivities.Representations
 {
     public class TaskActivityList
-        : IHaveHalJsonLinks
+    : IHaveHalJsonLinks
     {
         public TaskActivityList(IEnumerable<TaskActivity> taskActivities)
         {

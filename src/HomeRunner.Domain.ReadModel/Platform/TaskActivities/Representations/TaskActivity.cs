@@ -1,16 +1,15 @@
 ﻿
 using HalJsonNet.Configuration;
 using HalJsonNet.Configuration.Interfaces;
+using HomeRunner.Foundation.Entity;
 using System;
 using System.Collections.Generic;
 
-namespace HomeRunner.Api.ReadModel.V1.Platform.Representations
+namespace HomeRunner.Domain.ReadModel.Platform.TaskActivities.Representations
 {
-    public class TaskActivity
-        : IHaveHalJsonLinks
+    public sealed class TaskActivity
+        : DataEntity<Guid>, IHaveHalJsonLinks
     {
-        public Guid Id { get; set; }
-
         public string Description { get; set; }
 
         public string AssignedTo { get; set; }

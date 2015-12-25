@@ -3,7 +3,7 @@ using FluentNHibernate.Mapping;
 
 namespace HomeRunner.Domain.WriteModel.Platform.TaskActivities.Maps
 {
-    public class TaskActivityMap : ClassMap<TaskActivity>
+    public class TaskActivityMap : ClassMap<Entities.TaskActivity>
     {
         public TaskActivityMap()
         {
@@ -16,6 +16,8 @@ namespace HomeRunner.Domain.WriteModel.Platform.TaskActivities.Maps
             this.Map(e => e.IsCompleted);
             this.Map(e => e.AssignedTo);
             this.Map(e => e.UpdateTime);
+
+            this.DynamicUpdate();
         }
     }
 }

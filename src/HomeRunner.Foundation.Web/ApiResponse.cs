@@ -1,5 +1,4 @@
 ﻿
-using AutoMapper;
 using HomeRunner.Foundation.Cqrs;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
@@ -14,23 +13,6 @@ namespace HomeRunner.Foundation.Web
 {
     public static class ApiResponse
     {
-        public static TRepresentation ToRepresentation<TEntity, TRepresentation>(this TEntity instance)
-            where TRepresentation : class, new()
-        {
-            TRepresentation mapping = Equals(instance, default(TEntity))
-                ? default(TRepresentation)
-                : Mapper.Map(instance, new TRepresentation(), instance.GetType(), typeof(TRepresentation)) as TRepresentation;
-
-            return mapping;
-        }
-
-        public static List<TRepresentation> ToRepresentations<TEntity, TRepresentation>(this IEnumerable<TEntity> list)
-        {
-            return list != null
-                ? Mapper.Map<IEnumerable<TEntity>, List<TRepresentation>>(list)
-                : new List<TRepresentation>();
-        }
-
         public static HttpResponseMessage CommandResponse(ICommand<ICommandResult> command)
         {
             return new HttpResponseMessage

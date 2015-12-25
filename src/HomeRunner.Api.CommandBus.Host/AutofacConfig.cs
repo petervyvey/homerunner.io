@@ -1,6 +1,6 @@
 ﻿using Autofac;
 
-namespace HomeRunner.Consumer.Host
+namespace HomeRunner.Api.CommandBus.Host
 {
     public class AutofacConfig
     {
@@ -9,7 +9,6 @@ namespace HomeRunner.Consumer.Host
             ContainerBuilder builder = new ContainerBuilder();
 
             builder.RegisterModule<AutofacModule>();
-            builder.RegisterAssemblyModules(typeof(Domain.ReadModel.AutofacModule).Assembly);
             builder.RegisterAssemblyModules(typeof(Domain.WriteModel.AutofacModule).Assembly);
             builder.RegisterAssemblyModules(typeof(Foundation.NHibernate.AutofacModule).Assembly);
 

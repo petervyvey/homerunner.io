@@ -116,10 +116,6 @@
       <Project>{fe4076d4-0c05-4d70-a2d4-8abb0560aaf8}</Project>
       <Name>HomeRunner.Api.WriteModel.V1.Contract</Name>
     </ProjectReference>
-    <ProjectReference Include="..\HomeRunner.Domain.ReadModel\HomeRunner.Domain.ReadModel.csproj">
-      <Project>{99118F97-9D6C-4449-8F96-82471465673B}</Project>
-      <Name>HomeRunner.Domain.ReadModel</Name>
-    </ProjectReference>
     <ProjectReference Include="..\HomeRunner.Domain.WriteModel.Contract\HomeRunner.Domain.WriteModel.Contract.csproj">
       <Project>{B0FA7AD3-2A9F-4C1D-997D-833EFE84D674}</Project>
       <Name>HomeRunner.Domain.WriteModel.Contract</Name>

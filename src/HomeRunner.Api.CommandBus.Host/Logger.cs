@@ -1,7 +1,7 @@
 ﻿
 using HomeRunner.Foundation.Logging;
 
-namespace HomeRunner.Consumer.Host
+namespace HomeRunner.Api.CommandBus.Host
 {
     public class Logger
     {

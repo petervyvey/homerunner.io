@@ -7,7 +7,7 @@ using MassTransit;
 using MediatR;
 using System.Threading.Tasks;
 
-namespace HomeRunner.Consumer.Host
+namespace HomeRunner.Api.CommandBus.Host
 {
     public class CommandMessageConsumer :
 		IConsumer<CommandMessage<CreateTaskActivityCommand>>,

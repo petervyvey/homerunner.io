@@ -1,7 +1,6 @@
 ﻿
 using Autofac;
 using Autofac.Integration.WebApi;
-using AutoMapper;
 using HalJsonNet;
 using HalJsonNet.Serialization;
 using HomeRunner.Foundation.Logging;
@@ -30,7 +29,6 @@ namespace HomeRunner.Api.ReadModel.Host
 
 				var config = this.ConfigureHttp();
 				var container = this.ConfigureAutofac(config);
-				this.ConfigureAutoMapper();
 				this.ConfigureOwin(app, config, container);
 			}
 			catch (Exception ex)
@@ -75,14 +73,6 @@ namespace HomeRunner.Api.ReadModel.Host
             Program.WriteMessage("Autofac configuration DONE");
 
 			return container;
-		}
-
-		private void ConfigureAutoMapper()
-		{
-			Mapper.Initialize (config => { });
-			ReadModel.AutoMapperConfig.Config();
-
-            Program.WriteMessage("AutoMapper configuration DONE");
 		}
 
 		private void ConfigureOwin(IAppBuilder app, HttpConfiguration config, IContainer container)

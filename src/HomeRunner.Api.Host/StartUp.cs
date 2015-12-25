@@ -12,7 +12,6 @@ namespace HomeRunner.Api.Host
         public void Configuration(IAppBuilder app)
         {
             WebApiConfig.Configuration(app);
-            AutoMapperConfig.Config();
         }
     }
 }

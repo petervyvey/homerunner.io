@@ -21,11 +21,7 @@ namespace HomeRunner.Api.WriteModel.Host
 					return t =>
 					{
 						object instance;
-					    if (c.IsRegisteredWithKey("request-with-logging-read", t))
-					    {
-					        instance = c.ResolveKeyed("request-with-logging-read", t);
-					    }
-                        else if (c.IsRegisteredWithKey("request-with-logging-write", t))
+                        if (c.IsRegisteredWithKey("request-with-logging-write", t))
                         {
                             instance = c.ResolveKeyed("request-with-logging-write", t);
                         }

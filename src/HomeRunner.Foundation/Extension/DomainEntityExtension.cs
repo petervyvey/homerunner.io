@@ -35,7 +35,7 @@ namespace HomeRunner.Foundation.Extension
 			if(instance is IWithValidator<TDomainEntity> )
 			{
 				ValidationResult result = ((IWithValidator<TDomainEntity> )instance).Validate();
-				if(result.IsValid)
+				if(!result.IsValid)
 				{
 					throw new ValidationException (result.Errors);
 				}

@@ -2,7 +2,7 @@
 using Autofac;
 using MassTransit;
 
-namespace HomeRunner.Consumer.Host
+namespace HomeRunner.Api.CommandBus.Host
 {
     internal sealed class MassTransitConfig
     {
