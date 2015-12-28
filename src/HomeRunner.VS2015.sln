@@ -1,0 +1,220 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.24720.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{3E35A28F-4FAA-4EF6-90AA-C8245244CAFD}"
+	ProjectSection(SolutionItems) = preProject
+		.nuget\NuGet.Config = .nuget\NuGet.Config
+		.nuget\NuGet.exe = .nuget\NuGet.exe
+		.nuget\NuGet.targets = .nuget\NuGet.targets
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "00.Foundation", "00.Foundation", "{A84D4E8A-419B-4B07-B734-47A053521688}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HomeRunner.Foundation", "HomeRunner.Foundation\HomeRunner.Foundation.csproj", "{D7E6A58F-B54D-4339-9AB8-5B9F6F389F9F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HomeRunner.Foundation.Contract", "HomeRunner.Foundation.Contract\HomeRunner.Foundation.Contract.csproj", "{0DB614AB-D508-4160-8EF1-4E107808CF42}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HomeRunner.Foundation.Web", "HomeRunner.Foundation.Web\HomeRunner.Foundation.Web.csproj", "{BAC87A48-B162-44DD-836B-DD78543ACD19}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HomeRunner.Foundation.NHibernate", "HomeRunner.Foundation.NHibernate\HomeRunner.Foundation.NHibernate.csproj", "{B1027144-83B6-4B72-809E-56D792FB7AC3}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "20.Api", "20.Api", "{8036D9AB-17D6-4084-8FED-DC250BBFCF42}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "10.Domain", "10.Domain", "{619CD9FF-49FE-4BBA-ADC9-B34D1C4ADE51}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HomeRunner.Domain.ReadModel", "HomeRunner.Domain.ReadModel\HomeRunner.Domain.ReadModel.csproj", "{99118F97-9D6C-4449-8F96-82471465673B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HomeRunner.Domain.WriteModel", "HomeRunner.Domain.WriteModel\HomeRunner.Domain.WriteModel.csproj", "{27AE38A7-A804-43D2-A546-FCAA8E288BC5}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HomeRunner.Domain.WriteModel.Contract", "HomeRunner.Domain.WriteModel.Contract\HomeRunner.Domain.WriteModel.Contract.csproj", "{B0FA7AD3-2A9F-4C1D-997D-833EFE84D674}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "30.Service", "30.Service", "{E0354E9C-7E76-4B05-8AA4-92C62CDD6707}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HomeRunner.Foundation.NHibernate.Contract", "HomeRunner.Foundation.NHibernate.Contract\HomeRunner.Foundation.NHibernate.Contract.csproj", "{443660A1-60CF-45BB-BAD8-0105933D869D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HomeRunner.Foundation.Dapper.Contract", "HomeRunner.Foundation.Dapper.Contract\HomeRunner.Foundation.Dapper.Contract.csproj", "{D669B2A8-D7B2-48DF-8A9C-ADC09A704B32}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HomeRunner.Foundation.Dapper", "HomeRunner.Foundation.Dapper\HomeRunner.Foundation.Dapper.csproj", "{67EE74BA-29A0-4BE3-B459-A6648F8DD2C3}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HomeRunner.Api.ReadModel", "HomeRunner.Api.ReadModel\HomeRunner.Api.ReadModel.csproj", "{79359F8F-5501-4DA5-8367-F34573144BD3}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HomeRunner.Api.WriteModel", "HomeRunner.Api.WriteModel\HomeRunner.Api.WriteModel.csproj", "{0ADBF1E6-D18C-4493-9EE0-2FE73ED4B848}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HomeRunner.Api.WriteModel.V1.Contract", "HomeRunner.Api.WriteModel.V1.Contract\HomeRunner.Api.WriteModel.V1.Contract.csproj", "{FE4076D4-0C05-4D70-A2D4-8ABB0560AAF8}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HomeRunner.Api.ReadModel.Host", "HomeRunner.Api.ReadModel.Host\HomeRunner.Api.ReadModel.Host.csproj", "{1D1157A7-2A01-40D6-9AB5-387E1059928C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HomeRunner.Api.WriteModel.Host", "HomeRunner.Api.WriteModel.Host\HomeRunner.Api.WriteModel.Host.csproj", "{3E8EFD3E-3A5D-4708-9806-F99414937008}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HomeRunner.Api.CommandBus.Host", "HomeRunner.Api.CommandBus.Host\HomeRunner.Api.CommandBus.Host.csproj", "{F627FF60-71F9-448F-9F71-174C36AC5D06}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HomeRunner.Foundation.MassTransit", "HomeRunner.Foundation.MassTransit\HomeRunner.Foundation.MassTransit.csproj", "{01E245D6-B21B-49A7-A967-3349E44B00DC}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		AzureWebSites|Any CPU = AzureWebSites|Any CPU
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{D7E6A58F-B54D-4339-9AB8-5B9F6F389F9F}.AzureWebSites|Any CPU.ActiveCfg = Release|Any CPU
+		{D7E6A58F-B54D-4339-9AB8-5B9F6F389F9F}.AzureWebSites|Any CPU.Build.0 = Release|Any CPU
+		{D7E6A58F-B54D-4339-9AB8-5B9F6F389F9F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D7E6A58F-B54D-4339-9AB8-5B9F6F389F9F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D7E6A58F-B54D-4339-9AB8-5B9F6F389F9F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D7E6A58F-B54D-4339-9AB8-5B9F6F389F9F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0DB614AB-D508-4160-8EF1-4E107808CF42}.AzureWebSites|Any CPU.ActiveCfg = Release|Any CPU
+		{0DB614AB-D508-4160-8EF1-4E107808CF42}.AzureWebSites|Any CPU.Build.0 = Release|Any CPU
+		{0DB614AB-D508-4160-8EF1-4E107808CF42}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0DB614AB-D508-4160-8EF1-4E107808CF42}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0DB614AB-D508-4160-8EF1-4E107808CF42}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0DB614AB-D508-4160-8EF1-4E107808CF42}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BAC87A48-B162-44DD-836B-DD78543ACD19}.AzureWebSites|Any CPU.ActiveCfg = Release|Any CPU
+		{BAC87A48-B162-44DD-836B-DD78543ACD19}.AzureWebSites|Any CPU.Build.0 = Release|Any CPU
+		{BAC87A48-B162-44DD-836B-DD78543ACD19}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BAC87A48-B162-44DD-836B-DD78543ACD19}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BAC87A48-B162-44DD-836B-DD78543ACD19}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BAC87A48-B162-44DD-836B-DD78543ACD19}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B1027144-83B6-4B72-809E-56D792FB7AC3}.AzureWebSites|Any CPU.ActiveCfg = Release|Any CPU
+		{B1027144-83B6-4B72-809E-56D792FB7AC3}.AzureWebSites|Any CPU.Build.0 = Release|Any CPU
+		{B1027144-83B6-4B72-809E-56D792FB7AC3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B1027144-83B6-4B72-809E-56D792FB7AC3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B1027144-83B6-4B72-809E-56D792FB7AC3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B1027144-83B6-4B72-809E-56D792FB7AC3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{99118F97-9D6C-4449-8F96-82471465673B}.AzureWebSites|Any CPU.ActiveCfg = Release|Any CPU
+		{99118F97-9D6C-4449-8F96-82471465673B}.AzureWebSites|Any CPU.Build.0 = Release|Any CPU
+		{99118F97-9D6C-4449-8F96-82471465673B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{99118F97-9D6C-4449-8F96-82471465673B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{99118F97-9D6C-4449-8F96-82471465673B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{99118F97-9D6C-4449-8F96-82471465673B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{27AE38A7-A804-43D2-A546-FCAA8E288BC5}.AzureWebSites|Any CPU.ActiveCfg = Release|Any CPU
+		{27AE38A7-A804-43D2-A546-FCAA8E288BC5}.AzureWebSites|Any CPU.Build.0 = Release|Any CPU
+		{27AE38A7-A804-43D2-A546-FCAA8E288BC5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{27AE38A7-A804-43D2-A546-FCAA8E288BC5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{27AE38A7-A804-43D2-A546-FCAA8E288BC5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{27AE38A7-A804-43D2-A546-FCAA8E288BC5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B0FA7AD3-2A9F-4C1D-997D-833EFE84D674}.AzureWebSites|Any CPU.ActiveCfg = Release|Any CPU
+		{B0FA7AD3-2A9F-4C1D-997D-833EFE84D674}.AzureWebSites|Any CPU.Build.0 = Release|Any CPU
+		{B0FA7AD3-2A9F-4C1D-997D-833EFE84D674}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B0FA7AD3-2A9F-4C1D-997D-833EFE84D674}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B0FA7AD3-2A9F-4C1D-997D-833EFE84D674}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B0FA7AD3-2A9F-4C1D-997D-833EFE84D674}.Release|Any CPU.Build.0 = Release|Any CPU
+		{443660A1-60CF-45BB-BAD8-0105933D869D}.AzureWebSites|Any CPU.ActiveCfg = Release|Any CPU
+		{443660A1-60CF-45BB-BAD8-0105933D869D}.AzureWebSites|Any CPU.Build.0 = Release|Any CPU
+		{443660A1-60CF-45BB-BAD8-0105933D869D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{443660A1-60CF-45BB-BAD8-0105933D869D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{443660A1-60CF-45BB-BAD8-0105933D869D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{443660A1-60CF-45BB-BAD8-0105933D869D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D669B2A8-D7B2-48DF-8A9C-ADC09A704B32}.AzureWebSites|Any CPU.ActiveCfg = Release|Any CPU
+		{D669B2A8-D7B2-48DF-8A9C-ADC09A704B32}.AzureWebSites|Any CPU.Build.0 = Release|Any CPU
+		{D669B2A8-D7B2-48DF-8A9C-ADC09A704B32}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D669B2A8-D7B2-48DF-8A9C-ADC09A704B32}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D669B2A8-D7B2-48DF-8A9C-ADC09A704B32}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D669B2A8-D7B2-48DF-8A9C-ADC09A704B32}.Release|Any CPU.Build.0 = Release|Any CPU
+		{67EE74BA-29A0-4BE3-B459-A6648F8DD2C3}.AzureWebSites|Any CPU.ActiveCfg = Release|Any CPU
+		{67EE74BA-29A0-4BE3-B459-A6648F8DD2C3}.AzureWebSites|Any CPU.Build.0 = Release|Any CPU
+		{67EE74BA-29A0-4BE3-B459-A6648F8DD2C3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{67EE74BA-29A0-4BE3-B459-A6648F8DD2C3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{67EE74BA-29A0-4BE3-B459-A6648F8DD2C3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{67EE74BA-29A0-4BE3-B459-A6648F8DD2C3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{79359F8F-5501-4DA5-8367-F34573144BD3}.AzureWebSites|Any CPU.ActiveCfg = Release|Any CPU
+		{79359F8F-5501-4DA5-8367-F34573144BD3}.AzureWebSites|Any CPU.Build.0 = Release|Any CPU
+		{79359F8F-5501-4DA5-8367-F34573144BD3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{79359F8F-5501-4DA5-8367-F34573144BD3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{79359F8F-5501-4DA5-8367-F34573144BD3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{79359F8F-5501-4DA5-8367-F34573144BD3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0ADBF1E6-D18C-4493-9EE0-2FE73ED4B848}.AzureWebSites|Any CPU.ActiveCfg = Release|Any CPU
+		{0ADBF1E6-D18C-4493-9EE0-2FE73ED4B848}.AzureWebSites|Any CPU.Build.0 = Release|Any CPU
+		{0ADBF1E6-D18C-4493-9EE0-2FE73ED4B848}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0ADBF1E6-D18C-4493-9EE0-2FE73ED4B848}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0ADBF1E6-D18C-4493-9EE0-2FE73ED4B848}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0ADBF1E6-D18C-4493-9EE0-2FE73ED4B848}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FE4076D4-0C05-4D70-A2D4-8ABB0560AAF8}.AzureWebSites|Any CPU.ActiveCfg = Release|Any CPU
+		{FE4076D4-0C05-4D70-A2D4-8ABB0560AAF8}.AzureWebSites|Any CPU.Build.0 = Release|Any CPU
+		{FE4076D4-0C05-4D70-A2D4-8ABB0560AAF8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FE4076D4-0C05-4D70-A2D4-8ABB0560AAF8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FE4076D4-0C05-4D70-A2D4-8ABB0560AAF8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FE4076D4-0C05-4D70-A2D4-8ABB0560AAF8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1D1157A7-2A01-40D6-9AB5-387E1059928C}.AzureWebSites|Any CPU.ActiveCfg = Release|Any CPU
+		{1D1157A7-2A01-40D6-9AB5-387E1059928C}.AzureWebSites|Any CPU.Build.0 = Release|Any CPU
+		{1D1157A7-2A01-40D6-9AB5-387E1059928C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1D1157A7-2A01-40D6-9AB5-387E1059928C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1D1157A7-2A01-40D6-9AB5-387E1059928C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1D1157A7-2A01-40D6-9AB5-387E1059928C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3E8EFD3E-3A5D-4708-9806-F99414937008}.AzureWebSites|Any CPU.ActiveCfg = Release|Any CPU
+		{3E8EFD3E-3A5D-4708-9806-F99414937008}.AzureWebSites|Any CPU.Build.0 = Release|Any CPU
+		{3E8EFD3E-3A5D-4708-9806-F99414937008}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3E8EFD3E-3A5D-4708-9806-F99414937008}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3E8EFD3E-3A5D-4708-9806-F99414937008}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3E8EFD3E-3A5D-4708-9806-F99414937008}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F627FF60-71F9-448F-9F71-174C36AC5D06}.AzureWebSites|Any CPU.ActiveCfg = Release|Any CPU
+		{F627FF60-71F9-448F-9F71-174C36AC5D06}.AzureWebSites|Any CPU.Build.0 = Release|Any CPU
+		{F627FF60-71F9-448F-9F71-174C36AC5D06}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F627FF60-71F9-448F-9F71-174C36AC5D06}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F627FF60-71F9-448F-9F71-174C36AC5D06}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F627FF60-71F9-448F-9F71-174C36AC5D06}.Release|Any CPU.Build.0 = Release|Any CPU
+		{01E245D6-B21B-49A7-A967-3349E44B00DC}.AzureWebSites|Any CPU.ActiveCfg = Release|Any CPU
+		{01E245D6-B21B-49A7-A967-3349E44B00DC}.AzureWebSites|Any CPU.Build.0 = Release|Any CPU
+		{01E245D6-B21B-49A7-A967-3349E44B00DC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{01E245D6-B21B-49A7-A967-3349E44B00DC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{01E245D6-B21B-49A7-A967-3349E44B00DC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{01E245D6-B21B-49A7-A967-3349E44B00DC}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{D7E6A58F-B54D-4339-9AB8-5B9F6F389F9F} = {A84D4E8A-419B-4B07-B734-47A053521688}
+		{0DB614AB-D508-4160-8EF1-4E107808CF42} = {A84D4E8A-419B-4B07-B734-47A053521688}
+		{BAC87A48-B162-44DD-836B-DD78543ACD19} = {A84D4E8A-419B-4B07-B734-47A053521688}
+		{B1027144-83B6-4B72-809E-56D792FB7AC3} = {A84D4E8A-419B-4B07-B734-47A053521688}
+		{99118F97-9D6C-4449-8F96-82471465673B} = {619CD9FF-49FE-4BBA-ADC9-B34D1C4ADE51}
+		{27AE38A7-A804-43D2-A546-FCAA8E288BC5} = {619CD9FF-49FE-4BBA-ADC9-B34D1C4ADE51}
+		{B0FA7AD3-2A9F-4C1D-997D-833EFE84D674} = {619CD9FF-49FE-4BBA-ADC9-B34D1C4ADE51}
+		{443660A1-60CF-45BB-BAD8-0105933D869D} = {A84D4E8A-419B-4B07-B734-47A053521688}
+		{D669B2A8-D7B2-48DF-8A9C-ADC09A704B32} = {A84D4E8A-419B-4B07-B734-47A053521688}
+		{67EE74BA-29A0-4BE3-B459-A6648F8DD2C3} = {A84D4E8A-419B-4B07-B734-47A053521688}
+		{79359F8F-5501-4DA5-8367-F34573144BD3} = {8036D9AB-17D6-4084-8FED-DC250BBFCF42}
+		{0ADBF1E6-D18C-4493-9EE0-2FE73ED4B848} = {8036D9AB-17D6-4084-8FED-DC250BBFCF42}
+		{FE4076D4-0C05-4D70-A2D4-8ABB0560AAF8} = {8036D9AB-17D6-4084-8FED-DC250BBFCF42}
+		{1D1157A7-2A01-40D6-9AB5-387E1059928C} = {E0354E9C-7E76-4B05-8AA4-92C62CDD6707}
+		{3E8EFD3E-3A5D-4708-9806-F99414937008} = {E0354E9C-7E76-4B05-8AA4-92C62CDD6707}
+		{F627FF60-71F9-448F-9F71-174C36AC5D06} = {E0354E9C-7E76-4B05-8AA4-92C62CDD6707}
+		{01E245D6-B21B-49A7-A967-3349E44B00DC} = {A84D4E8A-419B-4B07-B734-47A053521688}
+	EndGlobalSection
+	GlobalSection(MonoDevelopProperties) = preSolution
+		StartupItem = HomeRunner.Api.Host.Console\HomeRunner.Api.Host.Console.csproj
+		Policies = $0
+		$0.TextStylePolicy = $1
+		$1.inheritsSet = null
+		$1.scope = text/x-csharp
+		$0.CSharpFormattingPolicy = $2
+		$2.StatementBraceStyle = NextLine
+		$2.ElseNewLinePlacement = NewLine
+		$2.CatchNewLinePlacement = NewLine
+		$2.FinallyNewLinePlacement = NewLine
+		$2.ArrayInitializerWrapping = DoNotChange
+		$2.BeforeMethodDeclarationParentheses = False
+		$2.BeforeMethodCallParentheses = False
+		$2.BeforeConstructorDeclarationParentheses = False
+		$2.NewLineBeforeConstructorInitializerColon = NewLine
+		$2.NewLineAfterConstructorInitializerColon = SameLine
+		$2.BeforeIndexerDeclarationBracket = False
+		$2.BeforeDelegateDeclarationParentheses = False
+		$2.AfterDelegateDeclarationParameterComma = True
+		$2.IfParentheses = False
+		$2.WhileParentheses = False
+		$2.ForParentheses = False
+		$2.ForeachParentheses = False
+		$2.CatchParentheses = False
+		$2.SwitchParentheses = False
+		$2.LockParentheses = False
+		$2.UsingParentheses = False
+		$2.SpacesBeforeBrackets = False
+		$2.inheritsSet = Mono
+		$2.inheritsScope = text/x-csharp
+		$2.scope = text/x-csharp
+	EndGlobalSection
+EndGlobal
