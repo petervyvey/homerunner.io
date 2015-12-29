@@ -31,9 +31,6 @@ namespace HomeRunner.CommandLine
             Console.ResetColor();
 
             Console.WriteLine("-----------------------------------------------------------------");
-            Console.WriteLine(string.Format(typeof(Program).FullName));
-            Console.WriteLine("Press q to quit ...");
-            Console.WriteLine("-----------------------------------------------------------------");
 
             XmlConfigurator.Configure();
 
@@ -47,7 +44,8 @@ namespace HomeRunner.CommandLine
             }
             finally
             {
-                Logger.Log.Info("Closing CLI");
+				Console.WriteLine("-----------------------------------------------------------------");
+				Program.WriteMessage("Closing CLI");
             }
         }
 

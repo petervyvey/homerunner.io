@@ -50,12 +50,13 @@ namespace HomeRunner.CommandLine.Utils
 			Console.CursorVisible = false;
 			//record the original console color before changing it
 			ConsoleColor originalColor = Console.ForegroundColor;
+
 			//set the console to use the selected color
 			Console.ForegroundColor = color;
 			//move the cursor to the left of the console
 			Console.CursorLeft = 0;
 			//Determine the maximum width of the console window
-			int width = Console.WindowWidth - 1;
+			int width = Math.Min(Console.WindowWidth - 1, 100);
 			//Calculate the number of character required to create the
 			//progress bar
 			int newWidth = (int)((width * percentage) / 100d);
@@ -66,12 +67,12 @@ namespace HomeRunner.CommandLine.Utils
 
 			Console.Write(progBar);
 			if (string.IsNullOrEmpty(message)) message = "";
-			//move the cursor down one line to display the message
-			Console.CursorTop++;
+			//move the cursor up one line to display the message
+			Console.CursorTop--;
 			//Render the message below the progress bar
 			OverwriteConsoleMessage(message);
-			//reset the cursor up 1 line
-			Console.CursorTop--;
+			//reset the cursor down one line
+			Console.CursorTop++;
 			//reset the console color back to the original color
 			Console.ForegroundColor = originalColor;
 

@@ -16,19 +16,20 @@ namespace HomeRunner.CommandLine.Import
             Arguments arguments = new Arguments();
             if (Parser.Default.ParseArguments(args, arguments))
             {
-                Logger.Log.Info(string.Format("File: {0}", arguments.File));
-                Logger.Log.Info(string.Format("Connection: {0}", arguments.Connection));
-                Logger.Log.Info("Reading file");
+				Logger.Log.Info(string.Format("Verbose: {0}", arguments.Verbose));
+				Logger.Log.Info(string.Format("Connection: {0}", arguments.Connection));
+				Logger.Log.Info(string.Format("Reading file: {0}", arguments.File));
                 Logger.Log.Info("Start import");
 
                 if (!arguments.Verbose)
                 {
+					Console.WriteLine("\r\n");
                     for (int i = 0; i <= 100; i++)
                     {
-                        ConsoleProgressBar.RenderConsoleProgress(i, '\u2590', ConsoleColor.DarkYellow, i.ToString() + "%");
+                        ConsoleProgressBar.RenderConsoleProgress(i, '\u2590', ConsoleColor.Green, i.ToString() + "%");
                         Thread.Sleep(10);
                     }
-                    Console.WriteLine("\r\n");
+					Console.WriteLine("\r\n");
                 }
                 else
                 {
