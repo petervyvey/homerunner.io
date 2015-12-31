@@ -4,11 +4,9 @@ using CommandLine.Text;
 
 namespace HomeRunner.CommandLine.Import
 {
-    internal class Arguments
+    internal class ImportArguments
+		: Arguments
     {
-        [Option('v', "verbose", DefaultValue = false, HelpText = "Toon verwerkingsdetail")]
-        public bool Verbose { get; set; }
-
         [Option('f', "file", Required = true, HelpText = "De naam van het import bestand")]
         public string File { get; set; }
 

@@ -13,7 +13,7 @@ namespace HomeRunner.CommandLine
         public static void StartPlugin(string token, string[] args)
         {
             var plugins = PluginManager.GetPluginTypes();
-            Logger.Log.Debug(string.Format("Found {0} plugin(s)", plugins.Count()));
+            Program.Logger.Debug(string.Format("Found {0} plugin(s)", plugins.Count()));
 
             var plugin =
                 plugins
@@ -25,7 +25,7 @@ namespace HomeRunner.CommandLine
 
             if (plugin != null)
             {
-                Logger.Log.Info(string.Format("Found '{0}' plugin: {1}", token, plugin.FullName));
+				Program.Logger.Info(string.Format("Found '{0}' plugin: {1}", token, plugin.FullName));
                 var instance = (IPlugin)Activator.CreateInstance(plugin);
 
                 instance.Start(args);

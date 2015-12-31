@@ -3,6 +3,7 @@ using HomeRunner.CommandLine.Logging;
 using log4net.Config;
 using System;
 using System.Linq;
+using CommandLine;
 
 namespace HomeRunner.CommandLine
 {
@@ -22,6 +23,8 @@ namespace HomeRunner.CommandLine
             @"                                                               "
         };
 
+		internal static log4net.ILog Logger = null;
+
         static void Main(string[] args)
         {
             Console.WriteLine("-----------------------------------------------------------------");
@@ -32,7 +35,15 @@ namespace HomeRunner.CommandLine
 
             Console.WriteLine("-----------------------------------------------------------------");
 
-            XmlConfigurator.Configure();
+			XmlConfigurator.Configure();
+			Program.Logger = log4net.LogManager.GetLogger(typeof(Program));
+			Logger.Info("Configured");
+
+			HomeRunner.CommandLine.Arguments arguments = new HomeRunner.CommandLine.Arguments();
+			Parser.Default.ParseArguments(args, arguments);
+			if (arguments.Verbose){
+				Program.TurnOnLogging();
+			}
 
             try
             {
@@ -40,7 +51,7 @@ namespace HomeRunner.CommandLine
             }
             catch(Exception ex)
             {
-                Logger.Log.Error(ex.Message);
+				Logger.Error(ex.Message);
             }
             finally
             {
@@ -48,6 +59,29 @@ namespace HomeRunner.CommandLine
 				Program.WriteMessage("Closing CLI");
             }
         }
+
+		private static void TurnOnLogging()
+		{
+			log4net.Repository.ILoggerRepository[] repositories= log4net.LogManager.GetAllRepositories();
+
+			//Configure all loggers to be at the debug level.
+			foreach (log4net.Repository.ILoggerRepository repository in repositories)
+			{
+				repository.Threshold = repository.LevelMap["DEBUG"];
+				log4net.Repository.Hierarchy.Hierarchy hier = (log4net.Repository.Hierarchy.Hierarchy)repository;
+				log4net.Core.ILogger[] loggers=hier.GetCurrentLoggers();
+				foreach (log4net.Core.ILogger logger in loggers)
+				{
+					((log4net.Repository.Hierarchy.Logger) logger).Level = hier.LevelMap["DEBUG"];
+				}
+			}
+
+			//Configure the root logger.
+			log4net.Repository.Hierarchy.Hierarchy h = (log4net.Repository.Hierarchy.Hierarchy)log4net.LogManager.GetRepository();
+			log4net.Repository.Hierarchy.Logger rootLogger = h.Root;
+			rootLogger.Level = h.LevelMap["DEBUG"];
+
+		}
 
         private static void WriteMessage(string message)
         {

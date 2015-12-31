@@ -13,10 +13,15 @@ namespace HomeRunner.CommandLine.Import
     {
         public override void Start(string[] args)
         {
-            Arguments arguments = new Arguments();
+			ImportArguments arguments = new ImportArguments();
             if (Parser.Default.ParseArguments(args, arguments))
             {
-				Logger.Log.Info(string.Format("Verbose: {0}", arguments.Verbose));
+				if(arguments.Verbose)
+				{
+					Logger.Log.Info(string.Format("Verbose: {0}", arguments.Verbose));
+
+				}
+
 				Logger.Log.Info(string.Format("Connection: {0}", arguments.Connection));
 				Logger.Log.Info(string.Format("Reading file: {0}", arguments.File));
                 Logger.Log.Info("Start import");
