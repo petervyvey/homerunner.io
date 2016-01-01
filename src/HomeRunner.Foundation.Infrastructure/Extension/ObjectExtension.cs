@@ -1,5 +1,5 @@
 ﻿
-namespace HomeRunner.Foundation.Extension
+namespace HomeRunner.Foundation.Infrastructure.Extension
 {
 	public static class ObjectExtension
 	{

@@ -1,7 +1,8 @@
 ﻿
 using CommandLine;
-using HomeRunner.CommandLine.Logging;
 using HomeRunner.CommandLine.Utils;
+using HomeRunner.Foundation.Infrastructure;
+using HomeRunner.Foundation.Infrastructure.Logging;
 using System;
 using System.Threading;
 

@@ -36,6 +36,10 @@
       <HintPath>..\packages\HalJsonNet.0.1.2\lib\net45\HalJsonNet.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="Newtonsoft.Json, Version=8.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.8.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Configuration" />
     <Reference Include="Owin">
@@ -46,9 +50,6 @@
     </Reference>
     <Reference Include="Microsoft.Owin.Hosting">
       <HintPath>..\packages\Microsoft.Owin.Hosting.3.0.1\lib\net45\Microsoft.Owin.Hosting.dll</HintPath>
-    </Reference>
-    <Reference Include="Newtonsoft.Json">
-      <HintPath>..\packages\Newtonsoft.Json.7.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="System.Net.Http.Formatting">
       <HintPath>..\packages\Microsoft.AspNet.WebApi.Client.5.2.3\lib\net45\System.Net.Http.Formatting.dll</HintPath>
@@ -97,7 +98,6 @@
     <Compile Include="StartUp.cs" />
     <Compile Include="AutofacModule.cs" />
     <Compile Include="AutofacConfig.cs" />
-    <Compile Include="Logger.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
@@ -112,6 +112,10 @@
     <ProjectReference Include="..\HomeRunner.Foundation.Contract\HomeRunner.Foundation.Contract.csproj">
       <Project>{0db614ab-d508-4160-8ef1-4e107808cf42}</Project>
       <Name>HomeRunner.Foundation.Contract</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\HomeRunner.Foundation.Infrastructure\HomeRunner.Foundation.Infrastructure.csproj">
+      <Project>{34a3a49f-d391-4f83-a10d-4cfeea3dfdf9}</Project>
+      <Name>HomeRunner.Foundation.Infrastructure</Name>
     </ProjectReference>
     <ProjectReference Include="..\HomeRunner.Foundation.Web\HomeRunner.Foundation.Web.csproj">
       <Project>{BAC87A48-B162-44DD-836B-DD78543ACD19}</Project>

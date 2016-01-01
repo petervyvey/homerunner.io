@@ -1,9 +1,10 @@
 ﻿
-using System.Text;
-using HomeRunner.Foundation.Logging;
+using HomeRunner.Foundation.Infrastructure;
+using HomeRunner.Foundation.Infrastructure.Logging;
 using System;
 using System.Net;
 using System.Net.Http;
+using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -15,19 +16,19 @@ namespace HomeRunner.Foundation.Web
         protected override async Task<HttpResponseMessage> SendAsync(HttpRequestMessage request, CancellationToken cancellationToken)
         {
             var correlationId = string.Format("{0}{1}", DateTime.Now.Ticks, Thread.CurrentThread.ManagedThreadId);
-            Logger.Log.Info(string.Format("[{0}] Request:\r\n{1}", correlationId, LogHelper.BuildMessage(request.RequestUri, request.Headers.Authorization)));
+            Logger.Log.InfoFormat(Logger.CORRELATED_CONTENT, correlationId, "request", Logger.SerializeMessage(request.RequestUri, request.Headers.Authorization));
             try
             {
-                var requestMessage = await request.Content.ReadAsByteArrayAsync();
-                Logger.Log.Info(string.Format("[{0}] Content:\r\n{1}", correlationId, Encoding.UTF8.GetString(requestMessage)));
+                var _request = await request.Content.ReadAsByteArrayAsync();
+                Logger.Log.InfoFormat(Logger.CORRELATED_LONG_CONTENT, correlationId, "content", Encoding.UTF8.GetString(_request));
 
                 HttpResponseMessage response = await base.SendAsync(request, cancellationToken);
                 response.Content.Headers.ContentType.MediaType = "application/hal+json";
 
-                Logger.Log.Info(string.Format("[{0}] Request handled", correlationId));
+                Logger.Log.InfoFormat(Logger.CORRELATED_CONTENT, correlationId, "response", response.StatusCode);
                 byte[] _response = response.IsSuccessStatusCode ? await response.Content.ReadAsByteArrayAsync() : Encoding.UTF8.GetBytes(response.ReasonPhrase);
 
-                Logger.Log.Debug(string.Format("[{0}] Response:\r\n{1}", correlationId, Encoding.UTF8.GetString(_response)));
+                Logger.Log.DebugFormat(Logger.CORRELATED_LONG_CONTENT, correlationId, "response", Encoding.UTF8.GetString(_response));
 
                 return response;
             }
@@ -36,9 +37,13 @@ namespace HomeRunner.Foundation.Web
                 Logger.Log.Error(ex.Message);
                 HttpResponseMessage response = request.CreateErrorResponse(HttpStatusCode.InternalServerError, HttpStatusCode.InternalServerError.ToString());
 
-                Logger.Log.Debug(string.Format("HTTP response: {0}", response.StatusCode));
+                Logger.Log.DebugFormat(Logger.CORRELATED_CONTENT, correlationId, "statuscode", response.StatusCode);
 
                 return response;
+            }
+            finally
+            {
+                Logger.Log.DebugFormat(Logger.CORRELATED_CONTENT, correlationId, "handled", Logger.SerializeMessage(request.RequestUri, request.Headers.Authorization));
             }
         }
     }

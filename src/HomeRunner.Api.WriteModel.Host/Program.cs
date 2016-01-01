@@ -1,17 +1,17 @@
 ﻿
-using HomeRunner.Foundation.Extension;
-using HomeRunner.Foundation.Logging;
+using HomeRunner.Foundation.Infrastructure;
+using HomeRunner.Foundation.Infrastructure.Extension;
+using HomeRunner.Foundation.Infrastructure.Logging;
 using log4net.Config;
 using Microsoft.Owin.Hosting;
-using System.Configuration;
-using System.Threading;
-using System.Collections.Generic;
-using System.Linq;
 using System;
+using System.Configuration;
+using System.Linq;
+using System.Threading;
 
 namespace HomeRunner.Api.WriteModel.Host
 {
-	internal class Program
+    internal class Program
 	{
 		private static readonly string[] HEADER = new[]
 		{

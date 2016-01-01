@@ -20,7 +20,7 @@
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
     <OutputPath>bin\Debug\</OutputPath>
-    <DefineConstants>TRACE;DEBUG;LIBLOG_PUBLIC</DefineConstants>
+    <DefineConstants>TRACE;DEBUG</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
@@ -48,9 +48,6 @@
     <Reference Include="MediatR, Version=2.0.0.0, Culture=neutral, PublicKeyToken=null">
       <HintPath>..\packages\MediatR.2.0.2\lib\net45\MediatR.dll</HintPath>
     </Reference>
-    <Reference Include="Newtonsoft.Json, Version=7.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed">
-      <HintPath>..\packages\Newtonsoft.Json.7.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
-    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Cqrs\Command.cs" />
@@ -58,23 +55,16 @@
     <Compile Include="Cqrs\CommandResult.cs" />
     <Compile Include="Cqrs\DomainEvent.cs" />
     <Compile Include="Cqrs\DomainEventMessage.cs" />
-    <Compile Include="Cqrs\LocalDomainEventPublishDecorator.cs" />
+    <Compile Include="Decorator\LocalDomainEventPublishDecorator.cs" />
+    <Compile Include="Decorator\LoggingDecorator.cs" />
+    <Compile Include="Decorator\UnitOfWorkDecorator.cs" />
+    <Compile Include="Entity\ValidationDecorator.cs" />
     <Compile Include="ExceptionManagement\ApplicationException.cs" />
     <Compile Include="ExceptionManagement\BusinessException.cs" />
     <Compile Include="ExceptionManagement\TechnicalException.cs" />
-    <Compile Include="Extension\Argument.cs" />
-    <Compile Include="Extension\SerializerExtension.cs" />
-    <Compile Include="Infrastructure\UnitOfWork.cs" />
-    <Compile Include="Infrastructure\UnitOfWorkDecorator.cs" />
-    <Compile Include="Infrastructure\ValidationDecorator.cs" />
-    <Compile Include="Logging\LogHelper.cs" />
-    <Compile Include="Logging\LogInstance.cs" />
-    <Compile Include="Logging\LogProvider.cs" />
-    <Compile Include="Logging\LoggingDecorator.cs" />
-    <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Extension\ObjectExtension.cs" />
-    <Compile Include="ExceptionManagement\DataEntityNotFoundException.cs" />
     <Compile Include="Extension\DomainEntityExtension.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ExceptionManagement\DataEntityNotFoundException.cs" />
     <Compile Include="RabbitMQ\Configuration.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
@@ -90,13 +80,19 @@
       <Project>{0DB614AB-D508-4160-8EF1-4E107808CF42}</Project>
       <Name>HomeRunner.Foundation.Contract</Name>
     </ProjectReference>
+    <ProjectReference Include="..\HomeRunner.Foundation.Infrastructure.Contract\HomeRunner.Foundation.Infrastructure.Contract.csproj">
+      <Project>{f9116265-9f56-4c65-b3e6-124ed20a6721}</Project>
+      <Name>HomeRunner.Foundation.Infrastructure.Contract</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\HomeRunner.Foundation.Infrastructure\HomeRunner.Foundation.Infrastructure.csproj">
+      <Project>{34a3a49f-d391-4f83-a10d-4cfeea3dfdf9}</Project>
+      <Name>HomeRunner.Foundation.Infrastructure</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="MessageBus\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>

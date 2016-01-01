@@ -1,6 +1,5 @@
 ﻿
 using HomeRunner.Foundation.Cqrs;
-using HomeRunner.Foundation.Infrastructure;
 using NHibernate;
 using NHibernate.Linq;
 using System.Linq;

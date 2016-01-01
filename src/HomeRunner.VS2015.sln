@@ -60,6 +60,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HomeRunner.CommandLine.Cont
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HomeRunner.CommandLine.Import", "HomeRunner.CommandLine.Import\HomeRunner.CommandLine.Import.csproj", "{AF7B7972-9CBF-4CC0-8D9F-6DBB82A52B98}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HomeRunner.Foundation.Infrastructure", "HomeRunner.Foundation.Infrastructure\HomeRunner.Foundation.Infrastructure.csproj", "{34A3A49F-D391-4F83-A10D-4CFEEA3DFDF9}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HomeRunner.Foundation.Infrastructure.Contract", "HomeRunner.Foundation.Infrastructure.Contract\HomeRunner.Foundation.Infrastructure.Contract.csproj", "{F9116265-9F56-4C65-B3E6-124ED20A6721}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		AzureWebSites|Any CPU = AzureWebSites|Any CPU
@@ -187,6 +191,18 @@ Global
 		{AF7B7972-9CBF-4CC0-8D9F-6DBB82A52B98}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{AF7B7972-9CBF-4CC0-8D9F-6DBB82A52B98}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{AF7B7972-9CBF-4CC0-8D9F-6DBB82A52B98}.Release|Any CPU.Build.0 = Release|Any CPU
+		{34A3A49F-D391-4F83-A10D-4CFEEA3DFDF9}.AzureWebSites|Any CPU.ActiveCfg = Release|Any CPU
+		{34A3A49F-D391-4F83-A10D-4CFEEA3DFDF9}.AzureWebSites|Any CPU.Build.0 = Release|Any CPU
+		{34A3A49F-D391-4F83-A10D-4CFEEA3DFDF9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{34A3A49F-D391-4F83-A10D-4CFEEA3DFDF9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{34A3A49F-D391-4F83-A10D-4CFEEA3DFDF9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{34A3A49F-D391-4F83-A10D-4CFEEA3DFDF9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F9116265-9F56-4C65-B3E6-124ED20A6721}.AzureWebSites|Any CPU.ActiveCfg = Release|Any CPU
+		{F9116265-9F56-4C65-B3E6-124ED20A6721}.AzureWebSites|Any CPU.Build.0 = Release|Any CPU
+		{F9116265-9F56-4C65-B3E6-124ED20A6721}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F9116265-9F56-4C65-B3E6-124ED20A6721}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F9116265-9F56-4C65-B3E6-124ED20A6721}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F9116265-9F56-4C65-B3E6-124ED20A6721}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -212,6 +228,8 @@ Global
 		{8D3419AB-A60C-465B-B7CA-7CDE77CC10FC} = {D5B95EAD-AAE2-4A08-84C7-60951656DDCE}
 		{30C7398C-8667-4F53-A1A9-3CB16EE3E606} = {D5B95EAD-AAE2-4A08-84C7-60951656DDCE}
 		{AF7B7972-9CBF-4CC0-8D9F-6DBB82A52B98} = {D5B95EAD-AAE2-4A08-84C7-60951656DDCE}
+		{34A3A49F-D391-4F83-A10D-4CFEEA3DFDF9} = {A84D4E8A-419B-4B07-B734-47A053521688}
+		{F9116265-9F56-4C65-B3E6-124ED20A6721} = {A84D4E8A-419B-4B07-B734-47A053521688}
 	EndGlobalSection
 	GlobalSection(MonoDevelopProperties) = preSolution
 		StartupItem = HomeRunner.Api.Host.Console\HomeRunner.Api.Host.Console.csproj

@@ -1,6 +1,7 @@
 ﻿
 using HomeRunner.Foundation.ExceptionManagement;
-using HomeRunner.Foundation.Logging;
+using HomeRunner.Foundation.Infrastructure;
+using HomeRunner.Foundation.Infrastructure.Logging;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http.Filters;

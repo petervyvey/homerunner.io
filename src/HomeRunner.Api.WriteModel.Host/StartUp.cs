@@ -1,7 +1,8 @@
 ﻿
 using Autofac;
 using Autofac.Integration.WebApi;
-using HomeRunner.Foundation.Logging;
+using HomeRunner.Foundation.Infrastructure;
+using HomeRunner.Foundation.Infrastructure.Logging;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
 using Owin;

@@ -69,6 +69,10 @@
       <Project>{0DB614AB-D508-4160-8EF1-4E107808CF42}</Project>
       <Name>HomeRunner.Foundation.Contract</Name>
     </ProjectReference>
+    <ProjectReference Include="..\HomeRunner.Foundation.Infrastructure\HomeRunner.Foundation.Infrastructure.csproj">
+      <Project>{34a3a49f-d391-4f83-a10d-4cfeea3dfdf9}</Project>
+      <Name>HomeRunner.Foundation.Infrastructure</Name>
+    </ProjectReference>
     <ProjectReference Include="..\HomeRunner.Foundation.NHibernate.Contract\HomeRunner.Foundation.NHibernate.Contract.csproj">
       <Project>{443660A1-60CF-45BB-BAD8-0105933D869D}</Project>
       <Name>HomeRunner.Foundation.NHibernate.Contract</Name>

@@ -5,7 +5,7 @@ using System.Runtime.Serialization;
 namespace HomeRunner.Foundation.ExceptionManagement
 {
 	public class DataEntityNotFoundException
-		: TechnicalException
+		: BusinessException
 	{
 		/// <summary>
 		/// Initializes a new instance of the <see cref="DataEntityNotFoundException"/> class.

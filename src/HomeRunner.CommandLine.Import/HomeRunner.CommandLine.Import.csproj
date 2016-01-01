@@ -46,13 +46,16 @@
   <ItemGroup>
     <Compile Include="ImportArguments.cs" />
     <Compile Include="ImportPlugin.cs" />
-    <Compile Include="Logger.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\HomeRunner.CommandLine.Contract\HomeRunner.CommandLine.Contract.csproj">
       <Project>{30c7398c-8667-4f53-a1a9-3cb16ee3e606}</Project>
       <Name>HomeRunner.CommandLine.Contract</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\HomeRunner.Foundation.Infrastructure\HomeRunner.Foundation.Infrastructure.csproj">
+      <Project>{34a3a49f-d391-4f83-a10d-4cfeea3dfdf9}</Project>
+      <Name>HomeRunner.Foundation.Infrastructure</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

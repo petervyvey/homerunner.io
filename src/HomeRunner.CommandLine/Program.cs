@@ -1,5 +1,4 @@
 ﻿
-using HomeRunner.CommandLine.Logging;
 using log4net.Config;
 using System;
 using System.Linq;
@@ -39,7 +38,7 @@ namespace HomeRunner.CommandLine
 			Program.Logger = log4net.LogManager.GetLogger(typeof(Program));
 			Logger.Info("Configured");
 
-			HomeRunner.CommandLine.Arguments arguments = new HomeRunner.CommandLine.Arguments();
+			Arguments arguments = new Arguments();
 			Parser.Default.ParseArguments(args, arguments);
 			if (arguments.Verbose){
 				Program.TurnOnLogging();

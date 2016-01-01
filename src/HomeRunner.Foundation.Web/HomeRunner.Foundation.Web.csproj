@@ -32,6 +32,10 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Newtonsoft.Json, Version=8.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.8.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Net.Http" />
@@ -43,9 +47,6 @@
     <Reference Include="System.Xml" />
     <Reference Include="MediatR, Version=2.0.0.0, Culture=neutral, PublicKeyToken=null">
       <HintPath>..\packages\MediatR.2.0.2\lib\net45\MediatR.dll</HintPath>
-    </Reference>
-    <Reference Include="Newtonsoft.Json, Version=7.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed">
-      <HintPath>..\packages\Newtonsoft.Json.7.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="System.Net.Http.Formatting, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35">
       <HintPath>..\packages\Microsoft.AspNet.WebApi.Client.5.2.3\lib\net45\System.Net.Http.Formatting.dll</HintPath>
@@ -61,7 +62,6 @@
     <Compile Include="ApiExceptionFilterAttribute.cs" />
     <Compile Include="ApiResponse.cs" />
     <Compile Include="CommandResponse.cs" />
-    <Compile Include="Logger.cs" />
     <Compile Include="LoggingMessageHandler.cs" />
     <Compile Include="NotFoundException.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -74,6 +74,10 @@
     <ProjectReference Include="..\HomeRunner.Foundation.Contract\HomeRunner.Foundation.Contract.csproj">
       <Project>{0DB614AB-D508-4160-8EF1-4E107808CF42}</Project>
       <Name>HomeRunner.Foundation.Contract</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\HomeRunner.Foundation.Infrastructure\HomeRunner.Foundation.Infrastructure.csproj">
+      <Project>{34a3a49f-d391-4f83-a10d-4cfeea3dfdf9}</Project>
+      <Name>HomeRunner.Foundation.Infrastructure</Name>
     </ProjectReference>
     <ProjectReference Include="..\HomeRunner.Foundation\HomeRunner.Foundation.csproj">
       <Project>{D7E6A58F-B54D-4339-9AB8-5B9F6F389F9F}</Project>

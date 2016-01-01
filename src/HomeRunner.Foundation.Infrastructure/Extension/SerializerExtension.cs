@@ -5,7 +5,7 @@ using Newtonsoft.Json.Serialization;
 using System.Collections.Generic;
 using System.Runtime.Serialization.Formatters;
 
-namespace HomeRunner.Foundation.Extension
+namespace HomeRunner.Foundation.Infrastructure.Extension
 {
     public static class SerializerExtension
     {

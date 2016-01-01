@@ -8,6 +8,7 @@ using HomeRunner.Foundation.NHibernate;
 using MediatR;
 using System.Linq;
 using NHibernate;
+using HomeRunner.Foundation.Infrastructure.Extension;
 
 namespace HomeRunner.Domain.WriteModel.Platform.TaskActivities
 {

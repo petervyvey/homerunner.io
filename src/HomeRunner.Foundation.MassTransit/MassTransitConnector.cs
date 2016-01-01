@@ -1,6 +1,7 @@
 ﻿
 using HomeRunner.Foundation.Cqrs;
-using HomeRunner.Foundation.Logging;
+using HomeRunner.Foundation.Infrastructure;
+using HomeRunner.Foundation.Infrastructure.Logging;
 using HomeRunner.Foundation.MessageBus;
 using MassTransit;
 using System.Threading.Tasks;

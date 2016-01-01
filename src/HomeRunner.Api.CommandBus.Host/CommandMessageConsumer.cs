@@ -1,8 +1,9 @@
 ﻿
 using HomeRunner.Domain.WriteModel.Platform.TaskActivities.Commands;
 using HomeRunner.Foundation.Cqrs;
-using HomeRunner.Foundation.Extension;
-using HomeRunner.Foundation.Logging;
+using HomeRunner.Foundation.Infrastructure;
+using HomeRunner.Foundation.Infrastructure.Extension;
+using HomeRunner.Foundation.Infrastructure.Logging;
 using MassTransit;
 using MediatR;
 using System.Threading.Tasks;

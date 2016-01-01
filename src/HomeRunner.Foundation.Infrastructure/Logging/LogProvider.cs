@@ -1,4 +1,4 @@
-//===============================================================================
+﻿//===============================================================================
 // LibLog
 //
 // https://github.com/damianh/LibLog
@@ -42,16 +42,16 @@
 // If you copied this file manually, you need to change all "YourRootNameSpace" so not to clash with other libraries
 // that use LibLog
 #if LIBLOG_PROVIDERS_ONLY
-namespace HomeRunner.Foundation.LibLog
+namespace HomeRunner.Foundation.Infrastructure.Logging
 #else
-namespace HomeRunner.Foundation.Logging
+namespace HomeRunner.Foundation.Infrastructure.Logging
 #endif
 {
     using System.Collections.Generic;
 #if LIBLOG_PROVIDERS_ONLY
-    using HomeRunner.Foundation.LibLog.LogProviders;
+    using HomeRunner.Foundation.Infrastructure.Logging.LogProviders;
 #else
-    using HomeRunner.Foundation.Logging.LogProviders;
+    using HomeRunner.Foundation.Infrastructure.Logging.LogProviders;
 #endif
     using System;
 #if !LIBLOG_PROVIDERS_ONLY
@@ -64,7 +64,7 @@ namespace HomeRunner.Foundation.Logging
 #else
     public
 #endif
-    delegate bool Logger(LogLevel logLevel, Func<string> messageFunc, Exception exception = null, params object[] formatParameters);
+    delegate bool LoggerFunc(LogLevel logLevel, Func<string> messageFunc, Exception exception = null, params object[] formatParameters);
 
 #if !LIBLOG_PROVIDERS_ONLY
     /// <summary>
@@ -91,7 +91,7 @@ namespace HomeRunner.Foundation.Logging
         /// 
         /// To check IsEnabled call Log with only LogLevel and check the return value, no event will be written.
         /// </remarks>
-        bool Log(LogLevel logLevel, Func<string> messageFunc, Exception exception = null, params object[] formatParameters );
+        bool Log(LogLevel logLevel, Func<string> messageFunc, Exception exception = null, params object[] formatParameters);
     }
 #endif
 
@@ -385,7 +385,7 @@ namespace HomeRunner.Foundation.Logging
         /// </summary>
         /// <param name="name">Name of the logger.</param>
         /// <returns>The logger reference.</returns>
-        Logger GetLogger(string name);
+        LoggerFunc GetLogger(string name);
 
         /// <summary>
         /// Opens a nested diagnostics context. Not supported in EntLib logging.
@@ -532,7 +532,7 @@ namespace HomeRunner.Foundation.Logging
         static ILog GetLogger(string name)
         {
             ILogProvider logProvider = CurrentLogProvider ?? ResolveLogProvider();
-            return logProvider == null 
+            return logProvider == null
                 ? NoOpLogger.Instance
                 : (ILog)new LoggerExecutionWrapper(logProvider.GetLogger(name), () => IsDisabled);
         }
@@ -549,7 +549,7 @@ namespace HomeRunner.Foundation.Logging
 #endif
         static IDisposable OpenNestedContext(string message)
         {
-            if(CurrentLogProvider == null)
+            if (CurrentLogProvider == null)
             {
                 throw new InvalidOperationException(NullLogProvider);
             }
@@ -580,31 +580,31 @@ namespace HomeRunner.Foundation.Logging
 #if LIBLOG_PROVIDERS_ONLY
     private
 #else
-    internal
+        internal
 #endif
     delegate bool IsLoggerAvailable();
 
 #if LIBLOG_PROVIDERS_ONLY
     private
 #else
-    internal
+        internal
 #endif
     delegate ILogProvider CreateLogProvider();
 
 #if LIBLOG_PROVIDERS_ONLY
     private
 #else
-    internal
+        internal
 #endif
     static readonly List<Tuple<IsLoggerAvailable, CreateLogProvider>> LogProviderResolvers =
-            new List<Tuple<IsLoggerAvailable, CreateLogProvider>>
-        {
+                new List<Tuple<IsLoggerAvailable, CreateLogProvider>>
+            {
             new Tuple<IsLoggerAvailable, CreateLogProvider>(SerilogLogProvider.IsLoggerAvailable, () => new SerilogLogProvider()),
             new Tuple<IsLoggerAvailable, CreateLogProvider>(NLogLogProvider.IsLoggerAvailable, () => new NLogLogProvider()),
             new Tuple<IsLoggerAvailable, CreateLogProvider>(Log4NetLogProvider.IsLoggerAvailable, () => new Log4NetLogProvider()),
             new Tuple<IsLoggerAvailable, CreateLogProvider>(EntLibLogProvider.IsLoggerAvailable, () => new EntLibLogProvider()),
             new Tuple<IsLoggerAvailable, CreateLogProvider>(LoupeLogProvider.IsLoggerAvailable, () => new LoupeLogProvider()),
-        };
+            };
 
 #if !LIBLOG_PROVIDERS_ONLY
         private static void RaiseOnCurrentLogProviderSet()
@@ -658,17 +658,17 @@ namespace HomeRunner.Foundation.Logging
 #if !LIBLOG_PROVIDERS_ONLY
     internal class LoggerExecutionWrapper : ILog
     {
-        private readonly Logger _logger;
+        private readonly LoggerFunc _logger;
         private readonly Func<bool> _getIsDisabled;
         internal const string FailedToGenerateLogMessage = "Failed to generate log message";
 
-        internal LoggerExecutionWrapper(Logger logger, Func<bool> getIsDisabled = null)
+        internal LoggerExecutionWrapper(LoggerFunc logger, Func<bool> getIsDisabled = null)
         {
             _logger = logger;
             _getIsDisabled = getIsDisabled ?? (() => false);
         }
 
-        internal Logger WrappedLogger
+        internal LoggerFunc WrappedLogger
         {
             get { return _logger; }
         }
@@ -713,9 +713,9 @@ namespace HomeRunner.Foundation.Logging
 }
 
 #if LIBLOG_PROVIDERS_ONLY
-namespace HomeRunner.Foundation.LibLog.LogProviders
+namespace HomeRunner.Foundation.Infrastructure.Logging.LogProviders
 #else
-namespace HomeRunner.Foundation.Logging.LogProviders
+namespace HomeRunner.Foundation.Infrastructure.Logging.LogProviders
 #endif
 {
     using System;
@@ -739,13 +739,13 @@ namespace HomeRunner.Foundation.Logging.LogProviders
 
         protected LogProviderBase()
         {
-            _lazyOpenNdcMethod 
+            _lazyOpenNdcMethod
                 = new Lazy<OpenNdc>(GetOpenNdcMethod);
             _lazyOpenMdcMethod
                = new Lazy<OpenMdc>(GetOpenMdcMethod);
         }
 
-        public abstract Logger GetLogger(string name);
+        public abstract LoggerFunc GetLogger(string name);
 
         public IDisposable OpenNestedContext(string message)
         {
@@ -788,7 +788,7 @@ namespace HomeRunner.Foundation.Logging.LogProviders
             set { _providerIsAvailableOverride = value; }
         }
 
-        public override Logger GetLogger(string name)
+        public override LoggerFunc GetLogger(string name)
         {
             return new NLogLogger(_getLoggerByNameDelegate(name)).Log;
         }
@@ -864,7 +864,7 @@ namespace HomeRunner.Foundation.Logging.LogProviders
                 }
                 messageFunc = LogMessageFormatter.SimulateStructuredLogging(messageFunc, formatParameters);
 
-                if(exception != null)
+                if (exception != null)
                 {
                     return LogException(logLevel, messageFunc, exception);
                 }
@@ -1007,7 +1007,7 @@ namespace HomeRunner.Foundation.Logging.LogProviders
             set { _providerIsAvailableOverride = value; }
         }
 
-        public override Logger GetLogger(string name)
+        public override LoggerFunc GetLogger(string name)
         {
             return new Log4NetLogger(_getLoggerByNameDelegate(name)).Log;
         }
@@ -1258,7 +1258,7 @@ namespace HomeRunner.Foundation.Logging.LogProviders
             set { _providerIsAvailableOverride = value; }
         }
 
-        public override Logger GetLogger(string name)
+        public override LoggerFunc GetLogger(string name)
         {
             return new EntLibLogger(name, WriteLogEntry, ShouldLogEntry).Log;
         }
@@ -1318,17 +1318,17 @@ namespace HomeRunner.Foundation.Logging.LogProviders
             Expression severityParameter, ParameterExpression logNameParameter)
         {
             var entryType = LogEntryType;
-            MemberInitExpression memberInit = Expression.MemberInit(Expression.New(entryType), 
+            MemberInitExpression memberInit = Expression.MemberInit(Expression.New(entryType),
                 Expression.Bind(entryType.GetPropertyPortable("Message"), message),
                 Expression.Bind(entryType.GetPropertyPortable("Severity"), severityParameter),
                 Expression.Bind(
                     entryType.GetPropertyPortable("TimeStamp"),
-                    Expression.Property(null, typeof (DateTime).GetPropertyPortable("UtcNow"))),
+                    Expression.Property(null, typeof(DateTime).GetPropertyPortable("UtcNow"))),
                 Expression.Bind(
                     entryType.GetPropertyPortable("Categories"),
                     Expression.ListInit(
-                        Expression.New(typeof (List<string>)),
-                        typeof (List<string>).GetMethodPortable("Add", typeof (string)),
+                        Expression.New(typeof(List<string>)),
+                        typeof(List<string>).GetMethodPortable("Add", typeof(string)),
                         logNameParameter)));
             return memberInit;
         }
@@ -1411,7 +1411,7 @@ namespace HomeRunner.Foundation.Logging.LogProviders
             set { _providerIsAvailableOverride = value; }
         }
 
-        public override Logger GetLogger(string name)
+        public override LoggerFunc GetLogger(string name)
         {
             return new SerilogLogger(_getLoggerByNameDelegate(name)).Log;
         }
@@ -1435,7 +1435,7 @@ namespace HomeRunner.Foundation.Logging.LogProviders
         {
             Type ndcContextType = Type.GetType("Serilog.Context.LogContext, Serilog.FullNetFx");
             MethodInfo pushPropertyMethod = ndcContextType.GetMethodPortable(
-                "PushProperty", 
+                "PushProperty",
                 typeof(string),
                 typeof(object),
                 typeof(bool));
@@ -1451,7 +1451,7 @@ namespace HomeRunner.Foundation.Logging.LogProviders
                     valueParam,
                     destructureObjectParam)
                 .Compile();
-            
+
             return (key, value) => pushProperty(key, value, false);
         }
 
@@ -1469,7 +1469,7 @@ namespace HomeRunner.Foundation.Logging.LogProviders
             ParameterExpression destructureObjectsParam = Expression.Parameter(typeof(bool), "destructureObjects");
             MethodCallExpression methodCall = Expression.Call(null, method, new Expression[]
             {
-                propertyNameParam, 
+                propertyNameParam,
                 valueParam,
                 destructureObjectsParam
             });
@@ -1535,7 +1535,7 @@ namespace HomeRunner.Foundation.Logging.LogProviders
                     messageParam,
                     propertyValuesParam);
                 var expression = Expression.Lambda<Action<object, object, string, object[]>>(
-                    writeMethodExp, 
+                    writeMethodExp,
                     instanceParam,
                     levelParam,
                     messageParam,
@@ -1544,7 +1544,7 @@ namespace HomeRunner.Foundation.Logging.LogProviders
 
                 // Action<object, object, string, Exception> WriteException =
                 // (logger, level, exception, message) => { ((ILogger)logger).Write(level, exception, message, new object[]); }
-                MethodInfo writeExceptionMethodInfo = loggerType.GetMethodPortable("Write", 
+                MethodInfo writeExceptionMethodInfo = loggerType.GetMethodPortable("Write",
                     logEventLevelType,
                     typeof(Exception),
                     typeof(string),
@@ -1558,7 +1558,7 @@ namespace HomeRunner.Foundation.Logging.LogProviders
                     messageParam,
                     propertyValuesParam);
                 WriteException = Expression.Lambda<Action<object, object, Exception, string, object[]>>(
-                    writeMethodExp, 
+                    writeMethodExp,
                     instanceParam,
                     levelParam,
                     exceptionParam,
@@ -1726,7 +1726,7 @@ namespace HomeRunner.Foundation.Logging.LogProviders
             set { _providerIsAvailableOverride = value; }
         }
 
-        public override Logger GetLogger(string name)
+        public override LoggerFunc GetLogger(string name)
         {
             return new LoupeLogger(name, _logWriteDelegate).Log;
         }
@@ -1749,7 +1749,7 @@ namespace HomeRunner.Foundation.Logging.LogProviders
 
             MethodInfo method = logManagerType.GetMethodPortable(
                 "Write",
-                logMessageSeverityType, typeof(string), typeof(int), typeof(Exception), typeof(bool), 
+                logMessageSeverityType, typeof(string), typeof(int), typeof(Exception), typeof(bool),
                 logWriteModeType, typeof(string), typeof(string), typeof(string), typeof(string), typeof(object[]));
 
             var callDelegate = (WriteDelegate)method.CreateDelegate(typeof(WriteDelegate));
@@ -1868,7 +1868,7 @@ namespace HomeRunner.Foundation.Logging.LogProviders
                 foreach (Match match in Pattern.Matches(targetMessage))
                 {
                     int notUsed;
-                    if (!int.TryParse(match.Value.Substring(1, match.Value.Length -2), out notUsed))
+                    if (!int.TryParse(match.Value.Substring(1, match.Value.Length - 2), out notUsed))
                     {
                         targetMessage = ReplaceFirst(targetMessage, match.Value,
                             "{" + argumentIndex++ + "}");
@@ -1983,7 +1983,7 @@ namespace HomeRunner.Foundation.Logging.LogProviders
 
         public void Dispose()
         {
-            if(_onDispose != null)
+            if (_onDispose != null)
             {
                 _onDispose();
             }

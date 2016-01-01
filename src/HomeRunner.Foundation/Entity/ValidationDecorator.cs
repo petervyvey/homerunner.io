@@ -1,12 +1,12 @@
 ﻿
 using FluentValidation;
 using FluentValidation.Results;
-using HomeRunner.Foundation.Extension;
+using HomeRunner.Foundation.Infrastructure.Extension;
 using MediatR;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace HomeRunner.Foundation.Infrastructure
+namespace HomeRunner.Foundation.Entity
 {
     public class ValidationDecorator<TCommand, TCommandResult>
         : IRequestHandler<TCommand, TCommandResult>
@@ -34,7 +34,7 @@ namespace HomeRunner.Foundation.Infrastructure
                     .Where(f => f != null)
                     .ToList();
 
-            if (failures.Any()) throw new ValidationException((new {Request = request, Failures = failures}).ToJson(), failures);
+            if (failures.Any()) throw new ValidationException((new { Request = request, Failures = failures }).ToJson(), failures);
 
             return this.handler.Handle(request);
         }

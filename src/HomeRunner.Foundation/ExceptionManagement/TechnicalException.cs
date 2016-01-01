@@ -1,7 +1,7 @@
 ﻿
+using HomeRunner.Foundation.Infrastructure.Extension;
 using System;
 using System.Runtime.Serialization;
-using HomeRunner.Foundation.Extension;
 
 namespace HomeRunner.Foundation.ExceptionManagement
 {

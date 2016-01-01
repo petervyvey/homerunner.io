@@ -1,10 +1,10 @@
 ﻿
-using HomeRunner.Foundation.Extension;
-using HomeRunner.Foundation.Logging;
+using HomeRunner.Foundation.Infrastructure.Extension;
+using HomeRunner.Foundation.Infrastructure.Logging;
 using System;
 using System.Transactions;
 
-namespace HomeRunner.Foundation.Infrastructure
+namespace HomeRunner.Foundation.Infrastructure.Transaction
 {
     public sealed class UnitOfWork
         : IUnitOfWork
@@ -26,23 +26,23 @@ namespace HomeRunner.Foundation.Infrastructure
         {
             Argument.InstanceIsRequired(action, "action");
 
-            correlationId = string.IsNullOrEmpty(correlationId) ? "[UNSPECIFIED]" : correlationId;
+            correlationId = string.IsNullOrEmpty(correlationId) ? "__UNSPECIFIED__" : correlationId;
 
-            LogInstance.Log.Info(string.Format("Starting TransactionScope for: {0}", correlationId));
-            TransactionOptions options = new TransactionOptions {IsolationLevel = isolationLevel};
+            Logger.Log.InfoFormat(Logger.CORRELATED_MESSAGE, correlationId, "starting transaction");
+            TransactionOptions options = new TransactionOptions { IsolationLevel = isolationLevel };
             using (TransactionScope scope = new TransactionScope(TransactionScopeOption.Required, options))
             {
-                LogInstance.Log.Info(string.Format("Started TransactionScope for: {0}", correlationId));
+                Logger.Log.InfoFormat(Logger.CORRELATED_MESSAGE, correlationId, "transaction started");
 
-                LogInstance.Log.Info(string.Format("Invoking action for: {0}", correlationId));
+                Logger.Log.InfoFormat(Logger.CORRELATED_MESSAGE, correlationId, "invoking action");
                 action.Invoke();
 
-                LogInstance.Log.Debug(string.Format("Invoked action for: {0}", correlationId));
+                Logger.Log.DebugFormat(Logger.CORRELATED_MESSAGE, correlationId, "action invoked");
 
-                LogInstance.Log.Info(string.Format("Completing TransactionScope for: {0}", correlationId));
+                Logger.Log.InfoFormat(Logger.CORRELATED_MESSAGE, correlationId, "completing transaction");
                 scope.Complete();
 
-                LogInstance.Log.Debug(string.Format("Completed TransactionScope for: {0}", correlationId));
+                Logger.Log.DebugFormat(Logger.CORRELATED_MESSAGE, correlationId, "completed transaction");
             }
         }
 

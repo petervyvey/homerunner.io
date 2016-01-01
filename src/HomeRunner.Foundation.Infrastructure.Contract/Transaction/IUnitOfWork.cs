@@ -2,7 +2,7 @@
 using System;
 using System.Transactions;
 
-namespace HomeRunner.Foundation.Infrastructure
+namespace HomeRunner.Foundation.Infrastructure.Transaction
 {
     public interface IUnitOfWork
         : IDisposable

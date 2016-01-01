@@ -55,7 +55,6 @@
     <Compile Include="DatabaseHelper.cs" />
     <Compile Include="Filter\Criteria.cs" />
     <Compile Include="Filter\Criterion.cs" />
-    <Compile Include="Logger.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -66,6 +65,10 @@
     <ProjectReference Include="..\HomeRunner.Foundation.Dapper.Contract\HomeRunner.Foundation.Dapper.Contract.csproj">
       <Project>{d669b2a8-d7b2-48df-8a9c-adc09a704b32}</Project>
       <Name>HomeRunner.Foundation.Dapper.Contract</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\HomeRunner.Foundation.Infrastructure\HomeRunner.Foundation.Infrastructure.csproj">
+      <Project>{34a3a49f-d391-4f83-a10d-4cfeea3dfdf9}</Project>
+      <Name>HomeRunner.Foundation.Infrastructure</Name>
     </ProjectReference>
     <ProjectReference Include="..\HomeRunner.Foundation\HomeRunner.Foundation.csproj">
       <Project>{d7e6a58f-b54d-4339-9ab8-5b9f6f389f9f}</Project>

@@ -75,6 +75,10 @@
       <HintPath>..\packages\MassTransit.RabbitMQ.3.1.1\lib\net45\MassTransit.RabbitMqTransport.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="Newtonsoft.Json, Version=8.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.8.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="RabbitMQ.Client, Version=3.5.7.0, Culture=neutral, PublicKeyToken=89e7d7c5feba84ce, processorArchitecture=MSIL">
       <HintPath>..\packages\RabbitMQ.Client.3.5.7\lib\net40\RabbitMQ.Client.dll</HintPath>
       <Private>True</Private>
@@ -102,9 +106,6 @@
     <Reference Include="NewId, Version=2.1.3.0, Culture=neutral, PublicKeyToken=b8e0e9f2f1e657fa">
       <HintPath>..\packages\NewId.2.1.3\lib\net45\NewId.dll</HintPath>
     </Reference>
-    <Reference Include="Newtonsoft.Json, Version=7.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed">
-      <HintPath>..\packages\Newtonsoft.Json.7.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
-    </Reference>
     <Reference Include="MySql.Data">
       <HintPath>..\packages\MySql.Data.6.9.8\lib\net45\MySql.Data.dll</HintPath>
     </Reference>
@@ -113,7 +114,6 @@
     <Compile Include="AutofacConfig.cs" />
     <Compile Include="AutofacModule.cs" />
     <Compile Include="CommandMessageConsumer.cs" />
-    <Compile Include="Logger.cs" />
     <Compile Include="MassTransitConfig.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -136,6 +136,10 @@
     <ProjectReference Include="..\HomeRunner.Foundation.Contract\HomeRunner.Foundation.Contract.csproj">
       <Project>{0DB614AB-D508-4160-8EF1-4E107808CF42}</Project>
       <Name>HomeRunner.Foundation.Contract</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\HomeRunner.Foundation.Infrastructure\HomeRunner.Foundation.Infrastructure.csproj">
+      <Project>{34a3a49f-d391-4f83-a10d-4cfeea3dfdf9}</Project>
+      <Name>HomeRunner.Foundation.Infrastructure</Name>
     </ProjectReference>
     <ProjectReference Include="..\HomeRunner.Foundation.NHibernate\HomeRunner.Foundation.NHibernate.csproj">
       <Project>{B1027144-83B6-4B72-809E-56D792FB7AC3}</Project>

@@ -9,7 +9,7 @@ using System.Linq.Expressions;
 namespace HomeRunner.Domain.ReadModel.Platform.TaskActivities.Queries
 {
     public class TaskActivityListQuery
-        : IQuery<TaskActivityList>, IWithFilterExpression<TaskActivity>
+        : IQuery<TaskActivityList>
     {
         public TaskActivityListQuery(params Guid[] identifiers)
         {
@@ -17,10 +17,5 @@ namespace HomeRunner.Domain.ReadModel.Platform.TaskActivities.Queries
         }
 
         public Guid[] Identifiers { get; set; }
-
-        public Expression<Func<TaskActivity, bool>> FilterExpression
-        {
-            get { return taskactivity => !this.Identifiers.Any() || this.Identifiers.Contains(taskactivity.Id); }
-        }
     }
 }

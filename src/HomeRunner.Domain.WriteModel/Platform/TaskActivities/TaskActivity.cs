@@ -5,7 +5,7 @@ using HomeRunner.Domain.WriteModel.Platform.TaskActivities.Commands;
 using HomeRunner.Domain.WriteModel.Platform.TaskActivities.Events;
 using HomeRunner.Foundation.Cqrs;
 using HomeRunner.Foundation.Entity;
-using HomeRunner.Foundation.Extension;
+using HomeRunner.Foundation.Infrastructure.Extension;
 using System;
 
 namespace HomeRunner.Domain.WriteModel.Platform.TaskActivities

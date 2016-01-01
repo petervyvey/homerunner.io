@@ -3,13 +3,10 @@ using Autofac;
 using Autofac.Core;
 using FluentValidation;
 using HomeRunner.Foundation.Cqrs;
+using HomeRunner.Foundation.Decorator;
 using HomeRunner.Foundation.Entity;
-using HomeRunner.Foundation.Infrastructure;
-using HomeRunner.Foundation.Logging;
 using MassTransit;
-using MassTransit.Log4NetIntegration;
 using MediatR;
-using System;
 using System.Linq;
 
 namespace HomeRunner.Domain.WriteModel

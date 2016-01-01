@@ -60,6 +60,10 @@
       <HintPath>..\packages\NewId.2.1.3\lib\net45\NewId.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="Newtonsoft.Json, Version=8.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.8.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="RabbitMQ.Client, Version=3.5.7.0, Culture=neutral, PublicKeyToken=89e7d7c5feba84ce, processorArchitecture=MSIL">
       <HintPath>..\packages\RabbitMQ.Client.3.5.7\lib\net40\RabbitMQ.Client.dll</HintPath>
       <Private>True</Private>
@@ -85,9 +89,6 @@
     <Reference Include="MediatR, Version=2.0.0.0, Culture=neutral, PublicKeyToken=null">
       <HintPath>..\packages\MediatR.2.0.2\lib\net45\MediatR.dll</HintPath>
     </Reference>
-    <Reference Include="Newtonsoft.Json, Version=7.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed">
-      <HintPath>..\packages\Newtonsoft.Json.7.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
-    </Reference>
     <Reference Include="Iesi.Collections">
       <HintPath>..\packages\Iesi.Collections.4.0.0.4000\lib\net40\Iesi.Collections.dll</HintPath>
     </Reference>
@@ -98,7 +99,6 @@
   <ItemGroup>
     <Compile Include="AutofacModule.cs" />
     <Compile Include="LocalDomainEventPublisher.cs" />
-    <Compile Include="Logger.cs" />
     <Compile Include="Platform\TaskActivities\Entities\TaskActivity.cs" />
     <Compile Include="Platform\TaskActivities\Maps\TaskActivityMap.cs" />
     <Compile Include="Platform\TaskActivities\TaskActivity.cs" />
@@ -119,6 +119,10 @@
     <ProjectReference Include="..\HomeRunner.Foundation.Contract\HomeRunner.Foundation.Contract.csproj">
       <Project>{0DB614AB-D508-4160-8EF1-4E107808CF42}</Project>
       <Name>HomeRunner.Foundation.Contract</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\HomeRunner.Foundation.Infrastructure\HomeRunner.Foundation.Infrastructure.csproj">
+      <Project>{34a3a49f-d391-4f83-a10d-4cfeea3dfdf9}</Project>
+      <Name>HomeRunner.Foundation.Infrastructure</Name>
     </ProjectReference>
     <ProjectReference Include="..\HomeRunner.Foundation.NHibernate.Contract\HomeRunner.Foundation.NHibernate.Contract.csproj">
       <Project>{443660a1-60cf-45bb-bad8-0105933d869d}</Project>

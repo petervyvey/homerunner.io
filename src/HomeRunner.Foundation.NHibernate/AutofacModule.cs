@@ -1,6 +1,6 @@
 ﻿
 using Autofac;
-using HomeRunner.Foundation.Infrastructure;
+using HomeRunner.Foundation.Infrastructure.Transaction;
 using NHibernate;
 
 namespace HomeRunner.Foundation.NHibernate
