@@ -30,19 +30,19 @@ namespace HomeRunner.CommandLine.Import
                 if (!arguments.Verbose)
                 {
 					Console.WriteLine("\r\n");
-                    for (int i = 0; i <= 100; i++)
+                    for (int i = 0; i <= 2000; i++)
                     {
-                        ConsoleProgressBar.RenderConsoleProgress(i, '\u2590', ConsoleColor.Green, i.ToString() + "%");
-                        Thread.Sleep(10);
+                        ConsoleProgressBar.RenderConsoleProgress(i, 2000, ConsoleColor.Green, i.ToString());
+                        Thread.Sleep(1);
                     }
 					Console.WriteLine("\r\n");
                 }
                 else
                 {
-                    for (int i = 0; i <= 100; i++)
+                    for (int i = 0; i <= 2000; i++)
                     {
                         Logger.Log.Info(string.Format("Entity {0}", i));
-                        Thread.Sleep(10);
+                        Thread.Sleep(1);
                     }
                 }
 
