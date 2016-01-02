@@ -48,7 +48,7 @@ namespace HomeRunner.CommandLine.Utils
             Console.CursorLeft = 0;
 
 			// Determine the maximum width of the console window.
-			int width = Math.Min(Console.WindowWidth - 1, 100);
+			int width = Math.Min(Console.WindowWidth, 100) - 2;
 
 			// Calculate the number of character required to create the progress bar.
 			int newWidth = (int)((width * percentage) / 100d);
