@@ -6,8 +6,10 @@ namespace HomeRunner.CommandLine
 {
 	public class Arguments
 	{
-		[Option('v', "verbose", DefaultValue = false, HelpText = "Verbose")]
-		public bool Verbose { get; set; }
-	}
+        public const string DEFAULT_LOG_LEVEL = "WARN";
+
+        [Option('l', "loglevel", DefaultValue = Arguments.DEFAULT_LOG_LEVEL, HelpText = "Log level")]
+        public string LogLevel { get; set; }
+    }
 }
 

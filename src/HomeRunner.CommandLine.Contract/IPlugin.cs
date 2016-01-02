@@ -1,8 +1,12 @@
 ﻿
+using System;
+
 namespace HomeRunner.CommandLine
 {
     public interface IPlugin
     {
-        void Start(string[] args);
+        Guid SessionId { get; }
+
+        void Start(Guid sessionId, string[] args);
     }
 }

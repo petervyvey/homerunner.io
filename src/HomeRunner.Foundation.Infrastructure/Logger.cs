@@ -6,6 +6,12 @@ namespace HomeRunner.Foundation.Infrastructure
 {
     public class Logger
     {
+        public const string MESSAGE = "{0}";
+
+        public const string CONTENT = "{0} {1}";
+
+        public const string LONG_CONTENT = "{0}\r\n{1}";
+
         public const string CORRELATED_MESSAGE = "[{0}] {1}";
 
         public const string CORRELATED_CONTENT = "[{0}] {1} {2}";
