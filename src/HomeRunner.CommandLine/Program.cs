@@ -1,14 +1,16 @@
 ﻿
+using CommandLine;
 using log4net.Config;
 using System;
 using System.Linq;
-using CommandLine;
 using System.Threading;
 
 namespace HomeRunner.CommandLine
 {
     class Program
     {
+        private const ConsoleColor FOREGROUNDCOLOR = ConsoleColor.Yellow;
+
         private static readonly string[] HEADER = new[]
         {
             @"  _   _                      ____                              ",
@@ -31,7 +33,7 @@ namespace HomeRunner.CommandLine
         {
             Console.WriteLine("-----------------------------------------------------------------");
 
-            Console.ForegroundColor = ConsoleColor.Cyan;
+            Console.ForegroundColor = Program.FOREGROUNDCOLOR;
             Program.HEADER.ToList().ForEach(Console.WriteLine);
             Console.ResetColor();
 
@@ -44,16 +46,16 @@ namespace HomeRunner.CommandLine
 
             XmlConfigurator.Configure();
             Program.LOGGER = log4net.LogManager.GetLogger(typeof(Program));
-            // Always log argument parsing.
-            Program.SetLogLevel("INFO");
-            Program.LOGGER.InfoFormat("{0} {1}", "log level", arguments.LogLevel.ToUpper());
-            Program.SetLogLevel(arguments.LogLevel);
+            LogLevel.SetLevel(arguments.LogLevel);
 
             try
             {
                 if (args.Count() == 0) throw new ArgumentException("No arguments provided.");
 
-                PluginManager.StartPlugin(args[0], args);
+                var instance = PluginManager.GetPlugin(args[0], args);
+
+                Console.WriteLine("-----------------------------------------------------------------");
+                instance.Start(Program.SESSION_ID, args);
             }
             catch(Exception ex)
             {
@@ -62,41 +64,21 @@ namespace HomeRunner.CommandLine
             finally
             {
 				Console.WriteLine("-----------------------------------------------------------------");
-				Program.WriteMessage("Closing CLI");
+				Program.Write("Closing CLI");
             }
         }
 
-		private static void SetLogLevel(string level)
-		{
-            level = (new string[] { "NONE", "DEBUG", "INFO", "WARN", "ERROR", "FATAL" }).SingleOrDefault(x => x.Equals(level, StringComparison.InvariantCultureIgnoreCase)) ?? Arguments.DEFAULT_LOG_LEVEL;
+        internal static void Write(string message)
+        {
+            Program.WriteFormat("{0}", message);
+        }
 
-			log4net.Repository.ILoggerRepository[] repositories= log4net.LogManager.GetAllRepositories();
-
-			// Configure all loggers to be at the debug level.
-			foreach (log4net.Repository.ILoggerRepository repository in repositories)
-			{
-				repository.Threshold = repository.LevelMap[level];
-				log4net.Repository.Hierarchy.Hierarchy hier = (log4net.Repository.Hierarchy.Hierarchy)repository;
-				log4net.Core.ILogger[] loggers=hier.GetCurrentLoggers();
-				foreach (log4net.Core.ILogger logger in loggers)
-				{
-					((log4net.Repository.Hierarchy.Logger) logger).Level = hier.LevelMap[level];
-				}
-			}
-
-			// Configure the root logger.
-			log4net.Repository.Hierarchy.Hierarchy h = (log4net.Repository.Hierarchy.Hierarchy)log4net.LogManager.GetRepository();
-			log4net.Repository.Hierarchy.Logger rootLogger = h.Root;
-			rootLogger.Level = h.LevelMap[level];
-
-		}
-
-        private static void WriteMessage(string message)
+        internal static void WriteFormat(string format, params object[] args)
         {
             if (Console.CursorLeft > 0) Console.Write("\r\n");
 
-            Console.ForegroundColor = ConsoleColor.Cyan;
-            Console.WriteLine("{0} - {1}", DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss,fff"), message);
+            Console.ForegroundColor = Program.FOREGROUNDCOLOR;
+            Console.WriteLine("{0} - {1}", DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss,fff"), string.Format(format, args));
             Console.ResetColor();
         }
     }

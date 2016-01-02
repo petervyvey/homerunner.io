@@ -9,10 +9,10 @@ namespace HomeRunner.CommandLine
 {
     public static class PluginManager
     {
-        public static void StartPlugin(string token, string[] args)
+        public static IPlugin GetPlugin(string token, string[] args)
         {
             var plugins = PluginManager.GetPluginTypes();
-            Program.LOGGER.Debug(string.Format("found {0} plugin(s)", plugins.Count()));
+            Program.WriteFormat("found {0} plugin(s)", plugins.Count());
 
             var plugin =
                 plugins
@@ -22,15 +22,20 @@ namespace HomeRunner.CommandLine
                         p.GetCustomAttribute<PluginAttribute>(true).Token.Equals(token, StringComparison.InvariantCultureIgnoreCase))
                     .SingleOrDefault();
 
+            IPlugin instance = default(IPlugin);
             if (plugin != null)
             {
-				Program.LOGGER.InfoFormat(string.Format("{0} => {1}", token, plugin.FullName));
-                var instance = (IPlugin)Activator.CreateInstance(plugin);
+                Program.WriteFormat("{0} => {1}", token, plugin.FullName);
+                instance = (IPlugin)Activator.CreateInstance(plugin);
 
-                Program.LOGGER.DebugFormat(string.Format("created instance of {0}", plugin.FullName));
-
-                instance.Start(Program.SESSION_ID, args);
+                Program.WriteFormat("created instance of {0}", plugin.FullName);
             }
+            else
+            {
+                throw new ArgumentException("Plugin not found.");
+            }
+
+            return instance;
         }
 
         private static List<Type> GetPluginTypes()
