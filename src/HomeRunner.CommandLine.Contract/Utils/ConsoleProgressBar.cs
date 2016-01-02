@@ -23,8 +23,8 @@ namespace HomeRunner.CommandLine.Utils
 				message = message.Substring(0, maxCharacterWidth - 3) + "...";
 			}
 
-			// Create a new message string with the end padded out with blank spaces.
-			message = message + new string(' ', maxCharacterWidth - message.Length);
+            // Create a new message string with the end padded out with blank spaces.
+            message = message.PadRight(maxCharacterWidth - message.Length - 2, ' ');
 
 			Console.Write(message);
 		}
@@ -60,7 +60,7 @@ namespace HomeRunner.CommandLine.Utils
             Console.BackgroundColor = color;
 
             // Create the progress bar text to be displayed.
-            string progress = "|" + new string(progressBarCharacter, Math.Max(newWidth - (isFinished ? 0 : 1), 0));
+            string progress = "|" + string.Empty.PadLeft(Math.Max(newWidth - (isFinished ? 0 : 1), 0), progressBarCharacter);
             Console.Write(progress);
 
             char spinner = '|';
@@ -92,7 +92,7 @@ namespace HomeRunner.CommandLine.Utils
             Console.ForegroundColor = color;
             Console.BackgroundColor = ConsoleColor.DarkGreen;
 
-            string filler = isFinished ? string.Empty : new string('-', width - (newWidth == 0 ? 1 : newWidth)) + "|";
+            string filler = isFinished ? string.Empty : string.Empty.PadLeft(width - (newWidth == 0 ? 1 : newWidth), '-') + "|";
             Console.Write(filler);
 
             if (string.IsNullOrEmpty(message)) message = "";
