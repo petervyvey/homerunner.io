@@ -16,15 +16,15 @@ namespace HomeRunner.CommandLine.Utils
 			Console.CursorLeft = 0;
 
 			// Get size of console.
-			int maxCharacterWidth = Console.WindowWidth - 1;
-			if (message.Length > maxCharacterWidth)
+			int maxWidth = Math.Min(Console.WindowWidth, 100) - 3;
+			if (message.Length > maxWidth)
 			{
 				// If message is longer than the console window truncate it.
-				message = message.Substring(0, maxCharacterWidth - 3) + "...";
+				message = message.Substring(0, maxWidth) + "...";
 			}
 
             // Create a new message string with the end padded out with blank spaces.
-            message = message.PadRight(maxCharacterWidth - message.Length - 2, ' ');
+			message = message + new string(' ', maxWidth - message.Length);
 
 			Console.Write(message);
 		}
@@ -38,70 +38,70 @@ namespace HomeRunner.CommandLine.Utils
 		/// <param name="message">Message to be displayed below console</param>
 		public static void RenderConsoleProgress(int current, int total, ConsoleColor color, string message)
 		{
+			Console.CursorVisible = false;
+
             char progressBarCharacter = '=';
             int percentage = (int)Math.Round((current * 100d) / total);
             bool isFinished = current == total;
-
-            Console.CursorVisible = false;
 
             // Move the cursor to the left of the console.
             Console.CursorLeft = 0;
 
 			// Determine the maximum width of the console window.
-			int width = Math.Min(Console.WindowWidth, 100) - 2;
+			int maxWidth = Math.Min(Console.WindowWidth, 100) - 3;
 
 			// Calculate the number of character required to create the progress bar.
-			int newWidth = (int)((width * percentage) / 100d);
+			int width = (int)((maxWidth * percentage) / 100d);
 
             ConsoleColor foregroundColor = Console.ForegroundColor;
-            ConsoleColor backgroundColor = Console.BackgroundColor;
 
-            Console.ForegroundColor = backgroundColor;
-            Console.BackgroundColor = color;
+			// Write start character.
+			Console.ForegroundColor = ConsoleColor.Green;
+			Console.Write("|");
 
             // Create the progress bar text to be displayed.
-            string progress = "|" + string.Empty.PadLeft(Math.Max(newWidth - (isFinished ? 0 : 1), 0), progressBarCharacter);
+			string progress = new string(progressBarCharacter, width == 0 ? width: width - 1);
             Console.Write(progress);
 
-            char spinner = '|';
+            char spinner = '=';
+			if(!isFinished)
+			{
+				switch(current % 4)
+				{
+				case 0:
+					spinner = '/';
+					break;
 
-            if (!isFinished)
-            {
-                switch (current % 4)
-                {
-                    case 0:
-                        spinner = '/';
-                        break;
+				case 1:
+					spinner = '-';
+					break;
 
-                    case 1:
-                        spinner = '-';
-                        break;
+				case 2:
+					spinner = '\\';
+					break;
 
-                    case 2:
-                        spinner = '\\';
-                        break;
-
-                    case 3:
-                        spinner = '|';
-                        break;
-                }
-            }
+				case 3:
+					spinner = '|';
+					break;
+				}
+			}
 
             Console.Write(spinner);
 
-            Console.ForegroundColor = color;
-            Console.BackgroundColor = ConsoleColor.DarkGreen;
-
-            string filler = isFinished ? string.Empty : string.Empty.PadLeft(width - (newWidth == 0 ? 1 : newWidth), '-') + "|";
+			Console.ForegroundColor = ConsoleColor.DarkYellow;
+			string filler = new string ('-', maxWidth - (width == 0 ? width: width - 1) - 1);
             Console.Write(filler);
 
-            if (string.IsNullOrEmpty(message)) message = "";
+			// Write end character.
+			Console.ForegroundColor = ConsoleColor.Green;
+			Console.Write("|");
+
+			if (string.IsNullOrEmpty(message)) message = string.Empty;
 
 			// Move the cursor up one line to display the message.
 			Console.CursorTop--;
 
-            Console.ForegroundColor = color;
-            Console.BackgroundColor = backgroundColor;
+			Console.ForegroundColor = ConsoleColor.Green;
 
             // Render the message below the progress bar.
             OverwriteConsoleMessage(message);
@@ -111,7 +111,12 @@ namespace HomeRunner.CommandLine.Utils
 
             // Reset the console color back to the original color.
             Console.ForegroundColor = foregroundColor;
-            Console.BackgroundColor = backgroundColor;
+            //Console.BackgroundColor = backgroundColor;
+
+			if(isFinished)
+			{
+				Console.WriteLine();
+			}
 
             Console.CursorVisible = true;
 		}

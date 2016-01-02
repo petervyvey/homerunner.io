@@ -24,7 +24,7 @@ namespace HomeRunner.CommandLine
 
             if (plugin != null)
             {
-				Program.LOGGER.InfoFormat(string.Format("{0} ~ {1}", token, plugin.FullName));
+				Program.LOGGER.InfoFormat(string.Format("{0} => {1}", token, plugin.FullName));
                 var instance = (IPlugin)Activator.CreateInstance(plugin);
 
                 Program.LOGGER.DebugFormat(string.Format("created instance of {0}", plugin.FullName));
