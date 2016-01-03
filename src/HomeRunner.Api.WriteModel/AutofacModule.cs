@@ -4,7 +4,7 @@ using HomeRunner.Foundation.MassTransit;
 using HomeRunner.Foundation.MessageBus;
 using MassTransit;
 using MassTransit.Log4NetIntegration;
-using System;
+using System.Configuration;
 
 namespace HomeRunner.Api.WriteModel
 {
@@ -20,10 +20,10 @@ namespace HomeRunner.Api.WriteModel
                 config.UseJsonSerializer();
                 config.Durable = true;
 
-                var host = config.Host(new Uri("rabbitmq://localhost/command/"), h =>
+                config.Host(Foundation.Configuration.RabbitMQ.VirtualHostUri, host =>
                 {
-                    h.Username("slidingapps");
-                    h.Password("slidingapps");
+                    host.Username(ConfigurationManager.AppSettings[Foundation.Configuration.AppSetting.RABBITMQ_USER]);
+                    host.Password(ConfigurationManager.AppSettings[Foundation.Configuration.AppSetting.RABBITMQ_PASSWORD]);
                 });
             }))
                 .SingleInstance()

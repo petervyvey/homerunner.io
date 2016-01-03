@@ -21,11 +21,11 @@ namespace HomeRunner.Foundation.MassTransit
         public async Task SendCommand<TCommand>(TCommand command)
             where TCommand : ICommand<ICommandResult>
         {
-            Logger.Log.Info(string.Format("[{0}] submiting command: {1}  ", command.Id, command.GetType().FullName));
-            ISendEndpoint endpoint = await this.bus.GetSendEndpoint(Foundation.RabbitMQ.Configuration.Exchange);
+            Logger.Log.InfoFormat(Logger.CORRELATED_CONTENT, command.Id, "submiting command", command.GetType().FullName);
+            ISendEndpoint endpoint = await this.bus.GetSendEndpoint(Configuration.RabbitMQ.CommandExchangeUri);
             await endpoint.Send(new CommandMessage<TCommand>(command));
 
-            Logger.Log.Info(string.Format("[{0}] command submitted: {1} ", command.Id, command.GetType().FullName));
+            Logger.Log.DebugFormat(Logger.CORRELATED_CONTENT, command.Id, "command submitted", command.GetType().FullName);
         }
     }
 }

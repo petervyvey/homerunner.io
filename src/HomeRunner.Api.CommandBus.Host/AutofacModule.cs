@@ -1,10 +1,9 @@
-
-using System;
 using Autofac;
 using Autofac.Features.Variance;
 using MassTransit;
 using MediatR;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Reflection;
 using Module = Autofac.Module;
 
@@ -20,13 +19,13 @@ namespace HomeRunner.Api.CommandBus.Host
 
             builder.Register(context => Bus.Factory.CreateUsingRabbitMq(config =>
             {
-                var host = config.Host(new Uri("rabbitmq://localhost/command/"), h =>
+                config.Host(Foundation.Configuration.RabbitMQ.VirtualHostUri, host =>
                 {
-                    h.Username("slidingapps");
-                    h.Password("slidingapps");
+                    host.Username(ConfigurationManager.AppSettings[Foundation.Configuration.AppSetting.RABBITMQ_USER]);
+                    host.Password(ConfigurationManager.AppSettings[Foundation.Configuration.AppSetting.RABBITMQ_PASSWORD]);
                 });
 
-                config.ReceiveEndpoint("NormalPriority", epc => epc.LoadFrom(context));
+                config.ReceiveEndpoint(ConfigurationManager.AppSettings[Foundation.Configuration.AppSetting.RABBITMQ_QUEUE_COMMAND], epc => epc.LoadFrom(context));
             }))
                 .SingleInstance()
                 .As<IBusControl>()

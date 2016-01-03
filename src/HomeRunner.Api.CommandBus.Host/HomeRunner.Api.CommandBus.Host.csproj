@@ -84,6 +84,7 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.Transactions" />
     <Reference Include="System.Xml.Linq" />
@@ -132,6 +133,10 @@
     <ProjectReference Include="..\HomeRunner.Domain.WriteModel\HomeRunner.Domain.WriteModel.csproj">
       <Project>{27AE38A7-A804-43D2-A546-FCAA8E288BC5}</Project>
       <Name>HomeRunner.Domain.WriteModel</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\HomeRunner.Foundation.Configuration\HomeRunner.Foundation.Configuration.csproj">
+      <Project>{036ba076-a10b-4a2f-b2fd-9174d7f30f0f}</Project>
+      <Name>HomeRunner.Foundation.Configuration</Name>
     </ProjectReference>
     <ProjectReference Include="..\HomeRunner.Foundation.Contract\HomeRunner.Foundation.Contract.csproj">
       <Project>{0DB614AB-D508-4160-8EF1-4E107808CF42}</Project>

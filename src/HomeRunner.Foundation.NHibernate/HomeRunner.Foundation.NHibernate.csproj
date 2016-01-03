@@ -65,6 +65,10 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\HomeRunner.Foundation.Configuration\HomeRunner.Foundation.Configuration.csproj">
+      <Project>{036ba076-a10b-4a2f-b2fd-9174d7f30f0f}</Project>
+      <Name>HomeRunner.Foundation.Configuration</Name>
+    </ProjectReference>
     <ProjectReference Include="..\HomeRunner.Foundation.Contract\HomeRunner.Foundation.Contract.csproj">
       <Project>{0DB614AB-D508-4160-8EF1-4E107808CF42}</Project>
       <Name>HomeRunner.Foundation.Contract</Name>

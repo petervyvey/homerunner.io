@@ -1,11 +1,11 @@
 ﻿
+using HomeRunner.Foundation.Configuration;
 using HomeRunner.Foundation.Infrastructure;
 using HomeRunner.Foundation.Infrastructure.Extension;
 using HomeRunner.Foundation.Infrastructure.Logging;
 using log4net.Config;
 using Microsoft.Owin.Hosting;
 using System;
-using System.Configuration;
 using System.Linq;
 using System.Threading;
 
@@ -28,10 +28,6 @@ namespace HomeRunner.Api.WriteModel.Host
 			@"                                                                 "
 			};
 
-		private const string BASE_URI_TEMPLATE = "http://{0}:{1}";
-		private const string HOST_ADDRESS_CONFIGURATION_KEY = "host.address";
-		private const string HOST_PORT_CONFIGURATION_KEY = "host.port";
-
 		private static void Main(string[] args)
 		{
             Console.Clear();
@@ -50,12 +46,10 @@ namespace HomeRunner.Api.WriteModel.Host
 
 			try
 			{
-				var address = ConfigurationManager.AppSettings[HOST_ADDRESS_CONFIGURATION_KEY];
-				var port = ConfigurationManager.AppSettings[HOST_PORT_CONFIGURATION_KEY];
-				int _port = !string.IsNullOrEmpty(port) ? int.Parse(port) : 8000;
+                var hostUri = WebApi.HostUri;
+                Program.WriteMessage(string.Format("Network binding: {0}", hostUri.ToString()));
 
-				Program.WriteMessage(string.Format("Network binding: {0}", string.Format(Program.BASE_URI_TEMPLATE, address, _port)));
-				using (WebApp.Start<Startup>(new StartOptions(string.Format(Program.BASE_URI_TEMPLATE, address, _port))))
+                using (WebApp.Start<Startup>(new StartOptions(hostUri.ToString())))
 				{
 					while (true)
 					{

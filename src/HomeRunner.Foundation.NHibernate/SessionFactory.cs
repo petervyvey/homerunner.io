@@ -1,11 +1,12 @@
 ﻿
 using FluentNHibernate.Cfg;
 using FluentNHibernate.Cfg.Db;
+using HomeRunner.Foundation.Configuration;
 using NHibernate;
 using System;
 using System.Configuration;
 using System.Reflection;
-using Configuration = NHibernate.Cfg.Configuration;
+using NHibernate_Configuration = NHibernate.Cfg.Configuration;
 
 namespace HomeRunner.Foundation.NHibernate
 {
@@ -46,25 +47,25 @@ namespace HomeRunner.Foundation.NHibernate
         {
             IPersistenceConfigurer persistence = null;
 
-            switch (ConfigurationManager.AppSettings["nhibernate.dialect"])
+            switch (ConfigurationManager.AppSettings[AppSetting.NHIBERNATE_DIALECT])
             {
                 case "MsSql2005":
                 {
-                    string connectionString = ConfigurationManager.AppSettings["nhibernate.connectionstring"];
+                    string connectionString = ConfigurationManager.AppSettings[AppSetting.NHIBERNATE_CONNECTIONSTRING];
                     persistence = MsSqlConfiguration.MsSql2005.ConnectionString(connectionString);
                 }
                     break;
 
                 case "MsSql2008":
                 {
-                    string connectionString = ConfigurationManager.AppSettings["nhibernate.connectionstring"];
+                    string connectionString = ConfigurationManager.AppSettings[AppSetting.NHIBERNATE_CONNECTIONSTRING];
                     persistence = MsSqlConfiguration.MsSql2008.ConnectionString(connectionString);
                 }
                     break;
 
                 case "MySql":
                     {
-                        string connectionString = ConfigurationManager.AppSettings["nhibernate.connectionstring"];
+                        string connectionString = ConfigurationManager.AppSettings[AppSetting.NHIBERNATE_CONNECTIONSTRING];
                         persistence = MySQLConfiguration.Standard.ConnectionString(connectionString);
                     }
                     break;
@@ -73,11 +74,11 @@ namespace HomeRunner.Foundation.NHibernate
                     throw new NotImplementedException();
             }
 
-            Configuration configuration = new Configuration();
+            NHibernate_Configuration configuration = new NHibernate_Configuration();
             //configuration.SetInterceptor(new NhibernateSqlInterceptor(this.mediator));
             configuration.SetInterceptor(new NhibernateSqlInterceptor());
 
-            string mappingAssembly = ConfigurationManager.AppSettings["nhibernate.mappingAssembly"];
+            string mappingAssembly = ConfigurationManager.AppSettings[AppSetting.NHIBERNATE_MAPPING_ASSEMBLY];
 
             FluentConfiguration fluentConfiguration =
                 Fluently.Configure(configuration)

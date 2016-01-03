@@ -1,17 +1,17 @@
 ﻿
+using HomeRunner.Foundation.Configuration;
 using HomeRunner.Foundation.Infrastructure;
 using HomeRunner.Foundation.Infrastructure.Extension;
 using HomeRunner.Foundation.Infrastructure.Logging;
 using log4net.Config;
 using Microsoft.Owin.Hosting;
 using System;
-using System.Configuration;
 using System.Linq;
 using System.Threading;
 
 namespace HomeRunner.Api.ReadModel.Host
 {
-	internal class Program
+    internal class Program
 	{
 		private static readonly string[] HEADER = new[]
 		{
@@ -26,10 +26,6 @@ namespace HomeRunner.Api.ReadModel.Host
 			@"        |_| \_\___|\__,_|\__,_|_|  |_|\___/ \__,_|\___|_|        ",
             @"                                                                 "
 			};
-
-		private const string BASE_URI_TEMPLATE = "http://{0}:{1}";
-		private const string HOST_ADDRESS_CONFIGURATION_KEY = "host.address";
-		private const string HOST_PORT_CONFIGURATION_KEY = "host.port";
 
 		private static void Main(string[] args)
 		{
@@ -49,12 +45,10 @@ namespace HomeRunner.Api.ReadModel.Host
 
 			try
 			{
-				var address = ConfigurationManager.AppSettings[HOST_ADDRESS_CONFIGURATION_KEY];
-				var port = ConfigurationManager.AppSettings[HOST_PORT_CONFIGURATION_KEY];
-				int _port = !string.IsNullOrEmpty(port) ? int.Parse(port) : 8000;
+                var hostUri = WebApi.HostUri;
+                Program.WriteMessage(string.Format("Network binding: {0}", hostUri.ToString()));
 
-                Program.WriteMessage(string.Format("Network binding: {0}", string.Format(BASE_URI_TEMPLATE, address, _port)));
-				using (WebApp.Start<Startup>(new StartOptions(string.Format(BASE_URI_TEMPLATE, address, _port))))
+				using (WebApp.Start<Startup>(new StartOptions(hostUri.ToString())))
 				{
                     Program.WriteMessage("Listening ...");
 					while (true)
