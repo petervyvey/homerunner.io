@@ -12,7 +12,7 @@ namespace HomeRunner.CommandLine.Import
     public class ImportPlugin
         : Plugin
     {
-        public override void Start(Guid sessionId, string[] args)
+        public override void Start(string sessionId, string[] args)
         {
             this.SessionId = sessionId;
 

@@ -5,8 +5,8 @@ namespace HomeRunner.CommandLine
 {
     public interface IPlugin
     {
-        Guid SessionId { get; }
+        string SessionId { get; }
 
-        void Start(Guid sessionId, string[] args);
+        void Start(string sessionId, string[] args);
     }
 }

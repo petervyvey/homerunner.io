@@ -13,7 +13,9 @@ namespace HomeRunner.Api.ReadModel.Host
 {
     internal class Program
 	{
-		private static readonly string[] HEADER = new[]
+        private const ConsoleColor FOREGROUNDCOLOR = ConsoleColor.Yellow;
+
+        private static readonly string[] HEADER = new[]
 		{
 			@" _   _                      ____                                 ",
  			@"| | | | ___  _ __ ___   ___|  _ \ _   _ _ __  _ __   ___ _ __    ",
@@ -32,7 +34,7 @@ namespace HomeRunner.Api.ReadModel.Host
 			Console.Clear();
             Console.WriteLine("-----------------------------------------------------------------");
 
-            Console.ForegroundColor = ConsoleColor.Cyan;
+            Console.ForegroundColor = Program.FOREGROUNDCOLOR;
 			HEADER.ToList().ForEach(Console.WriteLine);
             Console.ResetColor();
 
@@ -79,7 +81,7 @@ namespace HomeRunner.Api.ReadModel.Host
         {
             if (Console.CursorLeft > 0) Console.Write("\r\n");
 
-            Console.ForegroundColor = ConsoleColor.Cyan;
+            Console.ForegroundColor = Program.FOREGROUNDCOLOR;
             Console.WriteLine("{0} - {1}", DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss,fff"), message);
             Console.ResetColor();
         }

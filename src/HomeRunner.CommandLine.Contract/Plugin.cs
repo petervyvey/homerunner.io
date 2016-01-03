@@ -6,8 +6,8 @@ namespace HomeRunner.CommandLine
     public abstract class Plugin
         : IPlugin
     {
-        public Guid SessionId { get; protected set; }
+        public string SessionId { get; protected set; }
 
-        public abstract void Start(Guid sessionId, string[] args);
+        public abstract void Start(string sessionId, string[] args);
     }
 }

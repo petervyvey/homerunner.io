@@ -26,9 +26,10 @@ namespace HomeRunner.CommandLine
             if (plugin != null)
             {
                 Program.WriteFormat("{0} => {1}", token, plugin.FullName);
+                Program.WriteFormat("creating instance of {0}", plugin.FullName);
                 instance = (IPlugin)Activator.CreateInstance(plugin);
 
-                Program.WriteFormat("created instance of {0}", plugin.FullName);
+                Program.WriteFormat("instance created of {0}", plugin.FullName);
             }
             else
             {
@@ -42,6 +43,8 @@ namespace HomeRunner.CommandLine
         {
             var path = PluginManager.GetAssemblyDirectory();
             var assemblyFiles = Directory.GetFiles(path, "*.dll").ToList();
+
+            Program.WriteFormat("scanning {0} assemblies", assemblyFiles.Count());
             var plugins =
                 assemblyFiles
                     .SelectMany(a => Assembly.LoadFrom(a).GetTypes().Where(t => typeof(IPlugin).IsAssignableFrom(t) && !t.IsInterface && !t.IsAbstract));
@@ -56,8 +59,11 @@ namespace HomeRunner.CommandLine
             string codeBase = Assembly.GetExecutingAssembly().CodeBase;
             UriBuilder uri = new UriBuilder(codeBase);
             string path = Uri.UnescapeDataString(uri.Path);
+            string folder = Path.GetDirectoryName(path);
 
-            return Path.GetDirectoryName(path);
+            Program.WriteFormat("plugin folder {0}", folder);
+
+            return folder;
         }
     }
 }

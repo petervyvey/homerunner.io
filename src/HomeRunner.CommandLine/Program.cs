@@ -2,6 +2,7 @@
 using CommandLine;
 using log4net.Config;
 using System;
+using System.IO;
 using System.Linq;
 using System.Threading;
 
@@ -25,7 +26,7 @@ namespace HomeRunner.CommandLine
             @"                                                               "
         };
 
-        internal static Guid SESSION_ID = Guid.NewGuid();
+        internal static string SESSION_ID = Path.GetRandomFileName().Replace(".", string.Empty);
 
 		internal static log4net.ILog LOGGER = null;
 
@@ -39,6 +40,7 @@ namespace HomeRunner.CommandLine
 
             Console.WriteLine("-----------------------------------------------------------------");
 
+            Program.WriteFormat("session id {0}", Program.SESSION_ID);
             Thread.CurrentThread.Name = Program.SESSION_ID.ToString();
 
             Arguments arguments = new Arguments();
