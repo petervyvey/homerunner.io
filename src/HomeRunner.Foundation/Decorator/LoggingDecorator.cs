@@ -23,14 +23,14 @@ namespace HomeRunner.Foundation.Decorator
         public TRequestResult Handle(TRequest request)
         {
             string _request = request.ToJson();
-            string correlationId = request is ICommand<TRequest> ? (request as ICommand<TRequest>).Id.ToString() : "__UNSPECIFIED__";
+            string correlationId = request is ICommand ? (request as ICommand).Id.ToString() : "__UNSPECIFIED__";
 
             try
             {
-                Logger.Log.InfoFormat(Logger.CORRELATED_LONG_CONTENT, correlationId, "handling", _request);
+                Logger.Log.InfoFormat(Logger.CORRELATED_LONG_CONTENT, correlationId, "logging request", _request);
                 TRequestResult events = this.handler.Handle(request);
 
-                Logger.Log.DebugFormat(Logger.CORRELATED_LONG_CONTENT, correlationId, "handled", _request);
+                Logger.Log.DebugFormat(Logger.CORRELATED_LONG_CONTENT, correlationId, "request logged", _request);
 
                 return events;
             }

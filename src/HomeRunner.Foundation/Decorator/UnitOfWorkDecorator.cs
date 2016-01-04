@@ -26,7 +26,7 @@ namespace HomeRunner.Foundation.Decorator
         public TCommandResult Handle(TCommand command)
         {
             string _command = command.ToJson();
-            Logger.Log.InfoFormat(Logger.CORRELATED_LONG_CONTENT, command.Id, "handling command", _command);
+            Logger.Log.InfoFormat(Logger.CORRELATED_LONG_CONTENT, command.Id, "received command", _command);
 
             TCommandResult events = default(TCommandResult);
             Logger.Log.InfoFormat(Logger.CORRELATED_CONTENT, command.Id, "starting unit of work", unitOfWork.GetType().FullName);

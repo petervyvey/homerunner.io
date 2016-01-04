@@ -4,6 +4,9 @@ using System;
 
 namespace HomeRunner.Foundation.Cqrs
 {
+    public interface ICommand
+        : IWithIdentifier<Guid> { }
+
     public interface ICommand<out TResult>
-        : IRequest<TResult>, IWithIdentifier<Guid> { }
+        : ICommand, IRequest<TResult> { }
 }

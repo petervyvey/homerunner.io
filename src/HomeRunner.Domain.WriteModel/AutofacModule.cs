@@ -5,8 +5,11 @@ using FluentValidation;
 using HomeRunner.Foundation.Cqrs;
 using HomeRunner.Foundation.Decorator;
 using HomeRunner.Foundation.Entity;
+using HomeRunner.Foundation.Infrastructure.Transaction;
+using HomeRunner.Foundation.NHibernate;
 using MassTransit;
 using MediatR;
+using NHibernate;
 using System.Linq;
 
 namespace HomeRunner.Domain.WriteModel
@@ -15,6 +18,11 @@ namespace HomeRunner.Domain.WriteModel
     {
         protected override void Load(ContainerBuilder builder)
         {
+            builder.RegisterType<UnitOfWork>().AsImplementedInterfaces().InstancePerDependency();
+            builder.RegisterType<DatabaseQueryProvider>().AsImplementedInterfaces().InstancePerDependency();
+            builder.RegisterType<SessionFactory>().InstancePerDependency();
+            builder.Register(c => c.Resolve<SessionFactory>().OpenSession()).As<ISession>().InstancePerDependency();
+
             builder.RegisterAssemblyTypes(typeof(AutofacModule).Assembly)
                 .As(t => t.GetInterfaces()
                     .Where(i => i.IsClosedTypeOf(typeof(IRequestHandler<,>)))

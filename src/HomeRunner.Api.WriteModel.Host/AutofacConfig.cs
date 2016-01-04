@@ -12,7 +12,6 @@ namespace HomeRunner.Api.WriteModel.Host
 			builder.RegisterModule<AutofacModule>();
             builder.RegisterAssemblyModules(typeof(Api.WriteModel.AutofacModule).Assembly);
 			builder.RegisterAssemblyModules(typeof(Domain.WriteModel.AutofacModule).Assembly);
-			builder.RegisterAssemblyModules(typeof(Foundation.NHibernate.AutofacModule).Assembly);
 
 			return builder.Build();
 		}

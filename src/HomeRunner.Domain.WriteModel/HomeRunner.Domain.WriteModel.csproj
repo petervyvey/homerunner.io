@@ -128,6 +128,10 @@
       <Project>{443660a1-60cf-45bb-bad8-0105933d869d}</Project>
       <Name>HomeRunner.Foundation.NHibernate.Contract</Name>
     </ProjectReference>
+    <ProjectReference Include="..\HomeRunner.Foundation.NHibernate\HomeRunner.Foundation.NHibernate.csproj">
+      <Project>{b1027144-83b6-4b72-809e-56d792fb7ac3}</Project>
+      <Name>HomeRunner.Foundation.NHibernate</Name>
+    </ProjectReference>
     <ProjectReference Include="..\HomeRunner.Foundation\HomeRunner.Foundation.csproj">
       <Project>{D7E6A58F-B54D-4339-9AB8-5B9F6F389F9F}</Project>
       <Name>HomeRunner.Foundation</Name>

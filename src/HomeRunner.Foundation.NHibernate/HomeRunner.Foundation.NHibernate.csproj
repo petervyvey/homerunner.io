@@ -54,7 +54,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AutofacModule.cs" />
     <Compile Include="DatabaseQueryProvider.cs" />
     <Compile Include="NHibernateSql.cs" />
     <Compile Include="NHibernateSqlInterceptor.cs" />

@@ -50,13 +50,11 @@ namespace HomeRunner.Api.CommandBus.Host
             {
                 var _message = context.Message.ToJson();
 
-                Logger.Log.InfoFormat(string.Format("Consuming message:\r\n{0}", context.Message));
+                Logger.Log.InfoFormat(Logger.CORRELATED_MESSAGE, context.Message.Command.Id, "consuming message");
                 ICommandResult events = this.mediator.Send(context.Message.Command);
 
-                Logger.Log.Debug(string.Format("Consumed message:\r\n{0}", _message));
-                Logger.Log.Info(string.Format("Received domain events:\r\n{0}", events.ToJson()));
-
-                //this.publisher.Publish(events);
+                Logger.Log.DebugFormat(Logger.CORRELATED_MESSAGE, context.Message.Command.Id, "message consumed");
+                Logger.Log.InfoFormat(Logger.CORRELATED_LONG_CONTENT, context.Message.Command.Id, "domain events", events.ToJson());
             });
         }
     }
