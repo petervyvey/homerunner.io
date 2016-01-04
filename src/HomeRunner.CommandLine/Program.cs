@@ -55,8 +55,7 @@ namespace HomeRunner.CommandLine
                 if (args.Count() == 0) throw new ArgumentException("No arguments provided.");
 
                 var instance = PluginManager.GetPlugin(args[0], args);
-
-                Console.WriteLine("-----------------------------------------------------------------");
+				Console.WriteLine("-----------------------------------------------------------------");
                 instance.Start(Program.SESSION_ID, args);
             }
             catch(Exception ex)
