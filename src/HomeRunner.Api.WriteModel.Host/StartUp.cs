@@ -3,9 +3,11 @@ using Autofac;
 using Autofac.Integration.WebApi;
 using HomeRunner.Foundation.Infrastructure;
 using HomeRunner.Foundation.Infrastructure.Logging;
+using HomeRunner.Foundation.Web;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
 using Owin;
+using WebApiProxy.Server;
 using System;
 using System.Configuration;
 using System.Linq;
@@ -50,11 +52,14 @@ namespace HomeRunner.Api.WriteModel.Host
 
 			config.Formatters.OfType<JsonMediaTypeFormatter>().First().SerializerSettings = new JsonSerializerSettings
 			{
-				Formatting = Newtonsoft.Json.Formatting.Indented,
+				Formatting = Formatting.Indented,
 				ContractResolver = new CamelCasePropertyNamesContractResolver(), //new JsonNetHalJsonContactResolver(new HalJsonConfiguration(urlBase)),
 				NullValueHandling = NullValueHandling.Ignore
 					//,TypeNameHandling = TypeNameHandling.Objects
 			};
+
+            config.MessageHandlers.Add(new LoggingMessageHandler());
+            config.RegisterProxyRoutes();
 
             Program.WriteMessage("HTTP configuration DONE");
 

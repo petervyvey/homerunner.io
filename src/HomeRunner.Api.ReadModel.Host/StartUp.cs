@@ -8,6 +8,7 @@ using HomeRunner.Foundation.Infrastructure.Logging;
 using HomeRunner.Foundation.Web;
 using Newtonsoft.Json;
 using Owin;
+using WebApiProxy.Server;
 using System;
 using System.Configuration;
 using System.Linq;
@@ -52,13 +53,14 @@ namespace HomeRunner.Api.ReadModel.Host
 
 		    config.Formatters.OfType<JsonMediaTypeFormatter>().First().SerializerSettings = new JsonSerializerSettings
 		    {
-		        Formatting = Newtonsoft.Json.Formatting.Indented,
+		        Formatting = Formatting.Indented,
 		        ContractResolver = new JsonNetHalJsonContactResolver(new HalJsonConfiguration(urlBase)),
 		        NullValueHandling = NullValueHandling.Ignore
 		        //,TypeNameHandling = TypeNameHandling.Objects
 		    };
 
             config.MessageHandlers.Add(new LoggingMessageHandler());
+            config.RegisterProxyRoutes("$metadata");
 
             Program.WriteMessage("HTTP configuration DONE");
 

@@ -32,12 +32,36 @@
     <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="DocsByReflection, Version=1.0.8.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\DocsByReflection.1.0.8.0\lib\net40\DocsByReflection.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="HalJsonNet, Version=0.1.2.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\HalJsonNet.0.1.2\lib\net45\HalJsonNet.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="HelperSharp, Version=1.0.5310.16532, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\HelperSharp.0.0.3.7\lib\net35\HelperSharp.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="log4net, Version=1.2.15.0, Culture=neutral, PublicKeyToken=669e0ddf0bb1aa2a, processorArchitecture=MSIL">
+      <HintPath>..\packages\log4net.2.0.5\lib\net45-full\log4net.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="log4net.Ext.Json, Version=1.2.13.29, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\log4net.Ext.Json.1.2.13.1.2.13.20140804\lib\net35-full\log4net.Ext.Json.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="log4net.RabbitMQ, Version=0.1.2.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\log4net.RabbitMQAppender.1.3.0\lib\net40\log4net.RabbitMQ.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="Newtonsoft.Json, Version=8.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\packages\Newtonsoft.Json.8.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="RabbitMQ.Client, Version=3.5.7.0, Culture=neutral, PublicKeyToken=89e7d7c5feba84ce, processorArchitecture=MSIL">
+      <HintPath>..\packages\RabbitMQ.Client.3.5.7\lib\net40\RabbitMQ.Client.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="System" />
@@ -85,11 +109,16 @@
     <Reference Include="System.Collections.Immutable, Version=1.0.30.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
       <HintPath>..\packages\Microsoft.Bcl.Immutable.1.0.30\lib\portable-net45+win8+wp8\System.Collections.Immutable.dll</HintPath>
     </Reference>
-    <Reference Include="log4net">
-      <HintPath>..\packages\log4net.2.0.4\lib\net45-full\log4net.dll</HintPath>
-    </Reference>
     <Reference Include="MySql.Data, Version=6.9.8.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d">
       <HintPath>..\packages\MySql.Data.6.9.8\lib\net45\MySql.Data.dll</HintPath>
+    </Reference>
+    <Reference Include="WebApiProxy.Core, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\WebApiProxy.1.2.0.7729\lib\net45\WebApiProxy.Core.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="WebApiProxy.Server, Version=1.2.0.7729, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\WebApiProxy.1.2.0.7729\lib\net45\WebApiProxy.Server.dll</HintPath>
+      <Private>True</Private>
     </Reference>
   </ItemGroup>
   <ItemGroup>
