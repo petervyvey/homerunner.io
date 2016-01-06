@@ -8,5 +8,8 @@ namespace HomeRunner.Foundation.MessageBus
     {
         Task SendCommand<TCommand>(TCommand command)
             where TCommand : ICommand<ICommandResult>;
+
+        Task PublishEvent<TDomainEventMessage>(TDomainEventMessage domainEventMessage)
+            where TDomainEventMessage : class, IDomainEventMessage<IDomainEvent>;
     }
 }

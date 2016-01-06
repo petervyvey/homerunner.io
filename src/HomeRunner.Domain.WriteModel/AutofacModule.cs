@@ -30,16 +30,30 @@ namespace HomeRunner.Domain.WriteModel
                         new KeyedService("request-handler-write", i)))
                 .InstancePerDependency();
 
-            builder.RegisterGenericDecorator(typeof(UnitOfWorkDecorator<,>), typeof(IRequestHandler<,>), "request-handler-write")
-                .Keyed("request-with-unit-of-work-write", typeof(IRequestHandler<,>))
+            builder.RegisterGenericDecorator(typeof(InternalDomainEventPublisherDecorator<,>), typeof(IRequestHandler<,>), "request-handler-write")
+                .Keyed("request-with-internal-domain-event-publish-write", typeof(IRequestHandler<,>))
                 .InstancePerDependency();
 
-            builder.RegisterGenericDecorator(typeof(ValidationDecorator<,>), typeof(IRequestHandler<,>), "request-with-unit-of-work-write")
+            builder.RegisterGenericDecorator(typeof(ValidationDecorator<,>), typeof(IRequestHandler<,>), "request-with-internal-domain-event-publish-write")
                 .Keyed("request-with-validation-write", typeof(IRequestHandler<,>))
                 .InstancePerDependency();
 
-            builder.RegisterGenericDecorator(typeof(LoggingDecorator<,>), typeof(IRequestHandler<,>), "request-with-validation-write")
+            builder.RegisterGenericDecorator(typeof(UnitOfWorkDecorator<,>), typeof(IRequestHandler<,>), "request-with-validation-write")
+                .Keyed("request-with-unit-of-work-write", typeof(IRequestHandler<,>))
+                .InstancePerDependency();
+
+            builder.RegisterGenericDecorator(typeof(BusDomainEventPublisherDecorator<,>), typeof(IRequestHandler<,>), "request-with-unit-of-work-write")
+                .Keyed("request-with-bus-domain-event-publish-write", typeof(IRequestHandler<,>))
+                .InstancePerDependency();
+
+            builder.RegisterGenericDecorator(typeof(LoggingDecorator<,>), typeof(IRequestHandler<,>), "request-with-bus-domain-event-publish-write")
                 .Keyed("request-with-logging-write", typeof(IRequestHandler<,>))
+                .InstancePerDependency();
+
+            builder.RegisterAssemblyTypes(typeof(AutofacModule).Assembly)
+                .As(t => t.GetInterfaces()
+                .Where(i => i.IsClosedTypeOf(typeof(INotificationHandler<>)))
+                .Select(i => i))
                 .InstancePerDependency();
 
             builder.RegisterType<LocalDomainEventPublisher>()
@@ -55,10 +69,11 @@ namespace HomeRunner.Domain.WriteModel
                 .AsClosedTypesOf(typeof(IValidator<>))
                 .SingleInstance();
 
-			builder.Register<IDomainEntityValidatorProvider>(ctx => {
-				IComponentContext c = ctx.Resolve<IComponentContext>();
-				return new DomainEntityValidatorProvider(c);
-			}).SingleInstance();
+            builder.Register<IDomainEntityValidatorProvider>(ctx =>
+            {
+                IComponentContext c = ctx.Resolve<IComponentContext>();
+                return new DomainEntityValidatorProvider(c);
+            }).SingleInstance();
 
             //builder.RegisterDecorator<IDomainEventMessagePublisher>(
             //    (c, inner) =>

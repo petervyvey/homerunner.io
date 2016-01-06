@@ -146,6 +146,10 @@
       <Project>{34a3a49f-d391-4f83-a10d-4cfeea3dfdf9}</Project>
       <Name>HomeRunner.Foundation.Infrastructure</Name>
     </ProjectReference>
+    <ProjectReference Include="..\HomeRunner.Foundation.MassTransit\HomeRunner.Foundation.MassTransit.csproj">
+      <Project>{01e245d6-b21b-49a7-a967-3349e44b00dc}</Project>
+      <Name>HomeRunner.Foundation.MassTransit</Name>
+    </ProjectReference>
     <ProjectReference Include="..\HomeRunner.Foundation.NHibernate\HomeRunner.Foundation.NHibernate.csproj">
       <Project>{B1027144-83B6-4B72-809E-56D792FB7AC3}</Project>
       <Name>HomeRunner.Foundation.NHibernate</Name>

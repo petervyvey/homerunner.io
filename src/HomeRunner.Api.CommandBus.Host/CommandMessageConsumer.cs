@@ -17,15 +17,12 @@ namespace HomeRunner.Api.CommandBus.Host
     {
         private readonly IMediator mediator;
 
-        private readonly IDomainEventMessagePublisher publisher;
-
         public CommandMessageConsumer() { }
 
-        public CommandMessageConsumer(IMediator mediator, IDomainEventMessagePublisher publisher)
+        public CommandMessageConsumer(IMediator mediator)
             : this()
         {
             this.mediator = mediator;
-            this.publisher = publisher;
         }
 
 		public Task Consume(ConsumeContext<CommandMessage<CreateTaskActivityCommand>> context)
@@ -50,11 +47,10 @@ namespace HomeRunner.Api.CommandBus.Host
             {
                 var _message = context.Message.ToJson();
 
-                Logger.Log.InfoFormat(Logger.CORRELATED_MESSAGE, context.Message.Command.Id, "consuming message");
+                Logger.Log.InfoFormat(Logger.CORRELATED_LONG_CONTENT, context.Message.Command.Id, "consuming message", _message);
                 ICommandResult events = this.mediator.Send(context.Message.Command);
 
-                Logger.Log.DebugFormat(Logger.CORRELATED_MESSAGE, context.Message.Command.Id, "message consumed");
-                Logger.Log.InfoFormat(Logger.CORRELATED_LONG_CONTENT, context.Message.Command.Id, "domain events", events.ToJson());
+                Logger.Log.InfoFormat(Logger.CORRELATED_LONG_CONTENT, context.Message.Command.Id, "message consumed", _message);
             });
         }
     }

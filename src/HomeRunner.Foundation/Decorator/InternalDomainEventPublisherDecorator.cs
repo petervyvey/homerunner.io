@@ -10,7 +10,7 @@ using System.Linq;
 
 namespace HomeRunner.Foundation.Decorator
 {
-    public class LocalDomainEventPublishDecorator<TCommand, TCommandResult>
+    public class InternalDomainEventPublisherDecorator<TCommand, TCommandResult>
         : IRequestHandler<TCommand, TCommandResult>
         where TCommand : ICommand<TCommandResult>, IRequest<TCommandResult>
         where TCommandResult : class, ICommandResult
@@ -21,7 +21,7 @@ namespace HomeRunner.Foundation.Decorator
 
         private readonly IRequestHandler<TCommand, TCommandResult> handler;
 
-        public LocalDomainEventPublishDecorator(IMediator mediator, IRequestHandler<TCommand, TCommandResult> handler)
+        public InternalDomainEventPublisherDecorator(IMediator mediator, IRequestHandler<TCommand, TCommandResult> handler)
         {
             this.mediator = mediator;
             this.handler = handler;
@@ -31,9 +31,11 @@ namespace HomeRunner.Foundation.Decorator
         {
             string _command = command.ToJson();
 
-            Logger.Log.InfoFormat(Logger.CORRELATED_LONG_CONTENT, command.Id, "handling", _command);
+            Logger.Log.InfoFormat(Logger.CORRELATED_CONTENT, command.Id, "pipeline -> ", this.GetType().Name);
+            Logger.Log.InfoFormat(Logger.CORRELATED_LONG_CONTENT, command.Id, "received command", _command);
             TCommandResult events = this.handler.Handle(command);
 
+            Logger.Log.InfoFormat(Logger.CORRELATED_LONG_CONTENT, command.Id, "internal publish domain events", _command);
             events.ToList().ForEach(de =>
             {
                 var _domainEvent = de.ToJson();
@@ -44,22 +46,24 @@ namespace HomeRunner.Foundation.Decorator
                 Type messageType;
                 if (!MESSAGE_TYPES.TryGetValue(de.GetType(), out messageType))
                 {
-                    Logger.Log.DebugFormat(Logger.CORRELATED_CONTENT, command.Id, "domain event message type not found", de.GetType());
+                    Logger.Log.WarnFormat(Logger.CORRELATED_CONTENT, command.Id, "domain event message type not found", de.GetType());
 
-                    Logger.Log.InfoFormat(Logger.CORRELATED_CONTENT, command.Id, "create domain event type", de.GetType());
+                    Logger.Log.WarnFormat(Logger.CORRELATED_CONTENT, command.Id, "create domain event type", de.GetType());
                     messageType = MESSAGE_TYPES[de.GetType()] = typeof(DomainEventMessage<>).MakeGenericType(de.GetType());
 
-                    Logger.Log.InfoFormat(Logger.CORRELATED_CONTENT, command.Id, "domain event message type created", messageType.FullName);
+                    Logger.Log.WarnFormat(Logger.CORRELATED_CONTENT, command.Id, "domain event message type created", messageType.FullName);
                 }
                 Logger.Log.DebugFormat(Logger.CORRELATED_CONTENT, command.Id, "domain event message type found", messageType.FullName);
 
                 INotification message = Activator.CreateInstance(messageType, de) as INotification;
+
+                Logger.Log.InfoFormat(Logger.CORRELATED_LONG_CONTENT, command.Id, "publish domain event message", message.ToJson());
                 this.mediator.Publish(message);
 
                 Logger.Log.DebugFormat(Logger.CORRELATED_LONG_CONTENT, command.Id, "domain event published", _domainEvent);
             });
 
-            Logger.Log.DebugFormat(Logger.CORRELATED_LONG_CONTENT, command.Id, "handled", _command);
+            Logger.Log.InfoFormat(Logger.CORRELATED_LONG_CONTENT, command.Id, "internal publish domain events completed", _command);
 
             return events;
         }

@@ -26,6 +26,7 @@ namespace HomeRunner.Foundation.Decorator
         public TCommandResult Handle(TCommand command)
         {
             string _command = command.ToJson();
+            Logger.Log.InfoFormat(Logger.CORRELATED_CONTENT, command.Id, "pipeline -> ", this.GetType().Name);
             Logger.Log.InfoFormat(Logger.CORRELATED_LONG_CONTENT, command.Id, "received command", _command);
 
             TCommandResult events = default(TCommandResult);
@@ -35,10 +36,10 @@ namespace HomeRunner.Foundation.Decorator
                 Logger.Log.DebugFormat(Logger.CORRELATED_CONTENT, command.Id, "unit of work started", unitOfWork.GetType().FullName);
                 events = this.handler.Handle(command);
 
-                Logger.Log.DebugFormat(Logger.CORRELATED_LONG_CONTENT, command.Id, "command handled", _command);
+                Logger.Log.DebugFormat(Logger.CORRELATED_LONG_CONTENT, command.Id, "unit of work handled command", _command);
             }, (command is IWithIdentifier<Guid>) ? ((IWithIdentifier<Guid>)command).Id.ToString() : string.Empty);
 
-            Logger.Log.DebugFormat(Logger.CORRELATED_CONTENT, command.Id, "unit of work completed", unitOfWork.GetType().FullName);
+            Logger.Log.InfoFormat(Logger.CORRELATED_CONTENT, command.Id, "unit of work completed", unitOfWork.GetType().FullName);
 
             return events;
         }

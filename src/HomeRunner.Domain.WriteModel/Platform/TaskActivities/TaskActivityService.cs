@@ -9,6 +9,10 @@ using MediatR;
 using System.Linq;
 using NHibernate;
 using HomeRunner.Foundation.Infrastructure.Extension;
+using HomeRunner.Domain.WriteModel.Platform.TaskActivities.Events;
+using System;
+using HomeRunner.Foundation.Infrastructure;
+using HomeRunner.Foundation.Infrastructure.Logging;
 
 namespace HomeRunner.Domain.WriteModel.Platform.TaskActivities
 {
@@ -16,7 +20,9 @@ namespace HomeRunner.Domain.WriteModel.Platform.TaskActivities
 	public class TaskActivityService :
 		ICommandHandler<CreateTaskActivityCommand>,
         ICommandHandler<ClaimTaskActivityCommand>,
-        ICommandHandler<UnclaimTaskActivityCommand>
+        ICommandHandler<UnclaimTaskActivityCommand>,
+
+        INotificationHandler<DomainEventMessage<TaskActivityUnclaimedEvent>>
     {
         private readonly IMediator mediator;
 
@@ -42,6 +48,12 @@ namespace HomeRunner.Domain.WriteModel.Platform.TaskActivities
 
 				return new CommandResult (command.Id, domainEvent);
 			}
+
+        public void Handle(DomainEventMessage<TaskActivityUnclaimedEvent> notification)
+        {
+            Logger.Log.InfoFormat(Logger.CORRELATED_CONTENT, notification.DomainEvent.CorrelationId, "received task activity unclaimed", notification.DomainEvent.TaskId);
+            var test = notification;
+        }
 
         public ICommandResult Handle(ClaimTaskActivityCommand command)
         {

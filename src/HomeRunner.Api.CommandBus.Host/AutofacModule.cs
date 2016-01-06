@@ -1,5 +1,8 @@
+
 using Autofac;
 using Autofac.Features.Variance;
+using HomeRunner.Foundation.MassTransit;
+using HomeRunner.Foundation.MessageBus;
 using MassTransit;
 using MediatR;
 using System.Collections.Generic;
@@ -13,6 +16,8 @@ namespace HomeRunner.Api.CommandBus.Host
     {
         protected override void Load(ContainerBuilder builder)
         {
+            builder.RegisterType<MassTransitConnector>().As<IBusConnector>();
+
             builder.RegisterSource(new ContravariantRegistrationSource());
             builder.RegisterAssemblyTypes(typeof (IMediator).Assembly).AsImplementedInterfaces();
             builder.RegisterConsumers(Assembly.GetExecutingAssembly());
