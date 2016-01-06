@@ -4,6 +4,7 @@ using HomeRunner.CommandLine.Utils;
 using HomeRunner.Foundation.Infrastructure;
 using HomeRunner.Foundation.Infrastructure.Logging;
 using System;
+using System.Linq;
 using System.Threading;
 
 namespace HomeRunner.CommandLine.Import
@@ -16,28 +17,32 @@ namespace HomeRunner.CommandLine.Import
         {
             this.SessionId = sessionId;
 
-			ImportArguments arguments = new ImportArguments();
+            ImportArguments arguments = new ImportArguments();
             if (Parser.Default.ParseArguments(args, arguments))
             {
-                Logger.Log.InfoFormat(Logger.CONTENT, "connection", arguments.Connection);
-                Logger.Log.InfoFormat(Logger.CONTENT, "import file", arguments.File);
-                Logger.Log.InfoFormat(Logger.MESSAGE, "start");
+                Logger.Log.InfoFormat(Logger.CORRELATED_CONTENT, sessionId, "connection", arguments.Connection);
+                Logger.Log.InfoFormat(Logger.CORRELATED_CONTENT, sessionId, "import file", arguments.File);
+                Logger.Log.InfoFormat(Logger.CORRELATED_MESSAGE, sessionId, "start");
 
-                if (!Logger.Log.IsDebugEnabled()) { Console.WriteLine();  }
+                if (!Logger.Log.IsDebugEnabled()) { Console.WriteLine(); }
 
-                    for (int i = 0; i <= 2000; i++)
+                int counter = 0;
+                Enumerable.Range(0, 100000).AsParallel().ForAll(x =>
                 {
-                    if (Logger.Log.IsDebugEnabled())
-                    {
-                        Logger.Log.InfoFormat(Logger.CONTENT, "entity", i);
-                        Thread.Sleep(1);
-                    }
-                    else
-                    {
-                        ConsoleProgressBar.RenderConsoleProgress(i, 2000, ConsoleColor.Green, i.ToString());
-                        Thread.Sleep(1);
-                    }
-                }
+                    Logger.Log.InfoFormat(Logger.CORRELATED_CONTENT, sessionId, "entity", x);
+                });
+
+                //for (int i = 0; i <= 100000; i++)
+                //{
+                //    if (Logger.Log.IsDebugEnabled())
+                //    {
+                //        Logger.Log.InfoFormat(Logger.CORRELATED_CONTENT, sessionId, "entity", i);
+                //    }
+                //    else
+                //    {
+                //        ConsoleProgressBar.RenderConsoleProgress(i, 100000, ConsoleColor.Green, i.ToString());
+                //    }
+                //}
 
                 Logger.Log.InfoFormat(Logger.MESSAGE, "done");
             }

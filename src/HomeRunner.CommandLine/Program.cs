@@ -41,7 +41,6 @@ namespace HomeRunner.CommandLine
             Console.WriteLine("-----------------------------------------------------------------");
 
             Program.WriteFormat("session id {0}", Program.SESSION_ID);
-            Thread.CurrentThread.Name = Program.SESSION_ID.ToString();
 
             Arguments arguments = new Arguments();
             Parser.Default.ParseArguments(args, arguments);
@@ -65,7 +64,7 @@ namespace HomeRunner.CommandLine
             finally
             {
 				Console.WriteLine("-----------------------------------------------------------------");
-				Program.Write("Closing CLI");
+				Program.Write("closing CLI");
             }
         }
 
