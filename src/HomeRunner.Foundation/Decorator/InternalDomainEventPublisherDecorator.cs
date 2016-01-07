@@ -41,19 +41,8 @@ namespace HomeRunner.Foundation.Decorator
 
                 Logger.Log.InfoFormat(Logger.CORRELATED_LONG_CONTENT, command.Id, "domain event", _domainEvent);
 
-                Logger.Log.InfoFormat(Logger.CORRELATED_CONTENT, command.Id, "find domain event type message type for ", de.GetType().FullName);
-                Type messageType;
-                if (!DomainEventPublisherTypeCache.MESSAGE_TYPES.TryGetValue(de.GetType(), out messageType))
-                {
-                    Logger.Log.WarnFormat(Logger.CORRELATED_CONTENT, command.Id, "domain event message type not found", de.GetType());
-
-                    Logger.Log.WarnFormat(Logger.CORRELATED_CONTENT, command.Id, "create domain event message type", de.GetType());
-                    messageType = DomainEventPublisherTypeCache.MESSAGE_TYPES[de.GetType()] = typeof(DomainEventMessage<>).MakeGenericType(de.GetType());
-
-                    Logger.Log.WarnFormat(Logger.CORRELATED_CONTENT, command.Id, "domain event message type created", messageType.FullName);
-                }
-                Logger.Log.DebugFormat(Logger.CORRELATED_CONTENT, command.Id, "domain event message type found", messageType.Name);
-
+                // Try to get the message type and create an instance.
+                Type messageType = DomainEventPublisherTypeCache.Get(de.GetType(), command.Id);
                 INotification message = Activator.CreateInstance(messageType, de) as INotification;
 
                 Logger.Log.InfoFormat(Logger.CORRELATED_LONG_CONTENT, command.Id, "publish domain event message", message.ToJson());

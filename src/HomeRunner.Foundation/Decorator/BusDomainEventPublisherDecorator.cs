@@ -37,23 +37,10 @@ namespace HomeRunner.Foundation.Decorator
             events.ToList().ForEach(de =>
             {
                 var _domainEvent = de.ToJson();
-
                 Logger.Log.InfoFormat(Logger.CORRELATED_LONG_CONTENT, command.Id, "domain event", _domainEvent);
 
-                // Try to get the message type.
-                Logger.Log.InfoFormat(Logger.CORRELATED_CONTENT, command.Id, "find domain event type message type", de.GetType().FullName);
-                Type messageType;
-                if (!DomainEventPublisherTypeCache.MESSAGE_TYPES.TryGetValue(de.GetType(), out messageType))
-                {
-                    Logger.Log.WarnFormat(Logger.CORRELATED_CONTENT, command.Id, "domain event message type not found", de.GetType());
-
-                    Logger.Log.WarnFormat(Logger.CORRELATED_CONTENT, command.Id, "create domain event message type", de.GetType());
-                    messageType = DomainEventPublisherTypeCache.MESSAGE_TYPES[de.GetType()] = typeof(DomainEventMessage<>).MakeGenericType(de.GetType());
-
-                    Logger.Log.WarnFormat(Logger.CORRELATED_CONTENT, command.Id, "domain event message type created", messageType.FullName);
-                }
-                Logger.Log.DebugFormat(Logger.CORRELATED_CONTENT, command.Id, "domain event message type found", messageType.Name);
-
+                // Try to get the message type and create an instance.
+                Type messageType = DomainEventPublisherTypeCache.Get(de.GetType(), command.Id);
                 IDomainEventMessage<IDomainEvent> message = Activator.CreateInstance(messageType, de) as IDomainEventMessage<IDomainEvent>;
 
                 // Publish the message on the bus
