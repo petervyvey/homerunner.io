@@ -56,6 +56,7 @@
     <Compile Include="Cqrs\DomainEvent.cs" />
     <Compile Include="Cqrs\DomainEventMessage.cs" />
     <Compile Include="Decorator\BusDomainEventPublisherDecorator.cs" />
+    <Compile Include="Decorator\DomainEventPublisherTypeCache.cs" />
     <Compile Include="Decorator\InternalDomainEventPublisherDecorator.cs" />
     <Compile Include="Decorator\LoggingDecorator.cs" />
     <Compile Include="Decorator\UnitOfWorkDecorator.cs" />
