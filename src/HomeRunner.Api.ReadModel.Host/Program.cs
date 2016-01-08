@@ -39,8 +39,8 @@ namespace HomeRunner.Api.ReadModel.Host
             Console.ResetColor();
 
             Console.WriteLine("-----------------------------------------------------------------");
-			Console.WriteLine(string.Format (typeof(Program).FullName));
-			Console.WriteLine("Press q to quit ...");
+            Console.WriteLine(string.Format("{0} ({1})", typeof(Program).Assembly.GetName().Name, typeof(Program).Assembly.GetName().Version));
+            Console.WriteLine("Press q to quit ...");
 			Console.WriteLine("-----------------------------------------------------------------");
 
 			XmlConfigurator.Configure();

@@ -20,7 +20,8 @@ namespace HomeRunner.Api.ReadModel.Host
 	internal sealed class Startup
 	{
 	    internal readonly Type[] SERVICES = {
-			typeof(Platform.TaskActivityController)
+            typeof(HealthController),
+            typeof(Platform.TaskActivityController)
 		};
 
 		public void Configuration(IAppBuilder app)
@@ -51,7 +52,8 @@ namespace HomeRunner.Api.ReadModel.Host
 			HttpConfiguration config = new HttpConfiguration();
 			config.MapHttpAttributeRoutes();
 
-		    config.Formatters.OfType<JsonMediaTypeFormatter>().First().SerializerSettings = new JsonSerializerSettings
+            config.Formatters.Remove(config.Formatters.XmlFormatter);
+            config.Formatters.OfType<JsonMediaTypeFormatter>().First().SerializerSettings = new JsonSerializerSettings
 		    {
 		        Formatting = Formatting.Indented,
 		        ContractResolver = new JsonNetHalJsonContactResolver(new HalJsonConfiguration(urlBase)),

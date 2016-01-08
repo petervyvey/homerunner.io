@@ -40,7 +40,7 @@ namespace HomeRunner.Api.WriteModel.Host
             Console.ResetColor();
 
             Console.WriteLine("-----------------------------------------------------------------");
-            Console.WriteLine(string.Format(typeof(Program).FullName));
+            Console.WriteLine(string.Format("{0} ({1})", typeof(Program).Assembly.GetName().Name, typeof(Program).Assembly.GetName().Version));
             Console.WriteLine("Press q to quit ...");
             Console.WriteLine("-----------------------------------------------------------------");
 

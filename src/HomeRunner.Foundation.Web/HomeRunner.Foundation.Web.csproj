@@ -62,6 +62,7 @@
     <Compile Include="ApiExceptionFilterAttribute.cs" />
     <Compile Include="ApiResponse.cs" />
     <Compile Include="CommandResponse.cs" />
+    <Compile Include="HealthController.cs" />
     <Compile Include="LoggingMessageHandler.cs" />
     <Compile Include="NotFoundException.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
